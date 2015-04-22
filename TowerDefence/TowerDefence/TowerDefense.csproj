@@ -130,9 +130,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enemies.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Tower defence.cs" />
+    <Compile Include="Projectile.cs" />
+    <Compile Include="Tower defense.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tower.cs" />
+    <Compile Include="Wave manager.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
