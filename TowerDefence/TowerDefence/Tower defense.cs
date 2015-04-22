@@ -11,6 +11,12 @@ namespace TowerDefence
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        enum GameState
+        {
+            MainMenu, Credits, Settings, LevelSelect, Playing, EndGame, Pause
+        }
+        GameState CurrentGameState = GameState.MainMenu;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -69,9 +75,26 @@ namespace TowerDefence
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
-            // TODO: Add your drawing code here
+            //gamestates
+            switch (CurrentGameState)
+            {
+                //case GameState.MainMenu:
+                //    btnPlay.Draw(spriteBatch);
+                //    btnHowTo.Draw(spriteBatch);
+                //    btnExit.Draw(spriteBatch);
+                //    break;
+                //case GameState.HowTo:
+                //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
+                //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
+                //    btnMain.Draw(spriteBatch);
+                //    break;
+                //case GameState.Playing:
+                //    level.Draw(gameTime, spriteBatch);
+                //    DrawHud();
+                //    break;
+            }
 
             base.Draw(gameTime);
         }
