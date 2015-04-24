@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace TowerDefence
 {
@@ -10,6 +11,7 @@ namespace TowerDefence
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
 
         enum GameState
         {
@@ -45,7 +47,6 @@ namespace TowerDefence
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -64,7 +65,33 @@ namespace TowerDefence
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // TODO: Add your update logic here
+            //gamestates
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    //update main menu
+
+                    break;
+                case GameState.Settings:
+                    //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
+                    //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
+                    //    btnMain.Draw(spriteBatch);
+                    break;
+                case GameState.Credits:
+                    //draw stuff
+                    break;
+                case GameState.LevelSelect:
+                    //draw
+                    break;
+                case GameState.Playing:
+                    //    level.Draw(gameTime, spriteBatch);
+                    //    DrawHud();
+                    break;
+                case GameState.Pause:
+                    break;
+                case GameState.EndGame:
+                    break;
+            }
 
             base.Update(gameTime);
         }
@@ -75,25 +102,31 @@ namespace TowerDefence
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
-
             //gamestates
             switch (CurrentGameState)
             {
-                //case GameState.MainMenu:
-                //    btnPlay.Draw(spriteBatch);
-                //    btnHowTo.Draw(spriteBatch);
-                //    btnExit.Draw(spriteBatch);
-                //    break;
-                //case GameState.HowTo:
-                //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
-                //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
-                //    btnMain.Draw(spriteBatch);
-                //    break;
-                //case GameState.Playing:
+                case GameState.MainMenu:
+                    //draw buttons
+                    break;
+                case GameState.Settings:
+                    //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
+                    //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
+                    //    btnMain.Draw(spriteBatch);
+                    break;
+                case GameState.Credits:
+                    //draw stuff
+                    break;
+                case GameState.LevelSelect:
+                    //draw
+                    break;
+                case GameState.Playing:
                 //    level.Draw(gameTime, spriteBatch);
                 //    DrawHud();
-                //    break;
+                    break;
+                case GameState.Pause:
+                    break;
+                case GameState.EndGame:
+                    break;
             }
 
             base.Draw(gameTime);
