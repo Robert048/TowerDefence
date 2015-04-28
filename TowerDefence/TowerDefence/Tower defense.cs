@@ -18,7 +18,7 @@ namespace TowerDefence
         Level level = new Level();
 
         //buttons
-        //Button button = new Button(Texture2D, );
+        Button btnPlay;
 
 
         //gameStates for the different states the game has
@@ -26,7 +26,7 @@ namespace TowerDefence
         {
             MainMenu, Credits, Settings, LevelSelect, Playing, EndGame, Pause
         }
-        GameState CurrentGameState = GameState.Playing;
+        GameState CurrentGameState = GameState.MainMenu;
 
         public Game1()
         {
@@ -67,6 +67,9 @@ namespace TowerDefence
             level.AddTexture(grass);
             level.AddTexture(road);
             level.AddTexture(turn);
+
+            btnPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
+            btnPlay.setPosition(new Vector2(525, 125));
         }
 
         /// <summary>
@@ -86,9 +89,13 @@ namespace TowerDefence
         protected override void Update(GameTime gameTime)
         {
             //gamestates
+            MouseState mouse = Mouse.GetState();
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
+                    IsMouseVisible = true;
+                    if (btnPlay.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnPlay.Update(mouse);
                     break;
                 case GameState.Settings:
                     break;
@@ -121,6 +128,7 @@ namespace TowerDefence
             {
                 case GameState.MainMenu:
                     //draw buttons
+                    btnPlay.Draw(spriteBatch);
 
                     break;
                 case GameState.Settings:
@@ -131,10 +139,12 @@ namespace TowerDefence
                     break;
                 case GameState.Playing:
                     level.Draw(spriteBatch);
+
                     //onderste gedeelte
                     spriteBatch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
                     spriteBatch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
-                    
+                    spriteBatch.DrawString(font, "Gold: ", new Vector2(level.Width, level.Height + 570), Color.Black);
+                    spriteBatch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
                     break;
                 case GameState.Pause:
                     break;

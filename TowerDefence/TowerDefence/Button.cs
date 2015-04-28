@@ -18,7 +18,7 @@ namespace TowerDefence
         private Color color = new Color(255, 255, 255, 255);
         private Vector2 size;
         private bool down;
-        private bool isClicked;
+        public bool isClicked;
 
         public Button(Texture2D newTexture, GraphicsDevice graphics)
         {
@@ -43,6 +43,11 @@ namespace TowerDefence
                 color.A += 3;
                 isClicked = false;
             }
+        }
+
+        public void setPosition(Vector2 newPosition)
+        {
+            position = newPosition;
         }
 
         public void Draw(SpriteBatch spritebatch)
