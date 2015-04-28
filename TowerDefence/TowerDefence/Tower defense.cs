@@ -12,29 +12,37 @@ namespace TowerDefence
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //Levels
+        Level level = new Level();
 
+        //buttons
+        //Button button = new Button(Texture2D, );
+
+
+        //gameStates for the different states the game has
         enum GameState
         {
             MainMenu, Credits, Settings, LevelSelect, Playing, EndGame, Pause
         }
-        GameState CurrentGameState = GameState.MainMenu;
+        GameState CurrentGameState = GameState.Playing;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = level.Width * 50;
+            graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
+        /// Initialize before game starts to run
+        /// Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -47,6 +55,11 @@ namespace TowerDefence
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Texture2D grass = Content.Load<Texture2D>("grass");
+            Texture2D road = Content.Load<Texture2D>("road");
+
+            level.AddTexture(grass);
+            level.AddTexture(road);
         }
 
         /// <summary>
@@ -69,23 +82,14 @@ namespace TowerDefence
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
-                    //update main menu
-
                     break;
                 case GameState.Settings:
-                    //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
-                    //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
-                    //    btnMain.Draw(spriteBatch);
                     break;
                 case GameState.Credits:
-                    //draw stuff
                     break;
                 case GameState.LevelSelect:
-                    //draw
                     break;
                 case GameState.Playing:
-                    //    level.Draw(gameTime, spriteBatch);
-                    //    DrawHud();
                     break;
                 case GameState.Pause:
                     break;
@@ -102,32 +106,31 @@ namespace TowerDefence
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            //Begin the drawing
+            spriteBatch.Begin();
+            
             //gamestates
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
                     //draw buttons
+
                     break;
                 case GameState.Settings:
-                    //    Rectangle Hrectangle = new Rectangle(0, 0, 1200, 600);
-                    //    spriteBatch.Draw(HowToBG, Hrectangle, Color.White);
-                    //    btnMain.Draw(spriteBatch);
                     break;
                 case GameState.Credits:
-                    //draw stuff
                     break;
                 case GameState.LevelSelect:
-                    //draw
                     break;
                 case GameState.Playing:
-                //    level.Draw(gameTime, spriteBatch);
-                //    DrawHud();
+                    level.Draw(spriteBatch);
                     break;
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
                     break;
             }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
