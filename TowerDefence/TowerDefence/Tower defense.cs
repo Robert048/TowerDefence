@@ -14,8 +14,10 @@ namespace TowerDefence
         SpriteFont font;
         Texture2D BG;
 
-        //Levels
+        //Objecten
+        Player player = new Player();
         Level level = new Level();
+        Wave_manager manager = new Wave_manager();
 
         //buttons
         Button btnPlay;

@@ -8,5 +8,11 @@ namespace TowerDefence
 {
     class Wave_manager
     {
+        Enemy normal;
+
+        public Wave_manager()
+        {
+
+        }
     }
 }
