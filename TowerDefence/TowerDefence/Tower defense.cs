@@ -32,10 +32,6 @@ namespace TowerDefence
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            graphics.PreferredBackBufferWidth = level.Width * 50;
-            graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
-            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -104,6 +100,10 @@ namespace TowerDefence
                 case GameState.LevelSelect:
                     break;
                 case GameState.Playing:
+                    //keep game fullscreen
+                    graphics.PreferredBackBufferWidth = level.Width * 50;
+                    graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
+                    graphics.ApplyChanges();
                     break;
                 case GameState.Pause:
                     break;
