@@ -11,6 +11,8 @@ namespace TowerDefence
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont font;
+        Texture2D BG;
 
         //Levels
         Level level = new Level();
@@ -57,9 +59,14 @@ namespace TowerDefence
 
             Texture2D grass = Content.Load<Texture2D>("grass");
             Texture2D road = Content.Load<Texture2D>("road");
+            Texture2D turn = Content.Load<Texture2D>("turn");
+
+            font = Content.Load<SpriteFont>("font");
+            BG = Content.Load<Texture2D>("BG_ingame");
 
             level.AddTexture(grass);
             level.AddTexture(road);
+            level.AddTexture(turn);
         }
 
         /// <summary>
@@ -124,6 +131,10 @@ namespace TowerDefence
                     break;
                 case GameState.Playing:
                     level.Draw(spriteBatch);
+                    //onderste gedeelte
+                    spriteBatch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
+                    spriteBatch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
+                    
                     break;
                 case GameState.Pause:
                     break;
