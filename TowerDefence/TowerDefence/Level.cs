@@ -50,54 +50,6 @@ namespace TowerDefence
         }
 
         /// <summary>
-        /// Draws each tile in the level.
-        /// </summary>
-        private void DrawTiles(SpriteBatch spriteBatch)
-        {
-            // For each tile position
-            for (int y = 0; y < Height; ++y)
-            {
-                for (int x = 0; x < Width; ++x)
-                {
-                    // If there is a visible tile in that position
-                    Texture2D texture = tiles[x, y].Texture;
-                    //check rotation
-                    int rotation = tiles[x, y].rotation;
-                    if (texture != null && rotation == 0)
-                    {
-                        // Draw it in screen space.
-                        Vector2 position = new Vector2(x, y) * Tile.Size;
-                        spriteBatch.Draw(texture, position, Color.White);
-                    }
-                    if (texture != null && rotation != 0)
-                    {
-                        // Draw it in screen space.
-                        Vector2 position = new Vector2(x, y) * Tile.Size;
-                        Vector2 vector = new Vector2(0,0);
-                        float rotate = 0;
-                        if (rotation == 90)
-                        {
-                            rotate = ((float)Math.PI / 2.0f);
-                            vector = new Vector2(0, 50);
-                        }
-                        else if (rotation == 180)
-                        {
-                            rotate = ((float)Math.PI);
-                            vector = new Vector2(50, 50);
-                        }
-                        else if (rotation == 270)
-                        {
-                            rotate = ((float)Math.PI * 1.5f);
-                            vector = new Vector2(50, 0);
-                        }
-
-                        spriteBatch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, rotate, vector, SpriteEffects.None, 0);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Laad de tiles uit de file
         /// </summary>
         /// <param name="filestream">
@@ -177,6 +129,54 @@ namespace TowerDefence
                 // Unknown tile type character
                 default:
                     throw new NotSupportedException(String.Format("Unsupported tile type character '{0}' at position {1}, {2}.", tileType, x, y));
+            }
+        }
+
+        /// <summary>
+        /// Draws each tile in the level.
+        /// </summary>
+        private void DrawTiles(SpriteBatch spriteBatch)
+        {
+            // For each tile position
+            for (int y = 0; y < Height; ++y)
+            {
+                for (int x = 0; x < Width; ++x)
+                {
+                    // If there is a visible tile in that position
+                    Texture2D texture = tiles[x, y].Texture;
+                    //check rotation
+                    int rotation = tiles[x, y].rotation;
+                    if (texture != null && rotation == 0)
+                    {
+                        // Draw it in screen space.
+                        Vector2 position = new Vector2(x, y) * Tile.Size;
+                        spriteBatch.Draw(texture, position, Color.White);
+                    }
+                    if (texture != null && rotation != 0)
+                    {
+                        // Draw it in screen space.
+                        Vector2 position = new Vector2(x, y) * Tile.Size;
+                        Vector2 vector = new Vector2(0, 0);
+                        float rotate = 0;
+                        if (rotation == 90)
+                        {
+                            rotate = ((float)Math.PI / 2.0f);
+                            vector = new Vector2(0, 50);
+                        }
+                        else if (rotation == 180)
+                        {
+                            rotate = ((float)Math.PI);
+                            vector = new Vector2(50, 50);
+                        }
+                        else if (rotation == 270)
+                        {
+                            rotate = ((float)Math.PI * 1.5f);
+                            vector = new Vector2(50, 0);
+                        }
+
+                        spriteBatch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, rotate, vector, SpriteEffects.None, 0);
+                    }
+                }
             }
         }
     }
