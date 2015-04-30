@@ -12,7 +12,10 @@ namespace TowerDefence
 {
     class Level
     {
+        //textures for tiles
         private List<Texture2D> tileTextures = new List<Texture2D>();
+        //the layout
+        private Tile[,] tiles;
 
         public void AddTexture(Texture2D texture)
         {
@@ -38,17 +41,13 @@ namespace TowerDefence
         public void Draw(SpriteBatch batch)
         {
             // Load the level.
-            string levelPath = string.Format("Content/{0}.txt", 0);
+            int levelIndex = 0;
+            string levelPath = string.Format("Content/{0}.txt", levelIndex);
             Stream fileStream = TitleContainer.OpenStream(levelPath);
 
             LoadTiles(fileStream);
             DrawTiles(batch);
         }
-
-        
-
-        // de layout van het level
-        private Tile[,] tiles;
 
         /// <summary>
         /// Draws each tile in the level.
