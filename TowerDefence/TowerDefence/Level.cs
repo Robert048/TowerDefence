@@ -62,11 +62,37 @@ namespace TowerDefence
                 {
                     // If there is a visible tile in that position
                     Texture2D texture = tiles[x, y].Texture;
-                    if (texture != null)
+                    //check rotation
+                    int rotation = tiles[x, y].rotation;
+                    if (texture != null && rotation == 0)
                     {
                         // Draw it in screen space.
                         Vector2 position = new Vector2(x, y) * Tile.Size;
                         spriteBatch.Draw(texture, position, Color.White);
+                    }
+                    if (texture != null && rotation != 0)
+                    {
+                        // Draw it in screen space.
+                        Vector2 position = new Vector2(x, y) * Tile.Size;
+                        Vector2 vector = new Vector2(0,0);
+                        float rotate = 0;
+                        if (rotation == 90)
+                        {
+                            rotate = ((float)Math.PI / 2.0f);
+                            vector = new Vector2(0, 50);
+                        }
+                        else if (rotation == 180)
+                        {
+                            rotate = ((float)Math.PI);
+                            vector = new Vector2(50, 50);
+                        }
+                        else if (rotation == 270)
+                        {
+                            rotate = ((float)Math.PI * 1.5f);
+                            vector = new Vector2(50, 0);
+                        }
+
+                        spriteBatch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, rotate, vector, SpriteEffects.None, 0);
                     }
                 }
             }
@@ -131,31 +157,23 @@ namespace TowerDefence
             {
                 //grass
                 case '.':
-                    return new Tile(tileTextures[0]);
+                    return new Tile(tileTextures[0], 0);
 
                 //road
                 case '|':
-                    return new Tile(tileTextures[1]);
+                    return new Tile(tileTextures[1], 0);
+                case '-':
+                    return new Tile(tileTextures[1], 90);
 
                 //turn
                 case '┌':
-                    return new Tile(tileTextures[2]);
-
-                //turn
+                    return new Tile(tileTextures[2], 0);
                 case '┐':
-                    return new Tile(tileTextures[2]);
-
-                //road
-                case '-':
-                    return new Tile(tileTextures[1]);
-
-                //Lucht
+                    return new Tile(tileTextures[2], 90);
                 case '┘':
-                    return new Tile(tileTextures[2]);
-
-                //Lucht
+                    return new Tile(tileTextures[2], 180);
                 case '└':
-                    return new Tile(tileTextures[2]);
+                    return new Tile(tileTextures[2], 270);
 
                 // Unknown tile type character
                 default:
