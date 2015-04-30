@@ -5,25 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using System.IO;
+using Microsoft.Xna.Framework.Content;
 
 namespace TowerDefence
 {
     class Level
     {
-        int[,] map = new int[,] 
-        {
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,4,4,4,3,0,0,0,0,},
-            {0,2,4,4,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,},
-            {0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,},
-            {0,1,0,0,1,0,0,0,0,2,4,4,3,0,0,1,0,0,0,1,0,0,0,0,},
-            {4,5,0,0,1,0,0,0,0,1,0,0,1,0,0,1,0,0,0,6,4,4,4,4,},
-            {0,0,0,0,1,0,0,0,0,1,0,0,6,4,4,5,0,0,0,0,0,0,0,0,},
-            {0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-            {0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-            {0,0,0,0,6,4,4,4,4,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-        };
         private List<Texture2D> tileTextures = new List<Texture2D>();
 
         public void AddTexture(Texture2D texture)
@@ -31,54 +19,148 @@ namespace TowerDefence
             tileTextures.Add(texture);
         }
 
+        /// <summary>
+        /// Width of level measured in tiles.
+        /// </summary>
         public int Width
         {
-            get { return map.GetLength(1); }
+            get { return tiles.GetLength(0); }
         }
+
+        /// <summary>
+        /// Height of the level measured in tiles.
+        /// </summary>
         public int Height
         {
-            get { return map.GetLength(0); }
+            get { return tiles.GetLength(1); }
         }
 
         public void Draw(SpriteBatch batch)
         {
-            for (int x = 0; x < Width; x++)
+            // Load the level.
+            string levelPath = string.Format("Content/{0}.txt", 0);
+            Stream fileStream = TitleContainer.OpenStream(levelPath);
+
+            LoadTiles(fileStream);
+            DrawTiles(batch);
+        }
+
+        
+
+        // de layout van het level
+        private Tile[,] tiles;
+
+        /// <summary>
+        /// Draws each tile in the level.
+        /// </summary>
+        private void DrawTiles(SpriteBatch spriteBatch)
+        {
+            // For each tile position
+            for (int y = 0; y < Height; ++y)
             {
-                for (int y = 0; y < Height; y++)
+                for (int x = 0; x < Width; ++x)
                 {
-                    int textureIndex = map[y, x];
-                    if (textureIndex == -1)
-                        continue;
-                    if (textureIndex == 3)
+                    // If there is a visible tile in that position
+                    Texture2D texture = tiles[x, y].Texture;
+                    if (texture != null)
                     {
-                        Texture2D texture2 = tileTextures[2];
-                        batch.Draw(texture2, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, ((float)Math.PI / 2.0f), new Vector2(0,50), SpriteEffects.None, 0);
+                        // Draw it in screen space.
+                        Vector2 position = new Vector2(x, y) * Tile.Size;
+                        spriteBatch.Draw(texture, position, Color.White);
                     }
-                    else if (textureIndex == 4)
-                    {
-                        Texture2D texture2 = tileTextures[1];
-                        batch.Draw(texture2, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, ((float)Math.PI / 2.0f), new Vector2(0, 50), SpriteEffects.None, 0);
-                    }
-                    else if (textureIndex == 5)
-                    {
-                        Texture2D texture2 = tileTextures[2];
-                        batch.Draw(texture2, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, ((float)Math.PI), new Vector2(50, 50), SpriteEffects.None, 0);
-                    }
-                    else if (textureIndex == 6)
-                    {
-                        Texture2D texture2 = tileTextures[2];
-                        batch.Draw(texture2, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, ((float)Math.PI * 1.5f), new Vector2(50, 0), SpriteEffects.None, 0);
-                    }
-                    else
-                    {
-                        Texture2D texture = tileTextures[textureIndex];
-                        batch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), Color.White);
-                    }
-                    
                 }
             }
         }
 
+        /// <summary>
+        /// Laad de tiles uit de file
+        /// </summary>
+        /// <param name="filestream">
+        /// filestream met level data
+        /// </param>
+        private void LoadTiles(Stream fileStream)
+        {
+            //Laad level en zorg dat alle regels even lang zijn
+            int width;
+            List<string> lines = new List<string>();
+            using (StreamReader reader = new StreamReader(fileStream))
+            {
+                string line = reader.ReadLine();
+                width = line.Length;
+                while (line != null)
+                {
+                    lines.Add(line);
+                    if (line.Length != width)
+                        throw new Exception(String.Format("The length of line {0} is different from all preceeding lines.", lines.Count));
+                    line = reader.ReadLine();
+                }
+            }
 
+            // Allocate the tile grid.
+            tiles = new Tile[width, lines.Count];
+
+            // Loop over every tile position,
+            for (int y = 0; y < Height; ++y)
+            {
+                for (int x = 0; x < Width; ++x)
+                {
+                    // to load each tile.
+                    char tileType = lines[y][x];
+                    tiles[x, y] = LoadTile(tileType, x, y);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Loads an individual tile's appearance and behavior.
+        /// </summary>
+        /// <param name="tileType">
+        /// The character loaded from the structure file which
+        /// indicates what should be loaded.
+        /// </param>
+        /// <param name="x">
+        /// The X location of this tile in tile space.
+        /// </param>
+        /// <param name="y">
+        /// The Y location of this tile in tile space.
+        /// </param>
+        /// <returns>The loaded tile.</returns>
+        private Tile LoadTile(char tileType, int x, int y)
+        {
+            switch (tileType)
+            {
+                //grass
+                case '.':
+                    return new Tile(tileTextures[0]);
+
+                //road
+                case '|':
+                    return new Tile(tileTextures[1]);
+
+                //turn
+                case '┌':
+                    return new Tile(tileTextures[2]);
+
+                //turn
+                case '┐':
+                    return new Tile(tileTextures[2]);
+
+                //road
+                case '-':
+                    return new Tile(tileTextures[1]);
+
+                //Lucht
+                case '┘':
+                    return new Tile(tileTextures[2]);
+
+                //Lucht
+                case '└':
+                    return new Tile(tileTextures[2]);
+
+                // Unknown tile type character
+                default:
+                    throw new NotSupportedException(String.Format("Unsupported tile type character '{0}' at position {1}, {2}.", tileType, x, y));
+            }
+        }
     }
 }
