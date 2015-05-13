@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefence
+namespace TowerDefense
 {
     /// <summary>
     /// Stores the appearance and collision behavior of a tile.

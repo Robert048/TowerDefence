@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using Microsoft.Xna.Framework.Content;
 
-namespace TowerDefence
+namespace TowerDefense
 {
     class Level
     {
@@ -135,7 +135,7 @@ namespace TowerDefence
         /// <summary>
         /// Draws each tile in the level.
         /// </summary>
-        private void DrawTiles(SpriteBatch spriteBatch)
+        private void DrawTiles(SpriteBatch batch)
         {
             // For each tile position
             for (int y = 0; y < Height; ++y)
@@ -150,7 +150,7 @@ namespace TowerDefence
                     {
                         // Draw it in screen space.
                         Vector2 position = new Vector2(x, y) * Tile.Size;
-                        spriteBatch.Draw(texture, position, Color.White);
+                        batch.Draw(texture, position, Color.White);
                     }
                     if (texture != null && rotation != 0)
                     {
@@ -174,7 +174,7 @@ namespace TowerDefence
                             vector = new Vector2(50, 0);
                         }
 
-                        spriteBatch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, rotate, vector, SpriteEffects.None, 0);
+                        batch.Draw(texture, new Rectangle(x * 50, y * 50, 50, 50), null, Color.White, rotate, vector, SpriteEffects.None, 0);
                     }
                 }
             }

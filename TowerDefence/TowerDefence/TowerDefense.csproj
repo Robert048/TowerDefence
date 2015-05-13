@@ -7,7 +7,7 @@
     <ProjectGuid>{71D0DC69-F796-485E-8B8E-49635B9CBBF3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TowerDefence</RootNamespace>
+    <RootNamespace>TowerDefense</RootNamespace>
     <AssemblyName>TowerDefence</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
@@ -156,6 +156,7 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Content\0.txt" />
+    <Content Include="Content\enemy.jpg" />
     <Content Include="Content\BG_ingame.png" />
     <Content Include="Content\grass.jpg" />
     <Content Include="Content\Play.png" />

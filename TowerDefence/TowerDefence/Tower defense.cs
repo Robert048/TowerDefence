@@ -2,25 +2,25 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace TowerDefence
+namespace TowerDefense
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Game
+    public class TowerDefense : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        SpriteFont font;
-        Texture2D BG;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch batch;
+        private SpriteFont font;
+        private Texture2D BG;
 
         //Objecten
-        Player player = new Player();
-        Level level = new Level();
-        Wave_manager manager = new Wave_manager();
+        private Player player = new Player();
+        private Level level = new Level();
+        private Wave_manager manager = new Wave_manager();
 
         //buttons
-        Button btnPlay;
+        private Button btnMenuPlay;
 
 
         //gameStates for the different states the game has
@@ -30,7 +30,7 @@ namespace TowerDefence
         }
         GameState CurrentGameState = GameState.MainMenu;
 
-        public Game1()
+        public TowerDefense()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -53,21 +53,24 @@ namespace TowerDefence
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            batch = new SpriteBatch(GraphicsDevice);
 
+            //load level sprites
             Texture2D grass = Content.Load<Texture2D>("grass");
             Texture2D road = Content.Load<Texture2D>("road");
             Texture2D turn = Content.Load<Texture2D>("turn");
-
-            font = Content.Load<SpriteFont>("font");
-            BG = Content.Load<Texture2D>("BG_ingame");
-
+            //add sprites for tiles to level
             level.AddTexture(grass);
             level.AddTexture(road);
             level.AddTexture(turn);
 
-            btnPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
-            btnPlay.setPosition(new Vector2(525, 125));
+            //load content for the game
+            font = Content.Load<SpriteFont>("font");
+            BG = Content.Load<Texture2D>("BG_ingame");
+
+            //buttons
+            btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
+            btnMenuPlay.setPosition(new Vector2(525, 125));
         }
 
         /// <summary>
@@ -92,8 +95,8 @@ namespace TowerDefence
             {
                 case GameState.MainMenu:
                     IsMouseVisible = true;
-                    if (btnPlay.isClicked == true) CurrentGameState = GameState.Playing;
-                    btnPlay.Update(mouse);
+                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnMenuPlay.Update(mouse);
                     break;
                 case GameState.Settings:
                     break;
@@ -123,14 +126,14 @@ namespace TowerDefence
         protected override void Draw(GameTime gameTime)
         {
             //Begin the drawing
-            spriteBatch.Begin();
+            batch.Begin();
             
             //gamestates
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
                     //draw buttons
-                    btnPlay.Draw(spriteBatch);
+                    btnMenuPlay.Draw(batch);
 
                     break;
                 case GameState.Settings:
@@ -140,20 +143,20 @@ namespace TowerDefence
                 case GameState.LevelSelect:
                     break;
                 case GameState.Playing:
-                    level.Draw(spriteBatch);
+                    level.Draw(batch);
 
                     //onderste gedeelte
-                    spriteBatch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
-                    spriteBatch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
-                    spriteBatch.DrawString(font, "Gold: ", new Vector2(level.Width, level.Height + 570), Color.Black);
-                    spriteBatch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
+                    batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
+                    batch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
+                    batch.DrawString(font, "Gold: ", new Vector2(level.Width, level.Height + 570), Color.Black);
+                    batch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
                     break;
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
                     break;
             }
-            spriteBatch.End();
+            batch.End();
 
             base.Draw(gameTime);
         }

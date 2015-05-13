@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TowerDefence
+namespace TowerDefense
 {
     class Enemy
     {
         private bool alive = true;
-        protected float startHealth;
+        protected int startHealth;
 
-        public float currentHealth { get; set; }
+        public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
 
         

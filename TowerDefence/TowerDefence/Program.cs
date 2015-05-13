@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TowerDefence
+namespace TowerDefense
 {
     /// <summary>
     /// The main class.
@@ -12,7 +12,7 @@ namespace TowerDefence
         /// </summary>
         static void Main()
         {
-            var factory = new MonoGame.Framework.GameFrameworkViewSource<Game1>();
+            var factory = new MonoGame.Framework.GameFrameworkViewSource<TowerDefense>();
             Windows.ApplicationModel.Core.CoreApplication.Run(factory);
         }
     }
