@@ -18,6 +18,7 @@ namespace TowerDefense
             ground = true;
             air = false;
             cost = 40;
+            projectileList = new List<Projectile>();
             towertexture = tower;
 
         }
