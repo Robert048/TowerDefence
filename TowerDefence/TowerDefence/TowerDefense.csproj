@@ -162,6 +162,7 @@
     <Content Include="Content\grass.jpg" />
     <Content Include="Content\Play.png" />
     <Content Include="Content\road.jpg" />
+    <Content Include="Content\tower.jpg" />
     <Content Include="Content\turn.jpg" />
   </ItemGroup>
   <ItemGroup>
