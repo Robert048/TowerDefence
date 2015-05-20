@@ -22,7 +22,7 @@ namespace TowerDefense
             cost = 50;
             projectileList = new List<Projectile>();
             towertexture = freezeTower;
-            freezePower = 20;
+            freezePower = 10;
         }
     }
 }
