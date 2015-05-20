@@ -11,7 +11,14 @@ namespace TowerDefense
 
         public ArrowTower()
         {
+            damage = 10;
+            attackSpeed = 1;
+            range = 100;
+            ground = true;
+            air = true;
+            cost = 20;
             
+
         }
     }
 }
