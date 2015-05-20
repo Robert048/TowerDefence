@@ -11,7 +11,7 @@ namespace TowerDefense
     class ArrowTower : Tower
     {
 
-        public ArrowTower(Texture2D tower)
+        public ArrowTower(Texture2D arrowTower)
         {
             damage = 10;
             attackSpeed = 1;
@@ -19,8 +19,8 @@ namespace TowerDefense
             ground = true;
             air = true;
             cost = 20;
-            towertexture = tower;
-
+            projectileList = new List<Projectile>();
+            towertexture = arrowTower;
         }
     }
 }
