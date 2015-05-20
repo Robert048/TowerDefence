@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
     class Tower
     {
+        protected int damage;
+        protected int attackSpeed;
+        protected int range;
+        protected Boolean ground;
+        protected Boolean air;
+        protected int cost;
+        protected List<Projectile> projectileList;
+        private Texture2D towertexture;
+
+
     }
 }

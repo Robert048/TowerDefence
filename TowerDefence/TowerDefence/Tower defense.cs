@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace TowerDefense
 {
     /// <summary>
-    /// This is the main type for your game
+    /// This is the main game class
     /// </summary>
     public class TowerDefense : Game
     {
