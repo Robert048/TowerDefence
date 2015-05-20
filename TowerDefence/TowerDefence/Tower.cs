@@ -17,7 +17,7 @@ namespace TowerDefense
         protected Boolean air;
         protected int cost;
         protected List<Projectile> projectileList;
-        private Texture2D towertexture;
+        protected Texture2D towertexture;
 
 
     }
