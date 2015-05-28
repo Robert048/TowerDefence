@@ -130,9 +130,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arrow.cs" />
     <Compile Include="ArrowTower.cs" />
+    <Compile Include="BossEnemy.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="CanonBall.cs" />
+    <Compile Include="CanonTower.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="FastEnemy.cs" />
+    <Compile Include="FlyingEnemy.cs" />
+    <Compile Include="FreezeBullet.cs" />
+    <Compile Include="FreezeTower.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="NormalEnemy.cs" />
     <Compile Include="Player.cs" />
