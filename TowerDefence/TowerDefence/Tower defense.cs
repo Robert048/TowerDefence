@@ -73,6 +73,9 @@ namespace TowerDefense
             //buttons
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(525, 125));
+
+            //load enemy sprites
+            NormalEnemy.LoadContent(Content);
         }
 
         /// <summary>

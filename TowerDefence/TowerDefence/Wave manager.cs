@@ -23,9 +23,9 @@ namespace TowerDefense
 
             for (int i = 0; i < numberOfWaves; i++)
             {
-                int initialNumberOfEnemies = 8;
-                int numberModifier = +2;
-                Wave wave = new Wave(i, initialNumberOfEnemies * numberModifier);
+                int initialNumberOfEnemies = 10;
+                int numberModifier = i * 2;
+                Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier);
                 waves.Enqueue(wave);
                 wave.waveNumber++;
             }
