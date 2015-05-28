@@ -16,6 +16,8 @@ namespace TowerDefense
         private List<Texture2D> tileTextures = new List<Texture2D>();
         //the layout
         private Tile[,] tiles;
+        //Waypoints for enemies
+        private readonly Queue<Vector2> waypoints = new Queue<Vector2>();
 
         public void AddTexture(Texture2D texture)
         {
@@ -84,6 +86,11 @@ namespace TowerDefense
                     // to load each tile.
                     char tileType = lines[y][x];
                     tiles[x, y] = LoadTile(tileType, x, y);
+                    //add waypoints for enemies
+                    if(tileType > 0)
+                    {
+                        waypoints.Enqueue(new Vector2(x, y) * 50);
+                    }
                 }
             }
         }
@@ -107,7 +114,7 @@ namespace TowerDefense
             switch (tileType)
             {
                 //grass
-                case '.':
+                case '0':
                     return new Tile(tileTextures[0], 0);
 
                 //road
@@ -117,19 +124,24 @@ namespace TowerDefense
                     return new Tile(tileTextures[1], 90);
 
                 //turn
-                case '┌':
-                    return new Tile(tileTextures[2], 0);
-                case '┐':
-                    return new Tile(tileTextures[2], 90);
-                case '┘':
+                case '1':
                     return new Tile(tileTextures[2], 180);
-                case '└':
+                case '2':
+                    return new Tile(tileTextures[2], 0);
+                case '3':
+                    return new Tile(tileTextures[2], 90);
+                case '4':
                     return new Tile(tileTextures[2], 270);
 
                 // Unknown tile type character
                 default:
                     throw new NotSupportedException(String.Format("Unsupported tile type character '{0}' at position {1}, {2}.", tileType, x, y));
             }
+        }
+
+        public Queue<Vector2> getWaypoints()
+        {
+            return waypoints;
         }
 
         /// <summary>

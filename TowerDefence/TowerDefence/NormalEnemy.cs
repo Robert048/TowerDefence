@@ -11,7 +11,6 @@ namespace TowerDefense
     class NormalEnemy : Enemy
     {
         private float speed = 0.5f;
-        private int bountyGiven;
 
         public NormalEnemy(Texture2D texture, Vector2 position, int health, int bountyGiven, float speed)
             : base()

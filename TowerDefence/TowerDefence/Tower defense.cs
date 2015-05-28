@@ -17,7 +17,7 @@ namespace TowerDefense
         //Objecten
         private Player player = new Player();
         private Level level = new Level();
-        private Wave_manager manager = new Wave_manager();
+        private Wave_manager manager;
 
         //buttons
         private Button btnMenuPlay;
@@ -34,6 +34,8 @@ namespace TowerDefense
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            int levelIndex = 1;
+            manager = new Wave_manager(level.getWaypoints(), levelIndex);
         }
 
         /// <summary>
@@ -109,6 +111,8 @@ namespace TowerDefense
                     graphics.PreferredBackBufferWidth = level.Width * 50;
                     graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
                     graphics.ApplyChanges();
+
+                    manager.Update(gameTime);
                     break;
                 case GameState.Pause:
                     break;
