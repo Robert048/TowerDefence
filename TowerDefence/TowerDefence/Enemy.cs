@@ -10,7 +10,7 @@ namespace TowerDefense
 {
     class Enemy
     {
-        private bool alive = true;
+        protected bool alive = true;
         protected int startHealth;
         private readonly Queue<Vector2> waypoints = new Queue<Vector2>();
 

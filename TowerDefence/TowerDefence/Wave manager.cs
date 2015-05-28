@@ -27,7 +27,7 @@ namespace TowerDefense
                 int numberModifier = i * 2;
                 Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier);
                 waves.Enqueue(wave);
-                wave.waveNumber++;
+                wave.IncrementWave();
             }
             StartNextWave();
         }

@@ -19,6 +19,10 @@ namespace TowerDefense
             this.waveNumber = waveNumber;
         }
 
+        public void IncrementWave()
+        {
+            waveNumber++;
+        }
         //1 + 12, 2 + 14. 3 + 16
 
 
@@ -34,15 +38,18 @@ namespace TowerDefense
                 //alle 10e rondes
                 else if(waveNumber % 10 == 0)
                 {
+                    Enemy boss = new BossEnemy(new Vector2(10, 10), waveNumber);
                     //boss
                 }
                 //alle 5e rondes behalve de 10e rondes
                 else if (waveNumber % 5 == 0)
                 {
+                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber);
                     //fast
                 }
                 else
                 {
+                    // Random ofzo? 50/50 verdeeld?
                     //normal & flying
                 }
             }
