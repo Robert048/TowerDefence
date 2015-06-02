@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Martijn/Source/Repos/TowerDefence/TowerDefence/TowerDefence/Content/font.spritefont</SourceFile>
-  <SourceTime>2015-05-18T22:14:41.6694693+02:00</SourceTime>
-  <DestFile>C:/Users/Martijn/Source/Repos/TowerDefence/TowerDefence/TowerDefence/Content/bin/WindowsStoreApp/font.xnb</DestFile>
-  <DestTime>2015-05-18T22:18:28.5783823+02:00</DestTime>
+  <SourceFile>C:/Users/Alex/Documents/TowerDefense/TowerDefence/TowerDefence/Content/font.spritefont</SourceFile>
+  <SourceTime>2015-06-02T12:00:16.7286258+02:00</SourceTime>
+  <DestFile>C:/Users/Alex/Documents/TowerDefense/TowerDefence/TowerDefence/Content/bin/WindowsStoreApp/font.xnb</DestFile>
+  <DestTime>2015-06-02T12:04:44.1104095+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
-  <ImporterTime>2015-04-29T19:14:44+02:00</ImporterTime>
+  <ImporterTime>2015-03-16T04:01:46+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
-  <ProcessorTime>2015-04-29T19:14:44+02:00</ProcessorTime>
+  <ProcessorTime>2015-03-16T04:01:46+01:00</ProcessorTime>
   <Parameters>
     <Key>TextureFormat</Key>
     <Value>Compressed</Value>

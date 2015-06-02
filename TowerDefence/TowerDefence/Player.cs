@@ -9,8 +9,8 @@ namespace TowerDefense
 {
     class Player
     {
-        private int lives { get; set; }
-        private int money { get; set; }
+        public int lives { get; set; }
+        public int money { get; set; }
         public int score { get; set; }
 
         public Player()

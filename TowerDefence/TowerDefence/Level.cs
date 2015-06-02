@@ -19,6 +19,8 @@ namespace TowerDefense
         //Waypoints for enemies
         private readonly Queue<Vector2> waypoints = new Queue<Vector2>();
 
+        private Dictionary<Vector2, char> tileList = new Dictionary<Vector2,char>();
+
         public void AddTexture(Texture2D texture)
         {
             tileTextures.Add(texture);
@@ -85,6 +87,11 @@ namespace TowerDefense
                 {
                     // to load each tile.
                     char tileType = lines[y][x];
+                    if (tileList.Count() < 264)
+                    {
+                        tileList.Add(new Vector2(y, x), tileType);
+                    }
+
                     tiles[x, y] = LoadTile(tileType, x, y);
                     //add waypoints for enemies
                     if(tileType > 0)
@@ -190,6 +197,18 @@ namespace TowerDefense
                     }
                 }
             }
+        }
+
+        public char getTileType(Vector2 position)
+        {
+            foreach (var pair in tileList)
+            {
+                if (pair.Key == position)
+                {
+                    return pair.Value;
+                }                
+            }
+            return '1';
         }
     }
 }

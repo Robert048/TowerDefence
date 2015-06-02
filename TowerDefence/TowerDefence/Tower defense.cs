@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace TowerDefense
 {
@@ -21,7 +22,23 @@ namespace TowerDefense
 
         //buttons
         private Button btnMenuPlay;
+        private Button btnArrow;
 
+        //Strings
+        private string towerType;
+
+        //towerList
+        private List<Tower> towerList;
+
+        //Locatie
+        private int cellX;
+        private int cellY;
+
+        private int tileX;
+        private int tileY;
+
+        //Bool
+        private bool onPath;
 
         //gameStates for the different states the game has
         enum GameState
@@ -36,6 +53,7 @@ namespace TowerDefense
             Content.RootDirectory = "Content";
             int levelIndex = 1;
             manager = new Wave_manager(level.getWaypoints(), levelIndex);
+            towerList = new List<Tower>();
         }
 
         /// <summary>
@@ -73,6 +91,9 @@ namespace TowerDefense
             //buttons
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(525, 125));
+
+            btnArrow = new Button(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice);
+            btnArrow.setPosition(new Vector2(250, 600));
 
             //load enemy sprites
             NormalEnemy.LoadContent(Content);
@@ -114,6 +135,13 @@ namespace TowerDefense
                     graphics.PreferredBackBufferWidth = level.Width * 50;
                     graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
                     graphics.ApplyChanges();
+
+                     if (btnArrow.isClicked == true) 
+                    {
+                        towerType = "arrowTower";
+                        newTower();
+                    }
+                    btnArrow.Update(mouse);
 
                     manager.Update(gameTime);
                     break;
@@ -157,6 +185,11 @@ namespace TowerDefense
                     batch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
                     batch.DrawString(font, "Gold: ", new Vector2(level.Width, level.Height + 570), Color.Black);
                     batch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
+                   
+                    batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+
+                    btnArrow.Draw(batch);
+                    
                     break;
                 case GameState.Pause:
                     break;
@@ -166,6 +199,65 @@ namespace TowerDefense
             batch.End();
 
             base.Draw(gameTime);
+        }
+
+         public void newTower()
+        {
+            Tower towerToAdd = null;
+            switch (towerType)
+            {
+                case "arrowTower":
+                {
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"));
+                    break;
+                }                    
+            }
+
+            if (IsCellClear() && towerToAdd.getCost() <= player.money)
+            {
+                towerList.Add(towerToAdd);
+                player.money -= towerToAdd.getCost();
+                
+                towerType = string.Empty;
+            }
+            else
+            {
+                towerType = string.Empty;
+            }
+        }
+
+        private bool IsCellClear()
+        {
+            // Hier checken we dat het in het speelveld is en niet er buiten
+            bool inBounds = cellX >= 0 && cellY >= 0 && cellX < level.Width && cellY < level.Height;
+            bool spaceClear = true;
+
+            // Check voor elke toren of de positie vrij is zo niet? stop met het plaatsen van de toren
+            foreach (Tower tower in towerList)
+            {
+                spaceClear = (tower.getPosition() != new Vector2(tileX, tileY));
+                if (!spaceClear)
+                {
+                    break;
+                }
+            }
+
+            if (onPath = (level.getTileType(new Vector2(cellX, cellY)) != 1))
+            {
+                if (onPath == false)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (onPath)
+                {
+                    return false;
+                }
+            }
+            // bool onPath = (level.GetIndex(cellX, cellY) != 1);
+            return inBounds && spaceClear && onPath;
         }
     }
 }
