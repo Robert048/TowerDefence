@@ -29,8 +29,11 @@ namespace TowerDefense
                 waves.Enqueue(wave);
                 wave.IncrementWave();
             }
+
             StartNextWave();
         }
+
+        
 
         private void StartNextWave()
         {
@@ -43,7 +46,7 @@ namespace TowerDefense
         }
         public void Update(GameTime gametime)
         {
-            //CurrentWave.Up
+            
         }
     }
 }

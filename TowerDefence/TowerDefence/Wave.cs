@@ -17,6 +17,7 @@ namespace TowerDefense
         {
             this.numberOfEnemies = numberOfEnemies;
             this.waveNumber = waveNumber;
+            Enemies = new List<Enemy>();
         }
 
         public void IncrementWave()
@@ -34,23 +35,29 @@ namespace TowerDefense
                 {
                     //normal
                     Enemy normal = new NormalEnemy(new Vector2(10, 10), waveNumber);
+                    Enemies.Add(normal);
+                    
                 }
                 //alle 10e rondes
                 else if(waveNumber % 10 == 0)
                 {
                     Enemy boss = new BossEnemy(new Vector2(10, 10), waveNumber);
+                    Enemies.Add(boss);
                     //boss
                 }
                 //alle 5e rondes behalve de 10e rondes
                 else if (waveNumber % 5 == 0)
                 {
                     Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber);
+                    Enemies.Add(fast);
                     //fast
                 }
                 else
                 {
+                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber);
+                    Enemies.Add(fast);
                     // Random ofzo? 50/50 verdeeld?
-                    //normal & flying
+                    //normal & flying TODO
                 }
             }
         }
