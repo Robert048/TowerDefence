@@ -166,6 +166,7 @@
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Content\0.txt" />
+    <Content Include="Content\ArrowTower.jpg" />
     <Content Include="Content\enemy.jpg" />
     <Content Include="Content\BG_ingame.png" />
     <Content Include="Content\grass.jpg" />

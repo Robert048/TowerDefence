@@ -92,7 +92,7 @@ namespace TowerDefense
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(525, 125));
 
-            btnArrow = new Button(Content.Load<Texture2D>("enemy"), graphics.GraphicsDevice);
+            btnArrow = new Button(Content.Load<Texture2D>("ArrowTower"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
 
             //load enemy sprites
@@ -136,8 +136,9 @@ namespace TowerDefense
                     graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
                     graphics.ApplyChanges();
 
-                     if (btnArrow.isClicked == true) 
+                    if (btnArrow.isClicked == true) 
                     {
+                        
                         towerType = "arrowTower";
                         newTower();
                     }
@@ -208,7 +209,7 @@ namespace TowerDefense
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"), new Vector2(cellX,cellY));
                     break;
                 }                    
             }
