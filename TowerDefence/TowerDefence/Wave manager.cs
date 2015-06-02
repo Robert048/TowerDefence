@@ -14,7 +14,7 @@ namespace TowerDefense
         private float timeSinceLastWave;
         private bool waveFinished;
         public Wave CurrentWave { get { return waves.Peek(); } }
-        public List<Enemy> enemies { get { return CurrentWave.Enemies; } }
+        public List<Enemy> enemies { get { return CurrentWave.enemies; } }
 
         public Wave_manager(Queue<Vector2> waypoints, int levelIndex)
         {
@@ -27,7 +27,6 @@ namespace TowerDefense
                 int numberModifier = i * 2;
                 Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier);
                 waves.Enqueue(wave);
-                wave.IncrementWave();
             }
 
             StartNextWave();
@@ -46,7 +45,7 @@ namespace TowerDefense
         }
         public void Update(GameTime gametime)
         {
-            
+            CurrentWave.Update(gametime);
         }
     }
 }

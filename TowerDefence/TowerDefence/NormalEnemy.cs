@@ -31,5 +31,7 @@ namespace TowerDefense
         {
             Texture2D texture = content.Load<Texture2D>("enemy");
         }
+
+
     }
 }
