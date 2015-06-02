@@ -21,6 +21,21 @@ namespace TowerDefense
         {
             get { return currentHealth <= 0; }
         }
-        
+
+
+        public void Update()
+        {
+            //waypoints enzo
+        }
+
+        public void Draw(SpriteBatch batch, Texture2D texture)
+        {
+            if(alive)
+            {
+                float healthPercentage = currentHealth / startHealth;
+                Color color = new Color(new Vector3(1 - healthPercentage, 1 - healthPercentage, 1 - healthPercentage));
+                //batch.Draw(texture, );
+            }
+        }
     }
 }
