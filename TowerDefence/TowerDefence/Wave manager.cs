@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,7 @@ namespace TowerDefense
             {
                 int initialNumberOfEnemies = 10;
                 int numberModifier = i * 2;
-                Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier);
+                Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier, waypoints);
                 waves.Enqueue(wave);
             }
 
@@ -46,6 +48,11 @@ namespace TowerDefense
         public void Update(GameTime gametime)
         {
             CurrentWave.Update(gametime);
+        }
+
+        public void Draw(SpriteBatch batch, ContentManager content)
+        {
+            CurrentWave.Draw(batch, content);
         }
     }
 }

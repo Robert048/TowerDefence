@@ -14,23 +14,14 @@ namespace TowerDefense
     {
        private float speed;
 
-        public BossEnemy(Vector2 position, int waveNumber)
+        public BossEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
             startHealth = 10 * waveNumber;
             currentHealth = startHealth;
             bountyGiven = 10 * waveNumber;
             speed = 0.5f;
-        }
-
-
-        /// <summary>
-        /// LoadContent, to load the sprite for the enemy
-        /// all of your content.
-        /// </summary>
-        public static void LoadContent(ContentManager content)
-        {
-            Texture2D texture = content.Load<Texture2D>("enemy");
+            this.waypoints = waypoints;
         }
     }
 }

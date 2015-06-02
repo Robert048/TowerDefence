@@ -94,7 +94,7 @@ namespace TowerDefense
 
                     tiles[x, y] = LoadTile(tileType, x, y);
                     //add waypoints for enemies
-                    if(tileType > 0)
+                    if (tileType == '1' || tileType == '2' || tileType == '3' || tileType == '4')
                     {
                         waypoints.Enqueue(new Vector2(x, y) * 50);
                     }

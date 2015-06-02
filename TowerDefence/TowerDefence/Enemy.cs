@@ -12,7 +12,9 @@ namespace TowerDefense
     {
         protected bool alive = true;
         protected int startHealth;
-        private readonly Queue<Vector2> waypoints = new Queue<Vector2>();
+        protected Queue<Vector2> waypoints = new Queue<Vector2>();
+        private Vector2 waypoint = new Vector2(0, 5) * 50;
+        private Vector2 position = new Vector2(0, 5) * 50;
 
         public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
@@ -25,7 +27,20 @@ namespace TowerDefense
 
         public void Update()
         {
-            //waypoints enzo
+            //waypoints
+            //waypoints hebben niet logische volgorde
+            if (position == waypoint)
+            {
+                waypoint = waypoints.Dequeue();
+            }
+            else if (position.X == waypoint.X)
+            {
+                position.Y++;
+            }
+            else if (position.Y == waypoint.Y)
+            {
+                position.X++;
+            }
         }
 
         public void Draw(SpriteBatch batch, Texture2D texture)
@@ -34,7 +49,7 @@ namespace TowerDefense
             {
                 float healthPercentage = currentHealth / startHealth;
                 Color color = new Color(new Vector3(1 - healthPercentage, 1 - healthPercentage, 1 - healthPercentage));
-                //batch.Draw(texture, );
+                batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), Color.White);
             }
         }
     }

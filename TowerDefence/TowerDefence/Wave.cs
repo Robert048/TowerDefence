@@ -15,11 +15,13 @@ namespace TowerDefense
         private int numberOfEnemies;
         private int waveNumber;
         private bool spawn;
+        private Queue<Vector2> waypoints;
 
-        public Wave(int waveNumber, int numberOfEnemies)
+        public Wave(int waveNumber, int numberOfEnemies, Queue<Vector2> waypoints)
         {
             this.numberOfEnemies = numberOfEnemies;
             this.waveNumber = waveNumber;
+            this.waypoints = waypoints;
             enemies = new List<Enemy>();
             spawn = false;
         }
@@ -38,30 +40,38 @@ namespace TowerDefense
                 if (waveNumber < 3)
                 {
                     //normal
-                    Enemy normal = new NormalEnemy(new Vector2(10, 10), waveNumber);
+                    Enemy normal = new NormalEnemy(new Vector2(10, 10), waveNumber, waypoints);
                     enemies.Add(normal);
 
                 }
                 //alle 10e rondes
                 else if (waveNumber % 10 == 0)
                 {
-                    Enemy boss = new BossEnemy(new Vector2(10, 10), waveNumber);
+                    //Boss wave
+                    Enemy boss = new BossEnemy(new Vector2(10, 10), waveNumber, waypoints);
                     enemies.Add(boss);
-                    //boss
                 }
                 //alle 5e rondes behalve de 10e rondes
                 else if (waveNumber % 5 == 0)
                 {
-                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber);
+                    //Fast enemy wave
+                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber, waypoints);
                     enemies.Add(fast);
-                    //fast
                 }
                 else
                 {
-                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber);
-                    enemies.Add(fast);
-                    // Random ofzo? 50/50 verdeeld?
-                    //normal & flying TODO
+                    //normal and flying enemies
+                    int halfWave = numberOfEnemies / 2;
+                    Enemy enemy;
+                    if (halfWave >= numberOfEnemies)
+                    {
+                        enemy = new NormalEnemy(new Vector2(10, 10), waveNumber, waypoints);
+                    }
+                    else
+                    {
+                        enemy = new FlyingEnemy(new Vector2(10, 10), waveNumber, waypoints);
+                    }
+                    enemies.Add(enemy);
                 }
             }
         }
@@ -80,7 +90,7 @@ namespace TowerDefense
                         i--;
                     }
                 }
-                spawn = false;
+                //spawn = false;
             }
         }
 
@@ -97,19 +107,20 @@ namespace TowerDefense
         {
             if(enemy.GetType() == typeof(NormalEnemy))
             {
-                return content.Load<Texture2D>("enemy");
+                return content.Load<Texture2D>("normalEnemy");
             }
             else if (enemy.GetType() == typeof(FastEnemy))
             {
-                return content.Load<Texture2D>("enemy");
+                return content.Load<Texture2D>("fastEnemy");
             }
             else if (enemy.GetType() == typeof(BossEnemy))
             {
-                return content.Load<Texture2D>("enemy");
+                //TODO random bossEnemy of boss2Enemy
+                return content.Load<Texture2D>("bossEnemy");
             }
             else if (enemy.GetType() == typeof(FlyingEnemy))
             {
-                return content.Load<Texture2D>("enemy");
+                return content.Load<Texture2D>("flyingEnemy");
             }
             else
             {

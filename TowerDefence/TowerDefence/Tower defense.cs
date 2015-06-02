@@ -94,9 +94,6 @@ namespace TowerDefense
 
             btnArrow = new Button(Content.Load<Texture2D>("ArrowTower"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
-
-            //load enemy sprites
-            NormalEnemy.LoadContent(Content);
         }
 
         /// <summary>
@@ -180,7 +177,8 @@ namespace TowerDefense
                     break;
                 case GameState.Playing:
                     level.Draw(batch);
-
+                    //draw enemies from wave manager > wave
+                    manager.Draw(batch, Content);
                     //onderste gedeelte
                     batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
                     batch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
