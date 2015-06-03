@@ -21,6 +21,8 @@ namespace TowerDefense
             bountyGiven = 10 * waveNumber;
             speed = 0.5f;
             this.waypoints = waypoints;
+            this.position = position;
+            waypoint = position;
         }
     }
 }

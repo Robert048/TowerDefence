@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TowerDefense
 {
@@ -13,17 +14,16 @@ namespace TowerDefense
         protected bool alive = true;
         protected int startHealth;
         protected Queue<Vector2> waypoints = new Queue<Vector2>();
-        private Vector2 waypoint = new Vector2(0, 5) * 50;
-        private Vector2 position = new Vector2(0, 5) * 50;
+        protected Vector2 position = new Vector2();
+        protected Vector2 waypoint = new Vector2();
 
         public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
 
         public bool IsDead
         {
-            get { return currentHealth <= 0; }
+            get { return (alive == false); }
         }
-
 
         public void Update()
         {
@@ -34,12 +34,19 @@ namespace TowerDefense
             }
             else if (position.X == waypoint.X)
             {
-                position.Y++;
+                if (position.Y > waypoint.Y) position.Y--;
+                if (position.Y < waypoint.Y) position.Y++;
             }
             else if (position.Y == waypoint.Y)
             {
                 position.X++;
+                Debug.WriteLine("x++");
             }
+            if (position.X > 1200) alive = false;
+            Debug.WriteLine(position + " en " + waypoint);
+
+            //levens
+            if(currentHealth <= 0) alive = false;
         }
 
         public void Draw(SpriteBatch batch, Texture2D texture)

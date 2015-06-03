@@ -21,6 +21,8 @@ namespace TowerDefense
 
         private Dictionary<Vector2, char> tileList = new Dictionary<Vector2, char>();
 
+        private bool test = true;
+
         public void AddTexture(Texture2D texture)
         {
             tileTextures.Add(texture);
@@ -100,13 +102,14 @@ namespace TowerDefense
                     }
                 }
             }
+            //het enqueued hierboven ook iets, constant! maakt niet uit voor game, maar zitten wel meer dan 1000 dingen in queue...
             if (test)
             {
                 sortWaypoints();
                 test = false;
             }
         }
-        bool test = true;
+
         private void sortWaypoints()
         {
             Vector2 position = new Vector2(0, 250);
