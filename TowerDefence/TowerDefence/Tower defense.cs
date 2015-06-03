@@ -22,7 +22,9 @@ namespace TowerDefense
 
         //buttons
         private Button btnMenuPlay;
-        private Button btnArrow;
+        private Button btnArrow;        
+        private Button btnFreeze;
+        private Button btnCanon;
 
         //Strings
         private string towerType;
@@ -92,8 +94,14 @@ namespace TowerDefense
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(525, 125));
 
-            btnArrow = new Button(Content.Load<Texture2D>("ArrowTower"), graphics.GraphicsDevice);
+            btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
+
+            btnFreeze = new Button(Content.Load<Texture2D>("slowTowerFront"), graphics.GraphicsDevice);
+            btnFreeze.setPosition(new Vector2(400, 600));
+
+            btnCanon = new Button(Content.Load<Texture2D>("canonTowerFront"), graphics.GraphicsDevice);
+            btnCanon.setPosition(new Vector2(650, 650));
         }
 
         /// <summary>
@@ -134,12 +142,23 @@ namespace TowerDefense
                     graphics.ApplyChanges();
 
                     if (btnArrow.isClicked == true) 
-                    {
-                        
+                    {                        
                         towerType = "arrowTower";
                         newTower();
                     }
+                    else if (btnFreeze.isClicked == true)
+                    {
+                        towerType = "freezeTower";
+                        newTower();
+                    }
+                    else if (btnCanon.isClicked == true)
+                    {
+                        towerType = "canonTower";
+                        newTower();
+                    }
                     btnArrow.Update(mouse);
+                    btnFreeze.Update(mouse);
+                    btnCanon.Update(mouse);
 
                     manager.Update(gameTime);
                     break;
@@ -188,6 +207,8 @@ namespace TowerDefense
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
 
                     btnArrow.Draw(batch);
+                    btnFreeze.Draw(batch);
+                    btnCanon.Draw(batch);
                     
                     break;
                 case GameState.Pause:
