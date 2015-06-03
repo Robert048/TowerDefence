@@ -153,12 +153,10 @@ namespace TowerDefense
                             cellY = newState.Y / 50;
                             tileX = cellX * 50;
                             tileY = cellY * 50;
-
+                            towerType = "arrowTower";
+                            newTower();
                         }
                         oldState = newState;
-
-                        towerType = "arrowTower";
-                        newTower();
                     }
                     else if (btnFreeze.isClicked == true)
                     {
