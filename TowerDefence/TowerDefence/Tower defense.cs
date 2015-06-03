@@ -42,6 +42,9 @@ namespace TowerDefense
         //Bool
         private bool onPath;
 
+        //MouseState
+        private MouseState oldState;
+
         //gameStates for the different states the game has
         enum GameState
         {
@@ -143,6 +146,17 @@ namespace TowerDefense
 
                     if (btnArrow.isClicked == true) 
                     {                        
+                        MouseState newState = Mouse.GetState();
+                        if(newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                        {
+                            cellX = newState.X / 50;
+                            cellY = newState.Y / 50;
+                            tileX = cellX * 50;
+                            tileY = cellY * 50;
+
+                        }
+                        oldState = newState;
+
                         towerType = "arrowTower";
                         newTower();
                     }
@@ -228,7 +242,7 @@ namespace TowerDefense
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"), new Vector2(cellX,cellY));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"), new Vector2(tileX, tileY));
                     break;
                 }                    
             }
