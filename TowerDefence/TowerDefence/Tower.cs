@@ -33,6 +33,7 @@ namespace TowerDefense
 
         public void Draw(SpriteBatch spritebatch)
         {
+            rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
             spritebatch.Draw(texture, rectangle, Color.White);
         }
 

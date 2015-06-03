@@ -41,9 +41,13 @@ namespace TowerDefense
 
         //Bool
         private bool onPath;
+        //Place Tower bool
+        private bool arrow;
+        private bool canon;
+        private bool freeze;
 
-        //MouseState
-        private MouseState oldState;
+        
+
 
         //gameStates for the different states the game has
         enum GameState
@@ -140,37 +144,107 @@ namespace TowerDefense
                     break;
                 case GameState.Playing:
                     //keep game fullscreen
-                    graphics.PreferredBackBufferWidth = level.Width * 50;
-                    graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
-                    graphics.ApplyChanges();
+                    //graphics.PreferredBackBufferWidth = level.Width * 50;
+                    //graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
+                    //graphics.ApplyChanges();
 
-                    if (btnArrow.isClicked == true) 
-                    {                        
+                    if (btnArrow.isClicked) 
+                    {
                         MouseState newState = Mouse.GetState();
-                        if(newState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released)
+                        if (newState.LeftButton == ButtonState.Released)
                         {
-                            cellX = newState.X / 50;
-                            cellY = newState.Y / 50;
+                            arrow = true;                            
+                            freeze = false;
+                            canon = false;
+                        }
+                    }
+                    else if (btnFreeze.isClicked)
+                    {
+                        MouseState newState = Mouse.GetState();
+                        if (newState.LeftButton == ButtonState.Released)
+                        {
+                            arrow = false;                            
+                            freeze = true;
+                            canon = false;
+                        }
+                    }
+                    else if (btnCanon.isClicked)
+                    {
+                        MouseState newState = Mouse.GetState();
+                        if (newState.LeftButton == ButtonState.Released)
+                        {
+                            arrow = false;                           
+                            freeze = false;
+                            canon = true;
+                        }
+                    }
+                    
+
+                    if (arrow)
+                    {
+                        //todo cursor icon tower
+                        MouseState nextState = Mouse.GetState();
+                        if (nextState.LeftButton == ButtonState.Pressed)
+                        {
+                            arrow = false;
+                            cellX = nextState.X / 50;
+                            cellY = nextState.Y / 50;
                             tileX = cellX * 50;
                             tileY = cellY * 50;
                             towerType = "arrowTower";
-                            newTower();
+                            newTower(tileX, tileY);
+                            Draw(gameTime);            
                         }
-                        oldState = newState;
+                        else if (nextState.RightButton == ButtonState.Pressed)
+                        {
+                            arrow = false;
+                        }
                     }
-                    else if (btnFreeze.isClicked == true)
+                    else if (freeze)
                     {
-                        towerType = "freezeTower";
-                        newTower();
+                        //todo cursor icon tower
+                        MouseState nextState = Mouse.GetState();
+                        if (nextState.LeftButton == ButtonState.Pressed)
+                        {
+                            freeze = false;
+                            cellX = nextState.X / 50;
+                            cellY = nextState.Y / 50;
+                            tileX = cellX * 50;
+                            tileY = cellY * 50;
+                            towerType = "freezeTower";
+                            newTower(tileX, tileY);
+                            Draw(gameTime);                            
+                        }
+                        else if (nextState.RightButton == ButtonState.Pressed)
+                        {
+                            freeze = false;
+                        }
                     }
-                    else if (btnCanon.isClicked == true)
+                    else if (canon)
                     {
-                        towerType = "canonTower";
-                        newTower();
+                        //todo cursor icon tower
+                        MouseState nextState = Mouse.GetState();
+                        if (nextState.LeftButton == ButtonState.Pressed)
+                        {
+                            canon = false;
+                            cellX = nextState.X / 50;
+                            cellY = nextState.Y / 50;
+                            tileX = cellX * 50;
+                            tileY = cellY * 50;
+                            towerType = "canonTower";
+                            newTower(tileX, tileY);
+                            Draw(gameTime);                            
+                        }
+                        else if (nextState.RightButton == ButtonState.Pressed)
+                        {
+                            canon = false;
+                        }
                     }
                     btnArrow.Update(mouse);
                     btnFreeze.Update(mouse);
                     btnCanon.Update(mouse);
+
+
 
                     manager.Update(gameTime);
                     break;
@@ -219,7 +293,7 @@ namespace TowerDefense
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
 
                     foreach (Tower item in towerList)
-                    {      
+                    {                        
                         item.Draw(batch);
                     }
 
@@ -238,16 +312,26 @@ namespace TowerDefense
             base.Draw(gameTime);
         }
 
-         public void newTower()
+         public void newTower(int tileX, int tileY)
         {
             Tower towerToAdd = null;
             switch (towerType)
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("tower"), new Vector2(tileX, tileY));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), new Vector2(tileX, tileY));
                     break;
-                }                    
+                }
+                case "freezeTower":
+                {
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("slowTower"), new Vector2(tileX, tileY));
+                    break;
+                }
+                case "canonTower":
+                {
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("canonTower"), new Vector2(tileX, tileY));
+                    break;
+                } 
             }
 
             if (IsCellClear() && towerToAdd.getCost() <= player.money)
