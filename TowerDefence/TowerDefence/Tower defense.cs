@@ -292,6 +292,21 @@ namespace TowerDefense
                    
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
 
+                    //if (arrow)
+                    //{
+                    //    batch.DrawString(font, ArrowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                    //}
+                    //if (freeze)
+                    //{
+                    //    batch.DrawString(font, arowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                    //}
+                    //if (canon)
+                    //{
+                    //    batch.DrawString(font, arowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                    //}
+
+                    // arowTower.getCost().ToString()
+
                     foreach (Tower item in towerList)
                     {                        
                         item.Draw(batch);
