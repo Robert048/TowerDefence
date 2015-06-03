@@ -19,7 +19,7 @@ namespace TowerDefense
             air = false;
             cost = 40;
             projectileList = new List<Projectile>();
-            towertexture = tower;
+            texture = tower;
 
         }
     }

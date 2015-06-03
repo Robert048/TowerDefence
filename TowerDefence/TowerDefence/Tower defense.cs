@@ -83,7 +83,7 @@ namespace TowerDefense
             //load level sprites
             Texture2D grass = Content.Load<Texture2D>("grass");
             Texture2D road = Content.Load<Texture2D>("road");
-            Texture2D turn = Content.Load<Texture2D>("turn");
+            Texture2D turn = Content.Load<Texture2D>("turn");            
             //add sprites for tiles to level
             level.AddTexture(grass);
             level.AddTexture(road);
@@ -219,6 +219,11 @@ namespace TowerDefense
                     batch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
                    
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+
+                    foreach (Tower item in towerList)
+                    {      
+                        item.Draw(batch);
+                    }
 
                     btnArrow.Draw(batch);
                     btnFreeze.Draw(batch);

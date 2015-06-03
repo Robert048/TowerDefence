@@ -21,7 +21,7 @@ namespace TowerDefense
             air = true;
             cost = 20;
             projectileList = new List<Projectile>();
-            towertexture = arrowTower;
+            texture = arrowTower;            
         }
     }
 }
