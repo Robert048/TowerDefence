@@ -28,7 +28,6 @@ namespace TowerDefense
         public void Update()
         {
             //waypoints
-            //waypoints hebben niet logische volgorde
             if (position == waypoint)
             {
                 waypoint = waypoints.Dequeue();

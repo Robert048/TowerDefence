@@ -100,14 +100,19 @@ namespace TowerDefense
                     }
                 }
             }
-            sortWaypoints();
+            if (test)
+            {
+                sortWaypoints();
+                test = false;
+            }
         }
-
+        bool test = true;
         private void sortWaypoints()
         {
             Vector2 position = new Vector2(0, 250);
             Vector2[] array = waypoints.ToArray();
             Queue<Vector2> waypointsTemp = new Queue<Vector2>();
+            waypoints.Clear();
             //sort waypoints
             // loop through waypoints
             for (int i = 0; i < array.Length; i++)
@@ -124,7 +129,7 @@ namespace TowerDefense
                     waypoint = findX(array, position);
                 }
                 //enqueue waypoint
-                waypointsTemp.Enqueue(waypoint);
+                waypoints.Enqueue(waypoint);
                 //set position
                 position = waypoint;
             }
