@@ -17,9 +17,9 @@ namespace TowerDefense
         //the layout
         private Tile[,] tiles;
         //Waypoints for enemies
-        private readonly Queue<Vector2> waypoints = new Queue<Vector2>();
+        private Queue<Vector2> waypoints = new Queue<Vector2>();
 
-        private Dictionary<Vector2, char> tileList = new Dictionary<Vector2,char>();
+        private Dictionary<Vector2, char> tileList = new Dictionary<Vector2, char>();
 
         public void AddTexture(Texture2D texture)
         {
@@ -100,6 +100,97 @@ namespace TowerDefense
                     }
                 }
             }
+            sortWaypoints();
+        }
+
+        private void sortWaypoints()
+        {
+            Vector2 position = new Vector2(0, 250);
+            Vector2[] array = waypoints.ToArray();
+            Queue<Vector2> waypointsTemp = new Queue<Vector2>();
+            //sort waypoints
+            // loop through waypoints
+            for (int i = 0; i < array.Length; i++)
+            {
+                Vector2 waypoint;
+                if (i % 2 == 0)
+                {
+                    //first Y
+                    waypoint = findY(array, position);
+                }
+                else
+                {
+                    //then X
+                    waypoint = findX(array, position);
+                }
+                //enqueue waypoint
+                waypointsTemp.Enqueue(waypoint);
+                //set position
+                position = waypoint;
+            }
+            //temp in normal
+            //waypoints.Clear();
+
+        }
+
+        private Vector2 findX(Vector2[] array, Vector2 position)
+        {
+            Vector2[] arrayX = new Vector2[4];
+            //loop through array made of waypoints and puts same X in arrayX
+            int j = 0;
+            for (int i = 0; i < array.Count(); i++)
+            {
+                float test = array[i].X;
+                if (test == position.X)
+                {
+                    arrayX[j] = array[i];
+                    j++;
+                }
+            }
+            float minY = 0;
+            minY = arrayX[0].Y;
+            if (minY == position.Y)
+            {
+                minY = arrayX[1].Y;
+            }
+            for (int i = 0; i < arrayX.Length; i++)
+            {
+                if (minY > arrayX[i].X && arrayX[i].X > position.X)
+                {
+                    minY = arrayX[i].Y;
+                }
+            }
+            return new Vector2(position.X, minY);
+        }
+
+        private Vector2 findY(Vector2[] array, Vector2 position)
+        {
+            Vector2[] arrayY = new Vector2[4];
+            //loop through array made of waypoints and puts same Y in arrayY
+            int j = 0;
+            for (int i = 0; i < array.Count(); i++)
+            {
+                float test = array[i].Y;
+                if (test == position.Y)
+                {
+                    arrayY[j] = array[i];
+                    j++;
+                }
+            }
+            float minX = 0;
+            minX = arrayY[0].X;
+            if (minX == position.X)
+            {
+                minX = arrayY[1].X;
+            }
+            for (int i = 0; i < arrayY.Length; i++)
+            {
+                if (minX > arrayY[i].X && arrayY[i].X > position.X)
+                {
+                    minX = arrayY[i].X;
+                }
+            }
+            return new Vector2(minX, position.Y);
         }
 
         /// <summary>
@@ -206,7 +297,7 @@ namespace TowerDefense
                 if (pair.Key == position)
                 {
                     return pair.Value;
-                }                
+                }
             }
             return '1';
         }
