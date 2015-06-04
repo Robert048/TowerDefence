@@ -28,14 +28,17 @@ namespace TowerDefense
         public void Update()
         {
             //waypoints
+            Debug.WriteLine("Update");
             if (position == waypoint)
             {
                 waypoint = waypoints.Dequeue();
+                Debug.WriteLine("dequeue");
             }
             else if (position.X == waypoint.X)
             {
                 if (position.Y > waypoint.Y) position.Y--;
                 if (position.Y < waypoint.Y) position.Y++;
+                Debug.WriteLine("Y");
             }
             else if (position.Y == waypoint.Y)
             {
@@ -56,6 +59,7 @@ namespace TowerDefense
                 float healthPercentage = currentHealth / startHealth;
                 Color color = new Color(new Vector3(1 - healthPercentage, 1 - healthPercentage, 1 - healthPercentage));
                 batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), Color.White);
+                //batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), 10, 10), color);
             }
         }
     }
