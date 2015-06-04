@@ -61,7 +61,7 @@ namespace TowerDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             int levelIndex = 1;
-            manager = new Wave_manager(level.getWaypoints(), levelIndex);
+            manager = new Wave_manager(level.getWaypoints(), levelIndex, player);
             towerList = new List<Tower>();
         }
 
@@ -244,7 +244,10 @@ namespace TowerDefense
                     btnFreeze.Update(mouse);
                     btnCanon.Update(mouse);
 
-
+                    if (player.lives <= 0)
+                    {
+                        CurrentGameState = GameState.EndGame;
+                    }
 
                     manager.Update(gameTime);
                     break;

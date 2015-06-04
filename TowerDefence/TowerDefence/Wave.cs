@@ -16,14 +16,16 @@ namespace TowerDefense
         private int waveNumber;
         private bool spawn;
         private Queue<Vector2> waypoints;
+        private Player player;
 
-        public Wave(int waveNumber, int numberOfEnemies, Queue<Vector2> waypoints)
+        public Wave(int waveNumber, int numberOfEnemies, Queue<Vector2> waypoints, Player player)
         {
             this.numberOfEnemies = numberOfEnemies;
             this.waveNumber = waveNumber;
             this.waypoints = waypoints;
             enemies = new List<Enemy>();
             spawn = false;
+            this.player = player;
         }
 
         public void Start()
@@ -48,14 +50,14 @@ namespace TowerDefense
                 else if (waveNumber % 10 == 0)
                 {
                     //Boss wave
-                    Enemy boss = new BossEnemy(new Vector2(10, 10), waveNumber, waypoints);
+                    Enemy boss = new BossEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     enemies.Add(boss);
                 }
                 //alle 5e rondes behalve de 10e rondes
                 else if (waveNumber % 5 == 0)
                 {
                     //Fast enemy wave
-                    Enemy fast = new FastEnemy(new Vector2(10, 10), waveNumber, waypoints);
+                    Enemy fast = new FastEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     enemies.Add(fast);
                 }
                 else
@@ -65,11 +67,11 @@ namespace TowerDefense
                     Enemy enemy;
                     if (halfWave >= numberOfEnemies)
                     {
-                        enemy = new NormalEnemy(new Vector2(0, 250), waveNumber, waypoints);
+                        enemy = new NormalEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     }
                     else
                     {
-                        enemy = new FlyingEnemy(new Vector2(10, 10), waveNumber, waypoints);
+                        enemy = new FlyingEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     }
                     enemies.Add(enemy);
                 }
@@ -84,13 +86,19 @@ namespace TowerDefense
                 {
                     Enemy enemy = enemies[i];
                     enemy.Update();
-                    if (enemy.IsDead)
+                    if (enemy.IsKilled())
                     {
+                        player.score++;
+                        enemies.Remove(enemy);
+                        i--;
+                    }
+                    if (enemy.madeItToEnd())
+                    {
+                        player.lives--;
                         enemies.Remove(enemy);
                         i--;
                     }
                 }
-                //spawn = false;
             }
         }
 

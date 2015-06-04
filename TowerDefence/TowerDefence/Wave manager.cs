@@ -18,7 +18,7 @@ namespace TowerDefense
         public Wave CurrentWave { get { return waves.Peek(); } }
         public List<Enemy> enemies { get { return CurrentWave.enemies; } }
 
-        public Wave_manager(Queue<Vector2> waypoints, int levelIndex)
+        public Wave_manager(Queue<Vector2> waypoints, int levelIndex, Player player)
         {
             numberOfWaves = 10 + levelIndex;
 
@@ -27,7 +27,7 @@ namespace TowerDefense
             {
                 int initialNumberOfEnemies = 10;
                 int numberModifier = i * 2;
-                Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier, waypoints);
+                Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier, waypoints, player);
                 waves.Enqueue(wave);
             }
 
@@ -47,12 +47,23 @@ namespace TowerDefense
         }
         public void Update(GameTime gametime)
         {
-            CurrentWave.Update(gametime);
+            if (waves.Count > 0)
+            {
+                CurrentWave.Update(gametime);
+                if (CurrentWave.enemies.Count <= 0)
+                {
+                    waves.Dequeue();
+                    CurrentWave.Start();
+                }
+            }
         }
 
         public void Draw(SpriteBatch batch, ContentManager content)
         {
-            CurrentWave.Draw(batch, content);
+            if (waves.Count > 0)
+            {
+                CurrentWave.Draw(batch, content);
+            }
         }
     }
 }

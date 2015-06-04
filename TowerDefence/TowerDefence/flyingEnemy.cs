@@ -14,11 +14,13 @@ namespace TowerDefense
         public FlyingEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 10 * waveNumber;
+            startHealth = 10 * (waveNumber + 1);
             currentHealth = startHealth;
             bountyGiven = 10 * waveNumber;
             speed = 0.5f;
             this.waypoints = waypoints;
+            this.position = position;
+            waypoint = position;
         }
 
     }
