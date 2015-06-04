@@ -12,7 +12,7 @@ namespace TowerDefense
     class Wave_manager
     {
         private readonly Queue<Wave> waves = new Queue<Wave>();
-        private int numberOfWaves;
+        public int numberOfWaves;
         private float timeSinceLastWave;
         private bool waveFinished;
         public Wave CurrentWave { get { return waves.Peek(); } }

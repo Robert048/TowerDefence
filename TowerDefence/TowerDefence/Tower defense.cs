@@ -286,9 +286,11 @@ namespace TowerDefense
                     manager.Draw(batch, Content);
                     //onderste gedeelte
                     batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
-                    batch.DrawString(font, "Lives: ", new Vector2(level.Width, level.Height + 550 ), Color.Black);
-                    batch.DrawString(font, "Gold: ", new Vector2(level.Width, level.Height + 570), Color.Black);
-                    batch.DrawString(font, "iets: ", new Vector2(level.Width, level.Height + 590), Color.Black);
+                    batch.DrawString(font, "Level: ", new Vector2(level.Width, level.Height + 550), Color.Black);
+                    batch.DrawString(font, "Total Waves: " + manager.numberOfWaves, new Vector2(level.Width, level.Height + 570), Color.Black);
+                    batch.DrawString(font, "Enemies: " + manager.enemies.Count, new Vector2(level.Width, level.Height + 590), Color.Black);
+                    batch.DrawString(font, "Lives: " + player.lives, new Vector2(level.Width, level.Height + 630 ), Color.Black);
+                    batch.DrawString(font, "Gold: " + player.money, new Vector2(level.Width, level.Height + 650), Color.Black);
                    
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
 
