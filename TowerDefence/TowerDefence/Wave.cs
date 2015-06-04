@@ -36,6 +36,8 @@ namespace TowerDefense
 
         private void AddEnemy()
         {
+            int enemiesNR = numberOfEnemies;
+            int halfWave = enemiesNR / 2;
             waypoints.Enqueue(new Vector2(1200, 50));
             for (int i = 0; i < numberOfEnemies; i++)
             {
@@ -63,15 +65,16 @@ namespace TowerDefense
                 else
                 {
                     //normal and flying enemies
-                    int halfWave = numberOfEnemies / 2;
                     Enemy enemy;
-                    if (halfWave >= numberOfEnemies)
+                    if (halfWave >= enemiesNR)
                     {
                         enemy = new NormalEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
+                        enemiesNR--;
                     }
                     else
                     {
                         enemy = new FlyingEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
+                        enemiesNR--;
                     }
                     enemies.Add(enemy);
                 }
