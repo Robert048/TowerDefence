@@ -239,6 +239,10 @@ namespace TowerDefense
                 case '4':
                     return new Tile(tileTextures[2], 270);
 
+                //end
+                case 'E':
+                    return new Tile(tileTextures[3], 0);
+
                 // Unknown tile type character
                 default:
                     throw new NotSupportedException(String.Format("Unsupported tile type character '{0}' at position {1}, {2}.", tileType, x, y));

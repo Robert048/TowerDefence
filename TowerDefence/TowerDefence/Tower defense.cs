@@ -87,11 +87,13 @@ namespace TowerDefense
             //load level sprites
             Texture2D grass = Content.Load<Texture2D>("grass");
             Texture2D road = Content.Load<Texture2D>("road");
-            Texture2D turn = Content.Load<Texture2D>("turn");            
+            Texture2D turn = Content.Load<Texture2D>("turn");
+            Texture2D end = Content.Load<Texture2D>("end");
             //add sprites for tiles to level
             level.AddTexture(grass);
             level.AddTexture(road);
             level.AddTexture(turn);
+            level.AddTexture(end);
 
             //load content for the game
             font = Content.Load<SpriteFont>("font");

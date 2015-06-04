@@ -174,6 +174,7 @@
     <Content Include="Content\bossEnemy.png" />
     <Content Include="Content\canonTower.png" />
     <Content Include="Content\canonTowerFront.png" />
+    <Content Include="Content\end.png" />
     <Content Include="Content\enemy2.jpg" />
     <Content Include="Content\enemy.jpg" />
     <Content Include="Content\BG_ingame.png" />
