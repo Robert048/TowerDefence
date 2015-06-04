@@ -48,7 +48,7 @@ namespace TowerDefense
             {
                 position.X = position.X + 5;
             }
-            if (position.X > 1200)
+            if (position.X > 1150)
             {
                 madeIt = true;
             }

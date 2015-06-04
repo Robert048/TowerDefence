@@ -47,23 +47,17 @@ namespace TowerDefense
         }
         public void Update(GameTime gametime)
         {
-            if (waves.Count > 0)
+            CurrentWave.Update(gametime);
+            if (CurrentWave.enemies.Count <= 0)
             {
-                CurrentWave.Update(gametime);
-                if (CurrentWave.enemies.Count <= 0)
-                {
-                    waves.Dequeue();
-                    CurrentWave.Start();
-                }
+                waves.Dequeue();
+                CurrentWave.Start();
             }
         }
 
         public void Draw(SpriteBatch batch, ContentManager content)
         {
-            if (waves.Count > 0)
-            {
-                CurrentWave.Draw(batch, content);
-            }
+            CurrentWave.Draw(batch, content);
         }
     }
 }
