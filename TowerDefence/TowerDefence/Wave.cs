@@ -26,7 +26,6 @@ namespace TowerDefense
             spawn = false;
         }
 
-        //1 + 12, 2 + 14. 3 + 16
         public void Start()
         {
             AddEnemy();
@@ -35,14 +34,13 @@ namespace TowerDefense
 
         private void AddEnemy()
         {
-            numberOfEnemies = 1;
             waypoints.Enqueue(new Vector2(1200, 50));
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 if (waveNumber < 3)
                 {
                     //normal
-                    Enemy normal = new NormalEnemy(new Vector2(0, 250), waveNumber, waypoints);
+                    Enemy normal = new NormalEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     enemies.Add(normal);
 
                 }

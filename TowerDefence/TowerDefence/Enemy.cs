@@ -25,25 +25,23 @@ namespace TowerDefense
             get { return (alive == false); }
         }
 
+        int nr = 0;
         public void Update()
         {
             //waypoints
-            Debug.WriteLine("Update");
             if (position == waypoint)
             {
-                waypoint = waypoints.Dequeue();
-                Debug.WriteLine("dequeue");
+                waypoint = waypoints.ElementAt(nr);
+                nr++;
             }
             else if (position.X == waypoint.X)
             {
                 if (position.Y > waypoint.Y) position.Y--;
                 if (position.Y < waypoint.Y) position.Y++;
-                Debug.WriteLine("Y");
             }
             else if (position.Y == waypoint.Y)
             {
                 position.X++;
-                Debug.WriteLine("x++");
             }
             if (position.X > 1200) alive = false;
             Debug.WriteLine(position + " en " + waypoint);
