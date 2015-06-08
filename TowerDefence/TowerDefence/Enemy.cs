@@ -66,5 +66,15 @@ namespace TowerDefense
                 //batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), 10, 10), color);
             }
         }
+
+        public Vector2 getPosition()
+        {
+            return position;
+        }
+
+        public bool getAlive()
+        {
+            return alive;
+        }
     }
 }
