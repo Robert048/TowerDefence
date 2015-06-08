@@ -19,7 +19,8 @@ namespace TowerDefense
         protected Boolean ground;
         protected Boolean air;
         protected int cost;
-        protected List<Projectile> projectileList;   
+        protected List<Projectile> projectileList;
+        protected Enemy target;
         
         public int getCost()
         {
@@ -37,6 +38,32 @@ namespace TowerDefense
             spritebatch.Draw(texture, rectangle, Color.White);
         }
 
+        public Enemy getClosest(Wave_manager manager)
+        {
+            float smallestRange = range;
+            target = null;
+            List<Enemy> enemies = manager.enemies;
+            foreach (Enemy enemy in enemies)
+            {
+                if (Vector2.Distance(position, enemy.getPosition()) < smallestRange)
+                {
+                    smallestRange = Vector2.Distance(position, enemy.getPosition());
+                    target = enemy;
+                }
+            }
+            return target;
+        }
 
+        public bool targetInRange()
+        {
+            if (Vector2.Distance(position, target.getPosition()) < range)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
