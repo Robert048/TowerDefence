@@ -19,7 +19,7 @@ namespace TowerDefense
         //Waypoints for enemies
         private Queue<Vector2> waypoints = new Queue<Vector2>();
 
-        private Dictionary<Vector2, char> tileList = new Dictionary<Vector2, char>();
+        private Dictionary<Vector2, String> tileList = new Dictionary<Vector2, String>();
 
         private bool test = true;
 
@@ -91,7 +91,7 @@ namespace TowerDefense
                     char tileType = lines[y][x];
                     if (tileList.Count() < 264)
                     {
-                        tileList.Add(new Vector2(y, x), tileType);
+                        tileList.Add(new Vector2(y, x), tileType.ToString());
                     }
 
                     tiles[x, y] = LoadTile(tileType, x, y);
@@ -302,7 +302,7 @@ namespace TowerDefense
             }
         }
 
-        public char getTileType(Vector2 position)
+        public String getTileType(Vector2 position)
         {
             foreach (var pair in tileList)
             {
@@ -311,7 +311,7 @@ namespace TowerDefense
                     return pair.Value;
                 }
             }
-            return '1';
+            return "1";
         }
     }
 }
