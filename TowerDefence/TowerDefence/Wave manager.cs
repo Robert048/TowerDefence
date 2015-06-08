@@ -13,16 +13,13 @@ namespace TowerDefense
     {
         private readonly Queue<Wave> waves = new Queue<Wave>();
         public int numberOfWaves;
-        private float timeSinceLastWave;
-        private bool waveFinished;
-        public Wave CurrentWave { get { return waves.Peek(); } }
-        public List<Enemy> enemies { get { return CurrentWave.enemies; } }
+        private bool levelFinished = false;
+            
+        public List<Enemy> enemies { get { return CurrentWave().enemies; } }
 
         public Wave_manager(Queue<Vector2> waypoints, int levelIndex, Player player)
         {
             numberOfWaves = 10 + levelIndex;
-
-
             for (int i = 0; i < numberOfWaves; i++)
             {
                 int initialNumberOfEnemies = 10;
@@ -30,34 +27,56 @@ namespace TowerDefense
                 Wave wave = new Wave(i, initialNumberOfEnemies + numberModifier, waypoints, player);
                 waves.Enqueue(wave);
             }
-
             StartNextWave();
         }
 
-        
+        public Wave CurrentWave()
+        { 
+            if(waves.Count > 0)
+            {
+                return waves.Peek();
+            }
+            else
+            {
+                // WIN
+                levelFinished = true;
+                return null;
+            }
+        }
+
+        public bool isFinished()
+        {
+            return levelFinished;
+        }
 
         private void StartNextWave()
         {
             if(waves.Count > 0)
             {
                 waves.Peek().Start();
-                timeSinceLastWave = 0;
-                waveFinished = false;
             }
         }
+
         public void Update(GameTime gametime)
         {
-            CurrentWave.Update(gametime);
-            if (CurrentWave.enemies.Count <= 0)
+            if(waves.Count > 0)
             {
-                waves.Dequeue();
-                CurrentWave.Start();
+                CurrentWave().Update(gametime);
+                if (CurrentWave().enemies.Count <= 0)
+                {
+                    waves.Dequeue();
+                    CurrentWave().Start();
+                }
+            }
+            else
+            {
+                // WIN
             }
         }
 
         public void Draw(SpriteBatch batch, ContentManager content)
         {
-            CurrentWave.Draw(batch, content);
+            CurrentWave().Draw(batch, content);
         }
     }
 }
