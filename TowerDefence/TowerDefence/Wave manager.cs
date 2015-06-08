@@ -37,10 +37,12 @@ namespace TowerDefense
                 return waves.Peek();
             }
             else
-            {
+            {r
                 // WIN
                 levelFinished = true;
-                return null;
+
+                // Dummywave
+                return new Wave(15, 20, new Queue<Vector2>(), new Player());
             }
         }
 
@@ -59,7 +61,11 @@ namespace TowerDefense
 
         public void Update(GameTime gametime)
         {
-            if(waves.Count > 0)
+            if(levelFinished)
+            {
+
+            }
+            else
             {
                 CurrentWave().Update(gametime);
                 if (CurrentWave().enemies.Count <= 0)
@@ -67,10 +73,6 @@ namespace TowerDefense
                     waves.Dequeue();
                     CurrentWave().Start();
                 }
-            }
-            else
-            {
-                // WIN
             }
         }
 
