@@ -242,11 +242,17 @@ namespace TowerDefense
                             canon = false;
                         }
                     }
+
                     btnArrow.Update(mouse);
                     btnFreeze.Update(mouse);
                     btnCanon.Update(mouse);
 
                     if (player.lives <= 0)
+                    {
+                        CurrentGameState = GameState.EndGame;
+                    }
+
+                    if(manager.isFinished())
                     {
                         CurrentGameState = GameState.EndGame;
                     }

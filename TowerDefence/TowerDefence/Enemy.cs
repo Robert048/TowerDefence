@@ -41,12 +41,12 @@ namespace TowerDefense
             }
             else if (position.X == waypoint.X)
             {
-                if (position.Y > waypoint.Y) position.Y = position.Y - 5;
-                if (position.Y < waypoint.Y) position.Y = position.Y + 5;
+                if (position.Y > waypoint.Y) position.Y = position.Y - 50;
+                if (position.Y < waypoint.Y) position.Y = position.Y + 50;
             }
             else if (position.Y == waypoint.Y)
             {
-                position.X = position.X + 5;
+                position.X = position.X + 50;
             }
             if (position.X > 1150)
             {
@@ -65,6 +65,16 @@ namespace TowerDefense
                 batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), Color.White);
                 //batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), 10, 10), color);
             }
+        }
+
+        public Vector2 getPosition()
+        {
+            return position;
+        }
+
+        public bool getAlive()
+        {
+            return alive;
         }
     }
 }
