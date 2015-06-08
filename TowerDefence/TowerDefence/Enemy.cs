@@ -41,12 +41,12 @@ namespace TowerDefense
             }
             else if (position.X == waypoint.X)
             {
-                if (position.Y > waypoint.Y) position.Y = position.Y - 5;
-                if (position.Y < waypoint.Y) position.Y = position.Y + 5;
+                if (position.Y > waypoint.Y) position.Y = position.Y - 50;
+                if (position.Y < waypoint.Y) position.Y = position.Y + 50;
             }
             else if (position.Y == waypoint.Y)
             {
-                position.X = position.X + 5;
+                position.X = position.X + 50;
             }
             if (position.X > 1150)
             {

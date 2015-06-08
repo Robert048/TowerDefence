@@ -34,6 +34,12 @@ namespace TowerDefense
             spawn = true;
         }
 
+        // Return current wavenumber
+        public int getWaveNumber()
+        {
+            return waveNumber;
+        }
+
         private void AddEnemy()
         {
             int enemiesNR = numberOfEnemies;
