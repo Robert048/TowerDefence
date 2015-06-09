@@ -37,7 +37,7 @@ namespace TowerDefense
                 return waves.Peek();
             }
             else
-            {r
+            {
                 // WIN
                 levelFinished = true;
 
