@@ -11,7 +11,7 @@ namespace TowerDefense
     class ArrowTower : Tower
     {
 
-        public ArrowTower(Texture2D arrowTower, Vector2 position)
+        public ArrowTower(Texture2D arrowTower, Texture2D arrow, Vector2 position)
         {
             this.position = position;
             damage = 10;
@@ -21,7 +21,9 @@ namespace TowerDefense
             air = true;
             cost = 20;
             projectileList = new List<Projectile>();
-            texture = arrowTower;            
-        }
+            texture = arrowTower;
+            projectileTexture = arrow;
+        }      
+    
     }
 }

@@ -10,6 +10,7 @@ namespace TowerDefense
 {
     class Tower
     {
+        protected Texture2D projectileTexture;
         protected Texture2D texture;        
         protected Rectangle rectangle;
         protected Vector2 position;
@@ -76,8 +77,10 @@ namespace TowerDefense
                 {
                     attackTime = 0;
                     target.currentHealth = target.currentHealth - damage;
-                    Arrow projectile = new Arrow(arrow);
+                    Arrow projectile = new Arrow(projectileTexture);
                     projectile.shoot(target, position);
+                    projectile.Draw();
+
                 }
             }
         }
