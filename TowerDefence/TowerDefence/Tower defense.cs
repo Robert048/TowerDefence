@@ -403,7 +403,7 @@ namespace TowerDefense
                 }
             }
 
-            if (onPath = (level.getTileType(new Vector2(cellX, cellY)).Equals("0")))
+            if (onPath = (level.getTileType(new Vector2(cellY, cellX)).Equals("0")))
             {
                 if (onPath == false)
                 {
