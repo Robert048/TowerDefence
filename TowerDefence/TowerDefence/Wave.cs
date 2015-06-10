@@ -117,7 +117,7 @@ namespace TowerDefense
             //soort enemy
             foreach (Enemy enemy in enemies)
             {
-                enemy.Draw(batch, getTextures(enemy, content));
+                enemy.Draw(batch, getTextures(enemy, content), content.Load<Texture2D>("BlankBar"));
             }
         }
 
