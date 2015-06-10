@@ -99,6 +99,7 @@ namespace TowerDefense
                     if (enemy.IsKilled())
                     {
                         player.score++;
+                        player.money = player.money + enemy.bountyGiven;
                         enemies.Remove(enemy);
                         i--;
                     }
