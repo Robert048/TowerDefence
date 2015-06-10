@@ -17,6 +17,7 @@ namespace TowerDefense
         protected Vector2 position = new Vector2();
         protected Vector2 waypoint = new Vector2();
         private int nr = 0;
+        protected float speed;
 
         public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
@@ -41,12 +42,12 @@ namespace TowerDefense
             }
             else if (position.X == waypoint.X)
             {
-                if (position.Y > waypoint.Y) position.Y = position.Y - 50;
-                if (position.Y < waypoint.Y) position.Y = position.Y + 50;
+                if (position.Y > waypoint.Y) position.Y = position.Y - speed;
+                if (position.Y < waypoint.Y) position.Y = position.Y + speed;
             }
             else if (position.Y == waypoint.Y)
             {
-                position.X = position.X + 50;
+                position.X = position.X + speed;
             }
             if (position.X > 1150)
             {

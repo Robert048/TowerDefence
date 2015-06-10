@@ -60,6 +60,7 @@ namespace TowerDefense
                     //Boss wave
                     Enemy boss = new BossEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
                     enemies.Add(boss);
+                    numberOfEnemies = 0;
                 }
                 //alle 5e rondes behalve de 10e rondes
                 else if (waveNumber % 5 == 0)
