@@ -21,7 +21,7 @@ namespace TowerDefense
 
         private Dictionary<Vector2, String> tileList = new Dictionary<Vector2, String>();
 
-        private bool test = true;
+        private bool firstLoad = true;
 
         public void AddTexture(Texture2D texture)
         {
@@ -96,17 +96,17 @@ namespace TowerDefense
 
                     tiles[x, y] = LoadTile(tileType, x, y);
                     //add waypoints for enemies
-                    if (tileType == '1' || tileType == '2' || tileType == '3' || tileType == '4')
+                    if (tileType == '1' || tileType == '2' || tileType == '3' || tileType == '4' || tileType == 'E')
                     {
                         waypoints.Enqueue(new Vector2(x, y) * 50);
                     }
                 }
             }
-            //het enqueued hierboven ook iets, constant! maakt niet uit voor game, maar zitten wel meer dan 1000 dingen in queue...
-            if (test)
+
+            if (firstLoad)
             {
                 sortWaypoints();
-                test = false;
+                firstLoad = false;
             }
         }
 

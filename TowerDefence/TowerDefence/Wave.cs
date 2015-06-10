@@ -44,7 +44,6 @@ namespace TowerDefense
         {
             int enemiesNR = numberOfEnemies;
             int halfWave = enemiesNR / 2;
-            waypoints.Enqueue(new Vector2(1200, 50));
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 if (waveNumber < 3)
