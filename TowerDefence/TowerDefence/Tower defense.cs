@@ -363,17 +363,17 @@ namespace TowerDefense
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), Content.Load<Texture2D>("arrow"), new Vector2(tileX, tileY));
                     break;
                 }
                 case "freezeTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("slowTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new FreezeTower(Content.Load<Texture2D>("slowTower"), new Vector2(tileX, tileY));
                     break;
                 }
                 case "canonTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("canonTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new CanonTower(Content.Load<Texture2D>("canonTower"), new Vector2(tileX, tileY));
                     break;
                 } 
             }

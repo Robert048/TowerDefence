@@ -10,7 +10,7 @@ namespace TowerDefense
 {
     class CanonTower : Tower
     {
-        public CanonTower(Texture2D tower)
+        public CanonTower(Texture2D tower, Vector2 position)
         {
             damage = 20;
             attackSpeed = 2000;

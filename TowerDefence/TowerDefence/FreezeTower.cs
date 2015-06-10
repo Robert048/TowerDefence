@@ -12,7 +12,7 @@ namespace TowerDefense
     {
         protected int freezePower;
 
-        public FreezeTower(Texture2D freezeTower)
+        public FreezeTower(Texture2D freezeTower, Vector2 position)
         {
             damage = 10;
             attackSpeed = 1000;
