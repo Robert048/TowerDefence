@@ -10,5 +10,8 @@ namespace TowerDefense
 {
     class Projectile
     {
+        protected Texture2D texture;
+        protected Rectangle rectangle;
+        protected Vector2 position;
     }
 }
