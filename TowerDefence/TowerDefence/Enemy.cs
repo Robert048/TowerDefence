@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TowerDefense
 {
@@ -61,8 +62,14 @@ namespace TowerDefense
         {
             if(alive)
             {
-                float healthPercentage = currentHealth / startHealth;
-                Color color = new Color(new Vector3(1 - healthPercentage, 1 - healthPercentage, 1 - healthPercentage));
+                float healthPercentage = (((float)currentHealth / (float)startHealth) * 100);
+                Debug.WriteLine(currentHealth);
+                Debug.WriteLine(startHealth);
+                Debug.WriteLine(healthPercentage);
+                byte test = Convert.ToByte(255 - ((255f / 100f) * healthPercentage));
+                byte test2 = Convert.ToByte(0 + ((255f / 100f) * healthPercentage));
+                Color color = new Color(test, test2, 0);
+                Debug.WriteLine("next");
                 batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), Color.White);
                 batch.Draw(healthBar, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), 50, 10), color);
             }
