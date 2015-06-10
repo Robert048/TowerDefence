@@ -156,7 +156,7 @@ namespace TowerDefense
                     foreach (Tower tower in towerList)
                     {
                         tower.getClosest(manager);
-                        tower.shoot(gameTime, batch);
+                        tower.shoot(gameTime);                       
                     }
                     //keep game fullscreen
                     //graphics.PreferredBackBufferWidth = level.Width * 50;
@@ -341,6 +341,15 @@ namespace TowerDefense
                         item.Draw(batch);
                     }
 
+                    foreach (Tower item in towerList)
+                    {
+                        List<Projectile> p = item.getProjectileList();
+                        foreach (Projectile pro in p)
+                        {
+                                pro.Draw(batch);
+                        }
+                    }
+
                     btnArrow.Draw(batch);
                     btnFreeze.Draw(batch);
                     btnCanon.Draw(batch);
@@ -363,7 +372,7 @@ namespace TowerDefense
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), Content.Load<Texture2D>("arrow"), new Vector2(tileX, tileY));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), Content.Load<Texture2D>("OneUglyArrow"), new Vector2(tileX, tileY));
                     break;
                 }
                 case "freezeTower":

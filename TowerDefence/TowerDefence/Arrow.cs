@@ -13,6 +13,7 @@ namespace TowerDefense
         public Arrow(Texture2D arrow)
         {    
             texture = arrow;
+            speed = 1;
         }
 
        

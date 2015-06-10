@@ -16,7 +16,7 @@ namespace TowerDefense
             this.position = position;
             damage = 10;
             attackSpeed = 1000;
-            range = 100;
+            range = 300;
             ground = true;
             air = true;
             cost = 20;

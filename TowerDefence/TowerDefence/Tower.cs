@@ -22,7 +22,7 @@ namespace TowerDefense
         protected int cost;
         protected List<Projectile> projectileList;
         protected Enemy target;
-        protected int attackTime;
+        protected int attackTime;        
         
         public int getCost()
         {
@@ -36,6 +36,7 @@ namespace TowerDefense
 
         public void Draw(SpriteBatch spritebatch)
         {
+            
             rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
             spritebatch.Draw(texture, rectangle, Color.White);
         }
@@ -68,7 +69,7 @@ namespace TowerDefense
             }
         }
 
-        public void shoot(GameTime gameTime, SpriteBatch batch)
+        public void shoot(GameTime gameTime)
         {
             attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
             if (target != null)
@@ -78,11 +79,16 @@ namespace TowerDefense
                     attackTime = 0;
                     target.currentHealth = target.currentHealth - damage;
                     Arrow projectile = new Arrow(projectileTexture);
-                    projectile.shoot(target, position);
-                    projectile.Draw(batch);
-
+                    projectileList.Add(projectile);
+                    projectile.shoot(target, position);                    
                 }
             }
+        }
+        
+
+        public List<Projectile> getProjectileList()
+        {
+            return projectileList;
         }
     }
 }
