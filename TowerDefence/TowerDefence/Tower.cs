@@ -79,7 +79,7 @@ namespace TowerDefense
                     target.currentHealth = target.currentHealth - damage;
                     Arrow projectile = new Arrow(projectileTexture);
                     projectile.shoot(target, position);
-                    projectile.Draw();
+                    //projectile.Draw();
 
                 }
             }
