@@ -38,7 +38,7 @@ namespace TowerDefense
             spritebatch.Draw(texture, rectangle, Color.White);
         }
 
-        public Enemy getClosest(Wave_manager manager)
+        public void getClosest(Wave_manager manager)
         {
             float smallestRange = range;
             target = null;
@@ -51,7 +51,7 @@ namespace TowerDefense
                     target = enemy;
                 }
             }
-            return target;
+            //return target;
         }
 
         public bool targetInRange()
@@ -63,6 +63,17 @@ namespace TowerDefense
             else
             {
                 return false;
+            }
+        }
+
+        public void shoot()
+        {
+            if (target != null)
+            {
+                if(targetInRange())
+                {
+                    target.currentHealth = target.currentHealth - damage;
+                }
             }
         }
     }
