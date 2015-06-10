@@ -14,6 +14,7 @@ namespace TowerDefense
         private SpriteBatch batch;
         private SpriteFont font;
         private Texture2D BG;
+        private Texture2D MenuBG;
 
         //Objecten
         private Player player = new Player();
@@ -99,13 +100,14 @@ namespace TowerDefense
             //load content for the game
             font = Content.Load<SpriteFont>("font");
             BG = Content.Load<Texture2D>("BG_ingame");
+            MenuBG = Content.Load<Texture2D>("Menu Background");
 
             //buttons
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
-            btnMenuPlay.setPosition(new Vector2(525, 125));
+            btnMenuPlay.setPosition(new Vector2(550, 200));
 
             btnMenuCredits = new Button(Content.Load<Texture2D>("Credits"), graphics.GraphicsDevice);
-            btnMenuCredits.setPosition(new Vector2(525, 225));
+            btnMenuCredits.setPosition(new Vector2(550, 300));
 
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
@@ -293,6 +295,7 @@ namespace TowerDefense
             {
                 case GameState.MainMenu:
                     //draw buttons
+                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuPlay.Draw(batch);
                     btnMenuCredits.Draw(batch);
 

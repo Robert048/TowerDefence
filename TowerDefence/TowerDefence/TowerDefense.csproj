@@ -185,6 +185,7 @@
     <Content Include="Content\freezeBullet.png" />
     <Content Include="Content\grass.png" />
     <Content Include="Content\HealthBar.png" />
+    <Content Include="Content\Menu Background.png" />
     <Content Include="Content\normalEnemy.png" />
     <Content Include="Content\OneUglyArrow.png" />
     <Content Include="Content\Credits.png" />
