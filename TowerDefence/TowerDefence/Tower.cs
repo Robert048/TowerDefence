@@ -21,6 +21,7 @@ namespace TowerDefense
         protected int cost;
         protected List<Projectile> projectileList;
         protected Enemy target;
+        protected int attackTime;
         
         public int getCost()
         {
@@ -66,12 +67,14 @@ namespace TowerDefense
             }
         }
 
-        public void shoot()
+        public void shoot(GameTime gameTime)
         {
+            attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
             if (target != null)
             {
-                if(targetInRange())
+                if (targetInRange() && attackTime >= attackSpeed)
                 {
+                    attackTime = 0;
                     target.currentHealth = target.currentHealth - damage;
                 }
             }

@@ -154,7 +154,7 @@ namespace TowerDefense
                     foreach (Tower tower in towerList)
                     {
                         tower.getClosest(manager);
-                        tower.shoot();
+                        tower.shoot(gameTime);
                     }
                     //keep game fullscreen
                     //graphics.PreferredBackBufferWidth = level.Width * 50;
