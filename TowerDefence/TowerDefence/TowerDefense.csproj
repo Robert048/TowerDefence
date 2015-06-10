@@ -170,6 +170,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\arrowTowerFront.png" />
+    <Content Include="Content\BlankBar.png" />
     <Content Include="Content\boss2Enemy.png" />
     <Content Include="Content\bossEnemy.png" />
     <Content Include="Content\canonBall.png" />
@@ -183,8 +184,10 @@
     <Content Include="Content\flyingEnemy.png" />
     <Content Include="Content\freezeBullet.png" />
     <Content Include="Content\grass.png" />
+    <Content Include="Content\HealthBar.png" />
     <Content Include="Content\normalEnemy.png" />
     <Content Include="Content\OneUglyArrow.png" />
+    <Content Include="Content\Credits.png" />
     <Content Include="Content\Play.png" />
     <Content Include="Content\road.png" />
     <Content Include="Content\slowTower.png" />

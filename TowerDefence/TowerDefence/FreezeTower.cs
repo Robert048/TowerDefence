@@ -15,7 +15,7 @@ namespace TowerDefense
         public FreezeTower(Texture2D freezeTower)
         {
             damage = 10;
-            attackSpeed = 1;
+            attackSpeed = 1000;
             range = 100;
             ground = true;
             air = true;

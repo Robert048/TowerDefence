@@ -22,6 +22,7 @@ namespace TowerDefense
 
         //buttons
         private Button btnMenuPlay;
+        private Button btnMenuCredits;
         private Button btnArrow;        
         private Button btnFreeze;
         private Button btnCanon;
@@ -103,6 +104,9 @@ namespace TowerDefense
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(525, 125));
 
+            btnMenuCredits = new Button(Content.Load<Texture2D>("Credits"), graphics.GraphicsDevice);
+            btnMenuCredits.setPosition(new Vector2(525, 225));
+
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
 
@@ -137,6 +141,8 @@ namespace TowerDefense
                     IsMouseVisible = true;
                     if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
+                    if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnMenuCredits.Update(mouse);
                     break;
                 case GameState.Settings:
                     break;
@@ -145,6 +151,11 @@ namespace TowerDefense
                 case GameState.LevelSelect:
                     break;
                 case GameState.Playing:
+                    foreach (Tower tower in towerList)
+                    {
+                        tower.getClosest(manager);
+                        tower.shoot(gameTime);
+                    }
                     //keep game fullscreen
                     //graphics.PreferredBackBufferWidth = level.Width * 50;
                     //graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
@@ -283,6 +294,7 @@ namespace TowerDefense
                 case GameState.MainMenu:
                     //draw buttons
                     btnMenuPlay.Draw(batch);
+                    btnMenuCredits.Draw(batch);
 
                     break;
                 case GameState.Settings:

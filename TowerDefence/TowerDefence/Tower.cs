@@ -21,6 +21,7 @@ namespace TowerDefense
         protected int cost;
         protected List<Projectile> projectileList;
         protected Enemy target;
+        protected int attackTime;
         
         public int getCost()
         {
@@ -38,7 +39,7 @@ namespace TowerDefense
             spritebatch.Draw(texture, rectangle, Color.White);
         }
 
-        public Enemy getClosest(Wave_manager manager)
+        public void getClosest(Wave_manager manager)
         {
             float smallestRange = range;
             target = null;
@@ -51,7 +52,7 @@ namespace TowerDefense
                     target = enemy;
                 }
             }
-            return target;
+            //return target;
         }
 
         public bool targetInRange()
@@ -63,6 +64,19 @@ namespace TowerDefense
             else
             {
                 return false;
+            }
+        }
+
+        public void shoot(GameTime gameTime)
+        {
+            attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
+            if (target != null)
+            {
+                if (targetInRange() && attackTime >= attackSpeed)
+                {
+                    attackTime = 0;
+                    target.currentHealth = target.currentHealth - damage;
+                }
             }
         }
     }

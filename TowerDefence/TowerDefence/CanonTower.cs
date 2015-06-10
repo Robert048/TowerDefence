@@ -13,7 +13,7 @@ namespace TowerDefense
         public CanonTower(Texture2D tower)
         {
             damage = 20;
-            attackSpeed = 2;
+            attackSpeed = 2000;
             range = 150;
             ground = true;
             air = false;

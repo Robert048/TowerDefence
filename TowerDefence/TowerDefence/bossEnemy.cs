@@ -12,15 +12,13 @@ namespace TowerDefense
 {
     class BossEnemy : Enemy
     {
-       private float speed;
-
         public BossEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 10 * (waveNumber + 10);
+            startHealth = 50 + (waveNumber * 10);
             currentHealth = startHealth;
-            bountyGiven = 10 * waveNumber;
-            speed = 0.5f;
+            bountyGiven = 10 + (waveNumber * 4);
+            speed = 0.75f;
             this.waypoints = waypoints;
             this.position = position;
             waypoint = position;
