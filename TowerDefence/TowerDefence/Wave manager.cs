@@ -14,13 +14,14 @@ namespace TowerDefense
         private readonly Queue<Wave> waves = new Queue<Wave>();
         public int numberOfWaves;
         private bool levelFinished = false;
+        public int currentWave = 1;
             
         public List<Enemy> enemies { get { return CurrentWave().enemies; } }
 
         public Wave_manager(Queue<Vector2> waypoints, int levelIndex, Player player)
         {
             numberOfWaves = 10 + levelIndex;
-            for (int i = 0; i < numberOfWaves; i++)
+            for (int i = 1; i < numberOfWaves; i++)
             {
                 int initialNumberOfEnemies = 10;
                 int numberModifier = i * 2;
@@ -70,6 +71,7 @@ namespace TowerDefense
                 CurrentWave().Update(gametime);
                 if (CurrentWave().enemies.Count <= 0)
                 {
+                    currentWave++;
                     waves.Dequeue();
                     CurrentWave().Start();
                 }
