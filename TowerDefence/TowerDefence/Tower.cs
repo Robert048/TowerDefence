@@ -76,6 +76,8 @@ namespace TowerDefense
                 {
                     attackTime = 0;
                     target.currentHealth = target.currentHealth - damage;
+                    Arrow projectile = new Arrow(arrow);
+                    projectile.shoot(target, position);
                 }
             }
         }
