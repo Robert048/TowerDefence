@@ -68,7 +68,7 @@ namespace TowerDefense
             }
         }
 
-        public void shoot(GameTime gameTime)
+        public void shoot(GameTime gameTime, SpriteBatch batch)
         {
             attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
             if (target != null)
@@ -79,7 +79,7 @@ namespace TowerDefense
                     target.currentHealth = target.currentHealth - damage;
                     Arrow projectile = new Arrow(projectileTexture);
                     projectile.shoot(target, position);
-                    //projectile.Draw();
+                    projectile.Draw(batch);
 
                 }
             }
