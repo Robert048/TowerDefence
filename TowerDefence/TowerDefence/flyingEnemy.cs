@@ -9,15 +9,13 @@ namespace TowerDefense
 {
     class FlyingEnemy : Enemy
     {
-        private float speed;
-
         public FlyingEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 10 * (waveNumber + 1);
+            startHealth = 6 + (waveNumber * 2);
             currentHealth = startHealth;
-            bountyGiven = 10 * waveNumber;
-            speed = 0.5f;
+            bountyGiven = 2 + (waveNumber * 3);
+            speed = 1.25f;
             this.waypoints = waypoints;
             this.position = position;
             waypoint = position;
