@@ -172,6 +172,7 @@
     <Content Include="Content\arrowTowerFront.png" />
     <Content Include="Content\boss2Enemy.png" />
     <Content Include="Content\bossEnemy.png" />
+    <Content Include="Content\canonBall.png" />
     <Content Include="Content\canonTower.png" />
     <Content Include="Content\canonTowerFront.png" />
     <Content Include="Content\end.png" />
@@ -180,6 +181,7 @@
     <Content Include="Content\BG_ingame.png" />
     <Content Include="Content\fastEnemy.png" />
     <Content Include="Content\flyingEnemy.png" />
+    <Content Include="Content\freezeBullet.png" />
     <Content Include="Content\grass.png" />
     <Content Include="Content\normalEnemy.png" />
     <Content Include="Content\OneUglyArrow.png" />
