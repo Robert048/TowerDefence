@@ -13,5 +13,14 @@ namespace TowerDefense
         protected Texture2D texture;
         protected Rectangle rectangle;
         protected Vector2 position;
+
+        public Projectile()
+        {
+            
+        }
+        public void shoot(Enemy target, Vector2 position)
+        {
+            this.position = position;
+        }
     }
 }

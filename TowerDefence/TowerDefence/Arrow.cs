@@ -8,7 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
-    class Arrow
+    class Arrow : Projectile
     {
+        public Arrow(Texture2D arrow)
+        {    
+            texture = arrow;
+        }
     }
 }
