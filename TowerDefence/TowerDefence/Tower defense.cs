@@ -15,6 +15,7 @@ namespace TowerDefense
         private SpriteFont font;
         private Texture2D BG;
         private Texture2D MenuBG;
+        private Texture2D CreditsBG;
 
         //Objecten
         private Player player = new Player();
@@ -24,6 +25,7 @@ namespace TowerDefense
         //buttons
         private Button btnMenuPlay;
         private Button btnMenuCredits;
+        private Button btnMenuBack;
         private Button btnArrow;        
         private Button btnFreeze;
         private Button btnCanon;
@@ -101,6 +103,7 @@ namespace TowerDefense
             font = Content.Load<SpriteFont>("font");
             BG = Content.Load<Texture2D>("BG_ingame");
             MenuBG = Content.Load<Texture2D>("Menu Background");
+            CreditsBG = Content.Load<Texture2D>("CreditsBackground");
 
             //buttons
             btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
@@ -108,6 +111,9 @@ namespace TowerDefense
 
             btnMenuCredits = new Button(Content.Load<Texture2D>("Credits"), graphics.GraphicsDevice);
             btnMenuCredits.setPosition(new Vector2(550, 300));
+
+            btnMenuBack = new Button(Content.Load<Texture2D>("back"), graphics.GraphicsDevice);
+            btnMenuBack.setPosition(new Vector2(550, 500));
 
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
@@ -143,10 +149,12 @@ namespace TowerDefense
                     IsMouseVisible = true;
                     if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
-                    if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Playing;
+                    if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Settings;
                     btnMenuCredits.Update(mouse);
                     break;
                 case GameState.Settings:
+                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnMenuBack.Update(mouse);
                     break;
                 case GameState.Credits:
                     break;
@@ -301,6 +309,8 @@ namespace TowerDefense
 
                     break;
                 case GameState.Settings:
+                    batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    btnMenuBack.Draw(batch);
                     break;
                 case GameState.Credits:
                     break;

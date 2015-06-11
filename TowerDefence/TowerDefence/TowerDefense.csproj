@@ -170,12 +170,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\arrowTowerFront.png" />
+    <Content Include="Content\back.png" />
     <Content Include="Content\BlankBar.png" />
     <Content Include="Content\boss2Enemy.png" />
     <Content Include="Content\bossEnemy.png" />
     <Content Include="Content\canonBall.png" />
     <Content Include="Content\canonTower.png" />
     <Content Include="Content\canonTowerFront.png" />
+    <Content Include="Content\CreditsBackground.png" />
     <Content Include="Content\end.png" />
     <Content Include="Content\enemy2.jpg" />
     <Content Include="Content\enemy.jpg" />
