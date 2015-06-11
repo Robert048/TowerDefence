@@ -341,15 +341,6 @@ namespace TowerDefense
                         item.Draw(batch);
                     }
 
-                    foreach (Tower item in towerList)
-                    {
-                        List<Projectile> p = item.getProjectileList();
-                        foreach (Projectile pro in p)
-                        {
-                                pro.Draw(batch);
-                        }
-                    }
-
                     btnArrow.Draw(batch);
                     btnFreeze.Draw(batch);
                     btnCanon.Draw(batch);
