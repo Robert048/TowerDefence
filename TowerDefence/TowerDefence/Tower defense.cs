@@ -25,7 +25,11 @@ namespace TowerDefense
         //buttons
         private Button btnMenuPlay;
         private Button btnMenuCredits;
+        private Button btnMenuSettings;
+        private Button btnMenuExit;
         private Button btnMenuBack;
+
+        //tower buttons
         private Button btnArrow;        
         private Button btnFreeze;
         private Button btnCanon;
@@ -49,9 +53,6 @@ namespace TowerDefense
         private bool arrow;
         private bool canon;
         private bool freeze;
-
-        
-
 
         //gameStates for the different states the game has
         enum GameState
@@ -105,16 +106,24 @@ namespace TowerDefense
             MenuBG = Content.Load<Texture2D>("Menu Background");
             CreditsBG = Content.Load<Texture2D>("CreditsBackground");
 
-            //buttons
-            btnMenuPlay = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
+            //buttons for Main Menu
+            btnMenuPlay = new Button(Content.Load<Texture2D>("Buttons/Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(550, 200));
+            
+            btnMenuSettings = new Button(Content.Load<Texture2D>("Buttons/Settings"), graphics.GraphicsDevice);
+            btnMenuSettings.setPosition(new Vector2(550, 300));
 
-            btnMenuCredits = new Button(Content.Load<Texture2D>("Credits"), graphics.GraphicsDevice);
-            btnMenuCredits.setPosition(new Vector2(550, 300));
+            btnMenuCredits = new Button(Content.Load<Texture2D>("Buttons/Credits"), graphics.GraphicsDevice);
+            btnMenuCredits.setPosition(new Vector2(550, 400));
 
-            btnMenuBack = new Button(Content.Load<Texture2D>("back"), graphics.GraphicsDevice);
+            btnMenuExit = new Button(Content.Load<Texture2D>("Buttons/Exit"), graphics.GraphicsDevice);
+            btnMenuExit.setPosition(new Vector2(550, 500));
+
+            //Other menu buttons
+            btnMenuBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
             btnMenuBack.setPosition(new Vector2(550, 500));
 
+            //Tower buttons
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
 
@@ -149,14 +158,20 @@ namespace TowerDefense
                     IsMouseVisible = true;
                     if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
-                    if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Settings;
+                    if (btnMenuSettings.isClicked == true) CurrentGameState = GameState.Settings;
+                    btnMenuSettings.Update(mouse);
+                    if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Credits;
                     btnMenuCredits.Update(mouse);
+                    if (btnMenuExit.isClicked == true) CurrentGameState = GameState.MainMenu; //Exit mag niet in store app
+                    btnMenuExit.Update(mouse);
                     break;
                 case GameState.Settings:
                     if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
                     btnMenuBack.Update(mouse);
                     break;
                 case GameState.Credits:
+                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnMenuBack.Update(mouse);
                     break;
                 case GameState.LevelSelect:
                     break;
@@ -305,16 +320,21 @@ namespace TowerDefense
                     //draw buttons
                     batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuPlay.Draw(batch);
+                    btnMenuSettings.Draw(batch);
                     btnMenuCredits.Draw(batch);
-
+                    btnMenuExit.Draw(batch);
                     break;
                 case GameState.Settings:
-                    batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuBack.Draw(batch);
                     break;
                 case GameState.Credits:
+                    batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    btnMenuBack.Draw(batch);
                     break;
                 case GameState.LevelSelect:
+                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    btnMenuBack.Draw(batch);
                     break;
                 case GameState.Playing:
                     level.Draw(batch);

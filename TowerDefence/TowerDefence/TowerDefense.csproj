@@ -170,18 +170,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\arrowTowerFront.png" />
-    <Content Include="Content\back.png" />
+    <Content Include="Content\Buttons\Back.png" />
     <Content Include="Content\BlankBar.png" />
     <Content Include="Content\boss2Enemy.png" />
     <Content Include="Content\bossEnemy.png" />
     <Content Include="Content\canonBall.png" />
     <Content Include="Content\canonTower.png" />
     <Content Include="Content\canonTowerFront.png" />
+    <Content Include="Content\Buttons\Credits.png" />
     <Content Include="Content\CreditsBackground.png" />
     <Content Include="Content\end.png" />
     <Content Include="Content\enemy2.jpg" />
     <Content Include="Content\enemy.jpg" />
     <Content Include="Content\BG_ingame.png" />
+    <Content Include="Content\Buttons\Exit.png" />
     <Content Include="Content\fastEnemy.png" />
     <Content Include="Content\flyingEnemy.png" />
     <Content Include="Content\freezeBullet.png" />
@@ -190,9 +192,9 @@
     <Content Include="Content\Menu Background.png" />
     <Content Include="Content\normalEnemy.png" />
     <Content Include="Content\OneUglyArrow.png" />
-    <Content Include="Content\Credits.png" />
-    <Content Include="Content\Play.png" />
+    <Content Include="Content\Buttons\Play.png" />
     <Content Include="Content\road.png" />
+    <Content Include="Content\Buttons\Settings.png" />
     <Content Include="Content\slowTower.png" />
     <Content Include="Content\slowTowerFront.png" />
     <Content Include="Content\turn.png" />
