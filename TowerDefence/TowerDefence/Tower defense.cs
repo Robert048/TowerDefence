@@ -28,6 +28,7 @@ namespace TowerDefense
         private Button btnMenuSettings;
         private Button btnMenuExit;
         private Button btnMenuBack;
+        private Button btnLevel;
 
         //tower buttons
         private Button btnArrow;        
@@ -123,6 +124,9 @@ namespace TowerDefense
             btnMenuBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
             btnMenuBack.setPosition(new Vector2(550, 500));
 
+            btnLevel = new Button(Content.Load<Texture2D>("Buttons/Play"), graphics.GraphicsDevice);
+            btnLevel.setPosition(new Vector2(550, 200));
+
             //Tower buttons
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
@@ -156,7 +160,7 @@ namespace TowerDefense
             {
                 case GameState.MainMenu:
                     IsMouseVisible = true;
-                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
+                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.LevelSelect;
                     btnMenuPlay.Update(mouse);
                     if (btnMenuSettings.isClicked == true) CurrentGameState = GameState.Settings;
                     btnMenuSettings.Update(mouse);
@@ -174,6 +178,10 @@ namespace TowerDefense
                     btnMenuBack.Update(mouse);
                     break;
                 case GameState.LevelSelect:
+                    if (btnLevel.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnLevel.Update(mouse);
+                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnMenuBack.Update(mouse);
                     break;
                 case GameState.Playing:
                     foreach (Tower tower in towerList)
@@ -334,6 +342,7 @@ namespace TowerDefense
                     break;
                 case GameState.LevelSelect:
                     batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    btnMenuPlay.Draw(batch);
                     btnMenuBack.Draw(batch);
                     break;
                 case GameState.Playing:
