@@ -18,6 +18,8 @@ namespace TowerDefense
         protected Vector2 waypoint = new Vector2();
         private int nr = 0;
         protected float speed;
+        private float rotation;
+        private Vector2 vector;
 
         public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
@@ -42,12 +44,24 @@ namespace TowerDefense
             }
             else if (position.X == waypoint.X)
             {
-                if (position.Y > waypoint.Y) position.Y = position.Y - speed;
-                if (position.Y < waypoint.Y) position.Y = position.Y + speed;
+                if (position.Y > waypoint.Y)
+                {
+                    position.Y = position.Y - speed;
+                    rotation = 0;
+                    vector = new Vector2(0, 0);
+                }
+                if (position.Y < waypoint.Y)
+                {
+                    position.Y = position.Y + speed;
+                    rotation = ((float)Math.PI);
+                    vector = new Vector2(50, 50);
+                }
             }
             else if (position.Y == waypoint.Y)
             {
                 position.X = position.X + speed;
+                rotation = ((float)Math.PI / 2.0f);
+                vector = new Vector2(0, 50);
             }
             if (position.X > 1150)
             {
@@ -65,7 +79,7 @@ namespace TowerDefense
                 byte test = Convert.ToByte(255 - ((255f / 100f) * healthPercentage));
                 byte test2 = Convert.ToByte(0 + ((255f / 100f) * healthPercentage));
                 Color color = new Color(test, test2, 0);
-                batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), Color.White);
+                batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), null, Color.White, rotation, vector, SpriteEffects.None, 0);
                 batch.Draw(healthBar, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), Convert.ToInt32(healthPercentage / 2), 10), color);
             }
         }
