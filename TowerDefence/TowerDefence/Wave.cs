@@ -125,20 +125,29 @@ namespace TowerDefense
         {
             if(enemy.GetType() == typeof(NormalEnemy))
             {
-                return content.Load<Texture2D>("normalEnemy");
+                return content.Load<Texture2D>("Enemies/normalEnemy");
             }
             else if (enemy.GetType() == typeof(FastEnemy))
             {
-                return content.Load<Texture2D>("fastEnemy");
+                return content.Load<Texture2D>("Enemies/fastEnemy");
             }
             else if (enemy.GetType() == typeof(BossEnemy))
             {
-                //TODO random bossEnemy of boss2Enemy
-                return content.Load<Texture2D>("bossEnemy");
+                Random random = new Random();
+                int randomNumber = random.Next(0,2);
+                if (randomNumber == 0)
+                {
+                    return content.Load<Texture2D>("Enemies/bossEnemy");
+                }
+                else
+                {
+
+                    return content.Load<Texture2D>("Enemies/boss2Enemy");
+                }
             }
             else if (enemy.GetType() == typeof(FlyingEnemy))
             {
-                return content.Load<Texture2D>("flyingEnemy");
+                return content.Load<Texture2D>("Enemies/flyingEnemy");
             }
             else
             {
