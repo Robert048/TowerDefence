@@ -62,8 +62,9 @@ namespace TowerDefense
             }
         }
 
-        public void shoot(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
+            getClosest(manager);
             attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
             if (target != null)
             {

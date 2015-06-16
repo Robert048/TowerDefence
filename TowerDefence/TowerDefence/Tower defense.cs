@@ -186,8 +186,7 @@ namespace TowerDefense
                 case GameState.Playing:
                     foreach (Tower tower in towerList)
                     {
-                        tower.getClosest(manager);
-                        tower.shoot(gameTime);                       
+                        tower.Update(gameTime);                       
                     }
                     //keep game fullscreen
                     //graphics.PreferredBackBufferWidth = level.Width * 50;
