@@ -100,5 +100,20 @@ namespace TowerDefense
                 projectile.Draw(spritebatch);
             }
         }
+
+        public int getDamage()
+        {
+            return damage;
+        }
+
+        public int getRange()
+        {
+            return range;
+        }
+
+        public int getAttackSpeed()
+        {
+            return attackSpeed;
+        }
     }
 }
