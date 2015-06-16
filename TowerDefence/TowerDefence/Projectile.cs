@@ -17,23 +17,32 @@ namespace TowerDefense
         protected float speed;
         protected int damage;
         protected bool madeIt = false;
+        protected Enemy target;
+        //private Vector2 vector;
+        private float rotation;
 
-        public void setPosition(Vector2 position)
+        public bool madeIT()
         {
-            this.position = position;
+            return madeIt;
         }
 
-        public void Update(GameTime gametime, Enemy target)
+        public void Update(GameTime gametime)
         {
             tPos = target.getPosition();
-
+            tPos.X += 25;
+            tPos.Y += 25;
+            
+            if(target.IsKilled())
+            {
+                madeIt = true;
+            }
             if ((int)position.X > tPos.X)
             {
-                position.X = position.X - speed;
+                position.X -= speed;
             }
             if ((int)position.X < tPos.X)
             {
-                position.X = position.X + speed;
+                position.X += speed;
             }
             if ((int)position.Y > tPos.Y)
             {
@@ -43,22 +52,20 @@ namespace TowerDefense
             {
                 position.Y += speed;
             }
-            if ((int)position.X == tPos.X && position.Y == tPos.Y)
+            if ((int)position.X == tPos.X + 25 && position.Y == tPos.Y + 25)
             {
                 target.currentHealth = target.currentHealth - damage;
                 madeIt = true;
             }
+            rotation = (float)Math.Atan2((double)tPos.Y, (double)tPos.X);
+
         }
 
-        public bool madeIT()
-        {
-            return madeIt;
-        }
-
-        public void Draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch batch)
         {
             rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 10);
-            spritebatch.Draw(texture, rectangle, Color.White);
+            //batch.Draw(texture, rectangle, Color.White);
+            batch.Draw(texture, rectangle, null, Color.White, rotation, new Vector2(15, 5), SpriteEffects.None, 0);
         }
     }
 }

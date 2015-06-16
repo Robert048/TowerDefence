@@ -34,8 +34,9 @@ namespace TowerDefense
             return position;
         }
 
-        public void getClosest(Wave_manager manager)
+        public Enemy getTarget(Wave_manager manager)
         {
+            //targeting
             float smallestRange = range;
             target = null;
             List<Enemy> enemies = manager.enemies;
@@ -47,45 +48,44 @@ namespace TowerDefense
                     target = enemy;
                 }
             }
-            //return target;
+            return target;
         }
 
-        public bool targetInRange()
-        {
-            if (Vector2.Distance(position, target.getPosition()) < range)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public bool targetInRange()
+        //{
+        //    if (Vector2.Distance(position, target.getPosition()) < range)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Wave_manager manager)
         {
-            getClosest(manager);
+            getTarget(manager);
             attackTime += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds);
             if (target != null)
             {
-                if (targetInRange() && attackTime >= attackSpeed)
+                if (attackTime >= attackSpeed)
                 {
                     attackTime = 0;
                     // TODO CHECK WELKE TOWER HET IS EN MAAK ER EEN BIJBEHORENDE PROJECTILE VAN
-                    Arrow projectile = new Arrow(projectileTexture, damage);
-                    projectile.setPosition(position);
+                    Arrow projectile = new Arrow(projectileTexture, damage, target, position);
 
                     projectileList.Add(projectile);
                 }
-                for (int i = 0; i < projectileList.Count; i++)
+            }
+            for (int i = 0; i < projectileList.Count; i++)
+            {
+                Projectile projectile = projectileList[i];
+                projectile.Update(gameTime);
+
+                if (projectile.madeIT())
                 {
-                    Projectile projectil = projectileList[i];
-                    projectil.Update(gameTime, target);
-                    
-                    if(projectil.madeIT())
-                    {
-                        projectileList.RemoveAt(i);
-                    }
+                    projectileList.RemoveAt(i);
                 }
             }
         }
@@ -95,9 +95,9 @@ namespace TowerDefense
             rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
             spritebatch.Draw(texture, rectangle, Color.White);
 
-            foreach (var projectil in projectileList)
+            foreach (var projectile in projectileList)
             {
-                projectil.Draw(spritebatch);
+                projectile.Draw(spritebatch);
             }
         }
     }
