@@ -412,7 +412,7 @@ namespace TowerDefense
                 }
                 case "canonTower":
                 {
-                    towerToAdd = new CanonTower(Content.Load<Texture2D>("canonTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new CanonTower(Content.Load<Texture2D>("canonTower"), Content.Load<Texture2D>("CanonBall"), new Vector2(tileX, tileY));
                     break;
                 } 
             }
