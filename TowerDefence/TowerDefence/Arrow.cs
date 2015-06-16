@@ -10,10 +10,11 @@ namespace TowerDefense
 {
     class Arrow : Projectile
     {
-        public Arrow(Texture2D arrow)
+        public Arrow(Texture2D arrow, int damage)
         {
             texture = arrow;
-            speed = 1;
+            speed = 2;
+            this.damage = damage;
         }
     }
 }

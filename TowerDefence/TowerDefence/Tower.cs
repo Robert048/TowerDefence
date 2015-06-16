@@ -70,17 +70,21 @@ namespace TowerDefense
                 if (targetInRange() && attackTime >= attackSpeed)
                 {
                     attackTime = 0;
-                    target.currentHealth = target.currentHealth - damage;
-
-                    Arrow projectile = new Arrow(projectileTexture);
+                    // TODO CHECK WELKE TOWER HET IS EN MAAK ER EEN BIJBEHORENDE PROJECTILE VAN
+                    Arrow projectile = new Arrow(projectileTexture, damage);
                     projectile.setPosition(position);
-                    projectileList.Add(projectile);
 
+                    projectileList.Add(projectile);
                 }
                 for (int i = 0; i < projectileList.Count; i++)
                 {
                     Projectile projectil = projectileList[i];
                     projectil.Update(gameTime, target);
+                    
+                    if(projectil.madeIT())
+                    {
+                        projectileList.RemoveAt(i);
+                    }
                 }
             }
         }

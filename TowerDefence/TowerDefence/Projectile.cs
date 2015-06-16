@@ -15,6 +15,7 @@ namespace TowerDefense
         protected Vector2 position = new Vector2();
         protected Vector2 tPos = new Vector2();
         protected float speed;
+        protected int damage;
         protected bool madeIt = false;
 
         public void setPosition(Vector2 position)
@@ -42,15 +43,14 @@ namespace TowerDefense
             {
                 position.Y += speed;
             }
-
             if ((int)position.X == tPos.X && position.Y == tPos.Y)
             {
+                target.currentHealth = target.currentHealth - damage;
                 madeIt = true;
             }
-
         }
 
-        protected bool madeIT()
+        public bool madeIT()
         {
             return madeIt;
         }
