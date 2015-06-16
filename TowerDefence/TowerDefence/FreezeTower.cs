@@ -25,6 +25,7 @@ namespace TowerDefense
             texture = freezeTower;
             freezePower = 10;
             projectileTexture = freeze;
+            towerString = "freezeTower";
         }
     }
 }

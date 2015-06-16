@@ -370,16 +370,16 @@ namespace TowerDefense
                     if (arrow)
                     {
                         batch.DrawString(font, "ArrowTower", new Vector2(level.Width + 900, level.Height + 550), Color.Black);
-                        batch.DrawString(font, "Damage " + infoArrow.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
-                        batch.DrawString(font, "Cost " + infoArrow.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Cost " + infoArrow.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Damage " + infoArrow.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
                         batch.DrawString(font, "Attack speed " + infoArrow.getAttackSpeed().ToString(), new Vector2(level.Width + 900, level.Height + 610), Color.Black);
                         batch.DrawString(font, "Range " + infoArrow.getRange().ToString(), new Vector2(level.Width + 900, level.Height + 630), Color.Black);
                     }
                     if (freeze)
                     {
                         batch.DrawString(font, "FreezeTower", new Vector2(level.Width + 900, level.Height + 550), Color.Black);
-                        batch.DrawString(font, "Damage " + infoFreeze.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
-                        batch.DrawString(font, "Cost " + infoFreeze.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Cost " + infoFreeze.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Damage " + infoFreeze.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
                         batch.DrawString(font, "Attack speed " + infoFreeze.getAttackSpeed().ToString(), new Vector2(level.Width + 900, level.Height + 610), Color.Black);
                         batch.DrawString(font, "Range " + infoFreeze.getRange().ToString(), new Vector2(level.Width + 900, level.Height + 630), Color.Black);
                         batch.DrawString(font, "Slows", new Vector2(level.Width + 900, level.Height + 650), Color.Black);
@@ -387,8 +387,8 @@ namespace TowerDefense
                     if (canon)
                     {
                         batch.DrawString(font, "CanonTower", new Vector2(level.Width + 900, level.Height + 550), Color.Black);
-                        batch.DrawString(font, "Damage " + infoCanon.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
-                        batch.DrawString(font, "Cost " + infoCanon.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Cost " + infoCanon.getCost().ToString(), new Vector2(level.Width + 900, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Damage " + infoCanon.getDamage().ToString(), new Vector2(level.Width + 900, level.Height + 590), Color.Black);
                         batch.DrawString(font, "Attack speed " + infoCanon.getAttackSpeed().ToString(), new Vector2(level.Width + 900, level.Height + 610), Color.Black);
                         batch.DrawString(font, "Range " + infoCanon.getRange().ToString(), new Vector2(level.Width + 900, level.Height + 630), Color.Black);
                     }

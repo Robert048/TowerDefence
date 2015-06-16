@@ -22,6 +22,7 @@ namespace TowerDefense
             projectileList = new List<Projectile>();
             texture = tower;
             projectileTexture = canon;
+            towerString = "canonTower";
         }
     }
 }

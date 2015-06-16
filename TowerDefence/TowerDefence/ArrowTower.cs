@@ -23,6 +23,7 @@ namespace TowerDefense
             projectileList = new List<Projectile>();
             texture = arrowTower;
             projectileTexture = arrow;
+            towerString = "arrowTower";
         }      
     
     }

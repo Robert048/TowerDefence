@@ -23,6 +23,7 @@ namespace TowerDefense
         protected List<Projectile> projectileList;
         protected Enemy target;
         protected int attackTime;
+        protected String towerString;
 
         public int getCost()
         {
@@ -73,9 +74,21 @@ namespace TowerDefense
                 {
                     attackTime = 0;
                     // TODO CHECK WELKE TOWER HET IS EN MAAK ER EEN BIJBEHORENDE PROJECTILE VAN
-                    Arrow projectile = new Arrow(projectileTexture, damage, target, position);
-
-                    projectileList.Add(projectile);
+                    if(towerString == "arrowTower")
+                    {
+                        Arrow projectile = new Arrow(projectileTexture, damage, target, position);
+                        projectileList.Add(projectile);
+                    }
+                    else if(towerString == "freezeTower")
+                    {
+                        CanonBall projectile = new CanonBall(projectileTexture, damage, target, position);
+                        projectileList.Add(projectile);
+                    }
+                    else if(towerString == "canonTower")
+                    {
+                        FreezeBullet projectile = new FreezeBullet(projectileTexture, damage, target, position);
+                        projectileList.Add(projectile);
+                    }
                 }
             }
             for (int i = 0; i < projectileList.Count; i++)

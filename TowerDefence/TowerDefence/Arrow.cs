@@ -17,6 +17,7 @@ namespace TowerDefense
             this.damage = damage;
             this.target = target;
             position = startPosition;
+            projectileType = "arrow";
         }
     }
 }

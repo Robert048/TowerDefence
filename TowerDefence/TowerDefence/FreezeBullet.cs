@@ -8,7 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
-    class FreezeBullet
+    class FreezeBullet : Projectile
     {
+        public FreezeBullet(Texture2D freeze, int damage, Enemy target, Vector2 startPosition)
+        {
+            texture = freeze;
+            speed = 2;
+            this.damage = damage;
+            this.target = target;
+            position = startPosition;
+            projectileType = "freeze";
+        }
     }
 }

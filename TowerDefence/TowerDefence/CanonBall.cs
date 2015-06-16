@@ -8,7 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
-    class CanonBall
+    class CanonBall : Projectile
     {
+        public CanonBall(Texture2D canon, int damage, Enemy target, Vector2 startPosition)
+        {
+            texture = canon;
+            speed = 2;
+            this.damage = damage;
+            this.target = target;
+            position = startPosition;
+            projectileType = "canon";
+        }
     }
 }

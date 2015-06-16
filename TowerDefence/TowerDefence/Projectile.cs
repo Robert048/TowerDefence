@@ -18,8 +18,10 @@ namespace TowerDefense
         protected int damage;
         protected bool madeIt = false;
         protected Enemy target;
+        protected String projectileType;
         //private Vector2 vector;
         private float rotation;
+        
 
         public bool madeIT()
         {
@@ -63,7 +65,19 @@ namespace TowerDefense
 
         public void Draw(SpriteBatch batch)
         {
-            rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 10);
+            if(projectileType == "arrow")
+            {
+                rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 10);
+            }
+            else if(projectileType == "freeze")
+            {
+                rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
+            }
+            else if(projectileType == "canon")
+            {
+                rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
+            }
+            
             //batch.Draw(texture, rectangle, Color.White);
             batch.Draw(texture, rectangle, null, Color.White, rotation, new Vector2(15, 5), SpriteEffects.None, 0);
         }
