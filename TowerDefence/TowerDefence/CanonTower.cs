@@ -10,8 +10,9 @@ namespace TowerDefense
 {
     class CanonTower : Tower
     {
-        public CanonTower(Texture2D tower, Vector2 position)
+        public CanonTower(Texture2D tower, Texture2D canon, Vector2 position)
         {
+            this.position = position;
             damage = 20;
             attackSpeed = 2000;
             range = 150;
@@ -20,7 +21,7 @@ namespace TowerDefense
             cost = 40;
             projectileList = new List<Projectile>();
             texture = tower;
-
+            projectileTexture = canon;
         }
     }
 }

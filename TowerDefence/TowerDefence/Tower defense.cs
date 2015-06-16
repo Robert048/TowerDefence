@@ -407,12 +407,12 @@ namespace TowerDefense
                 }
                 case "freezeTower":
                 {
-                    towerToAdd = new FreezeTower(Content.Load<Texture2D>("slowTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new FreezeTower(Content.Load<Texture2D>("slowTower"), Content.Load<Texture2D>("freezeBullet"), new Vector2(tileX, tileY));
                     break;
                 }
                 case "canonTower":
                 {
-                    towerToAdd = new CanonTower(Content.Load<Texture2D>("canonTower"), new Vector2(tileX, tileY));
+                    towerToAdd = new CanonTower(Content.Load<Texture2D>("canonTower"), Content.Load<Texture2D>("CanonBall"), new Vector2(tileX, tileY));
                     break;
                 } 
             }
