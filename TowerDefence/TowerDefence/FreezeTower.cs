@@ -12,8 +12,9 @@ namespace TowerDefense
     {
         protected int freezePower;
 
-        public FreezeTower(Texture2D freezeTower, Vector2 position)
+        public FreezeTower(Texture2D freezeTower, Texture2D freeze, Vector2 position)
         {
+            this.position = position;
             damage = 10;
             attackSpeed = 1000;
             range = 100;
@@ -23,6 +24,7 @@ namespace TowerDefense
             projectileList = new List<Projectile>();
             texture = freezeTower;
             freezePower = 10;
+            projectileTexture = freeze;
         }
     }
 }
