@@ -11,11 +11,9 @@ namespace TowerDefense
     class Arrow : Projectile
     {
         public Arrow(Texture2D arrow)
-        {    
+        {
             texture = arrow;
             speed = 1;
         }
-
-       
     }
 }

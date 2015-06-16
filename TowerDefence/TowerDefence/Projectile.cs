@@ -12,19 +12,47 @@ namespace TowerDefense
     {
         protected Texture2D texture;
         protected Rectangle rectangle;
-        protected Vector2 position;
-        protected Vector2 tPos;
+        protected Vector2 position = new Vector2();
+        protected Vector2 tPos = new Vector2();
         protected float speed;
+        protected bool madeIt = false;
 
-        public Projectile()
-        {
-
-        }
-        public void shoot(Enemy target, Vector2 position)
+        public void setPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public void Update(GameTime gametime, Enemy target)
+        {
             tPos = target.getPosition();
-            
+
+            if ((int)position.X > tPos.X)
+            {
+                position.X = position.X - speed;
+            }
+            if ((int)position.X < tPos.X)
+            {
+                position.X = position.X + speed;
+            }
+            if ((int)position.Y > tPos.Y)
+            {
+                position.Y -= speed;
+            }
+            if ((int)position.Y < tPos.Y)
+            {
+                position.Y += speed;
+            }
+
+            if ((int)position.X == tPos.X && position.Y == tPos.Y)
+            {
+                madeIt = true;
+            }
+
+        }
+
+        protected bool madeIT()
+        {
+            return madeIt;
         }
 
         public void Draw(SpriteBatch spritebatch)

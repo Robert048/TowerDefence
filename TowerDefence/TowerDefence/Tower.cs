@@ -11,7 +11,7 @@ namespace TowerDefense
     class Tower
     {
         protected Texture2D projectileTexture;
-        protected Texture2D texture;        
+        protected Texture2D texture;
         protected Rectangle rectangle;
         protected Vector2 position;
         protected int damage;
@@ -22,8 +22,8 @@ namespace TowerDefense
         protected int cost;
         protected List<Projectile> projectileList;
         protected Enemy target;
-        protected int attackTime;        
-        
+        protected int attackTime;
+
         public int getCost()
         {
             return cost;
@@ -32,13 +32,6 @@ namespace TowerDefense
         public Vector2 getPosition()
         {
             return position;
-        }
-
-        public void Draw(SpriteBatch spritebatch)
-        {
-            
-            rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
-            spritebatch.Draw(texture, rectangle, Color.White);
         }
 
         public void getClosest(Wave_manager manager)
@@ -78,17 +71,29 @@ namespace TowerDefense
                 {
                     attackTime = 0;
                     target.currentHealth = target.currentHealth - damage;
+
                     Arrow projectile = new Arrow(projectileTexture);
+                    projectile.setPosition(position);
                     projectileList.Add(projectile);
-                    projectile.shoot(target, position);                    
+
+                }
+                for (int i = 0; i < projectileList.Count; i++)
+                {
+                    Projectile projectil = projectileList[i];
+                    projectil.Update(gameTime, target);
                 }
             }
         }
-        
 
-        public List<Projectile> getProjectileList()
+        public void Draw(SpriteBatch spritebatch)
         {
-            return projectileList;
+            rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
+            spritebatch.Draw(texture, rectangle, Color.White);
+
+            foreach (var projectil in projectileList)
+            {
+                projectil.Draw(spritebatch);
+            }
         }
     }
 }
