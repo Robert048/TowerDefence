@@ -420,7 +420,7 @@ namespace TowerDefense
             {
                 case "arrowTower":
                 {
-                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), Content.Load<Texture2D>("OneUglyArrow"), new Vector2(tileX, tileY));
+                    towerToAdd = new ArrowTower(Content.Load<Texture2D>("arrowTower"), Content.Load<Texture2D>("Arrow"), new Vector2(tileX, tileY));
                     break;
                 }
                 case "freezeTower":

@@ -190,7 +190,7 @@
     <Content Include="Content\HealthBar.png" />
     <Content Include="Content\Menu Background.png" />
     <Content Include="Content\Enemies\normalEnemy.png" />
-    <Content Include="Content\OneUglyArrow.png" />
+    <Content Include="Content\Arrow.png" />
     <Content Include="Content\Buttons\Play.png" />
     <Content Include="Content\road.png" />
     <Content Include="Content\Buttons\Settings.png" />
