@@ -21,6 +21,9 @@ namespace TowerDefense
         private Player player = new Player();
         private Level level = new Level();
         private Wave_manager manager;
+        private ArrowTower infoArrow;
+        private FreezeTower infoFreeze;
+        private CanonTower infoCanon;
 
         //buttons
         private Button btnMenuPlay;
@@ -69,6 +72,11 @@ namespace TowerDefense
             int levelIndex = 1;
             manager = new Wave_manager(level.getWaypoints(), levelIndex, player);
             towerList = new List<Tower>();
+            
+            Vector2 newVector = new Vector2(0,0);
+            infoArrow = new ArrowTower(null, null, newVector);
+            infoFreeze = new FreezeTower(null, null, newVector);
+            infoCanon = new CanonTower(null, null, newVector);
         }
 
         /// <summary>
@@ -359,20 +367,31 @@ namespace TowerDefense
                    
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
 
-                    //if (arrow)
-                    //{
-                    //    batch.DrawString(font, ArrowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
-                    //}
-                    //if (freeze)
-                    //{
-                    //    batch.DrawString(font, arowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
-                    //}
-                    //if (canon)
-                    //{
-                    //    batch.DrawString(font, arowTower.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 550), Color.Black);
-                    //}
-
-                    // arowTower.getCost().ToString()
+                    if (arrow)
+                    {
+                        batch.DrawString(font, "ArrowTower", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                        batch.DrawString(font, "Damage" + infoArrow.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Cost" + infoArrow.getDamage().ToString(), new Vector2(level.Width + 225, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Attack speed" + infoArrow.getAttackSpeed().ToString(), new Vector2(level.Width + 225, level.Height + 610), Color.Black);
+                        batch.DrawString(font, "Range" + infoArrow.getRange().ToString(), new Vector2(level.Width + 225, level.Height + 630), Color.Black);
+                    }
+                    if (freeze)
+                    {
+                        batch.DrawString(font, "FreezeTower", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                        batch.DrawString(font, "Damage" + infoFreeze.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Cost" + infoFreeze.getDamage().ToString(), new Vector2(level.Width + 225, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Attack speed" + infoFreeze.getAttackSpeed().ToString(), new Vector2(level.Width + 225, level.Height + 610), Color.Black);
+                        batch.DrawString(font, "Range" + infoFreeze.getRange().ToString(), new Vector2(level.Width + 225, level.Height + 630), Color.Black);
+                        batch.DrawString(font, "Deze tower laat enemies langzamer lopen", new Vector2(level.Width + 225, level.Height + 650), Color.Black);
+                    }
+                    if (canon)
+                    {
+                        batch.DrawString(font, "CanonTower", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
+                        batch.DrawString(font, "Damage" + infoCanon.getCost().ToString(), new Vector2(level.Width + 225, level.Height + 570), Color.Black);
+                        batch.DrawString(font, "Cost" + infoCanon.getDamage().ToString(), new Vector2(level.Width + 225, level.Height + 590), Color.Black);
+                        batch.DrawString(font, "Attack speed" + infoCanon.getAttackSpeed().ToString(), new Vector2(level.Width + 225, level.Height + 610), Color.Black);
+                        batch.DrawString(font, "Range" + infoCanon.getRange().ToString(), new Vector2(level.Width + 225, level.Height + 630), Color.Black);
+                    }
 
                     foreach (Tower item in towerList)
                     {                        
