@@ -17,7 +17,7 @@ namespace TowerDefense
         {
             score = 0;
             lives = 20;
-            money = 60;
+            money = 51;
         }
     }
 }
