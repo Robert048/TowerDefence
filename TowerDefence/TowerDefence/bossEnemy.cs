@@ -15,7 +15,7 @@ namespace TowerDefense
         public BossEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 50 + (waveNumber * 10);
+            startHealth = 150 + (waveNumber * 30);
             currentHealth = startHealth;
             bountyGiven = 10 + (waveNumber * 4);
             speed = 1.0f;
