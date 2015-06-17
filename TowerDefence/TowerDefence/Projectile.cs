@@ -17,16 +17,34 @@ namespace TowerDefense
         protected float speed;
         protected int damage;
         protected bool madeIt = false;
+        protected bool inRange = true;
+        protected int maxRange;
         protected Enemy target;
         protected String projectileType;
         private Vector2 direction;
         float rotation;
         //private Vector2 vector;
 
-
         public bool madeIT()
         {
             return madeIt;
+        }
+
+        public bool isInRange()
+        {
+            return inRange;
+        }
+
+        private bool stillInRange()
+        {
+            if (Vector2.Distance(position, target.getPosition()) < maxRange)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void Update(GameTime gametime)
@@ -38,6 +56,10 @@ namespace TowerDefense
             if (target.IsKilled())
             {
                 madeIt = true;
+            }
+            if (!stillInRange())
+            {
+                inRange = false;
             }
             if ((int)position.X > tPos.X + 26)
             {

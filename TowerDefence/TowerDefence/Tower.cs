@@ -74,17 +74,17 @@ namespace TowerDefense
                 {
                     attackTime = 0;
                     // TODO CHECK WELKE TOWER HET IS EN MAAK ER EEN BIJBEHORENDE PROJECTILE VAN
-                    if(towerString == "arrowTower")
+                    if (towerString == "arrowTower")
                     {
-                        Arrow projectile = new Arrow(projectileTexture, damage, target, position);
+                        Arrow projectile = new Arrow(projectileTexture, damage, target, position, range);
                         projectileList.Add(projectile);
                     }
-                    else if(towerString == "freezeTower")
+                    else if (towerString == "freezeTower")
                     {
                         CanonBall projectile = new CanonBall(projectileTexture, damage, target, position);
                         projectileList.Add(projectile);
                     }
-                    else if(towerString == "canonTower")
+                    else if (towerString == "canonTower")
                     {
                         FreezeBullet projectile = new FreezeBullet(projectileTexture, damage, target, position);
                         projectileList.Add(projectile);
@@ -96,7 +96,7 @@ namespace TowerDefense
                 Projectile projectile = projectileList[i];
                 projectile.Update(gameTime);
 
-                if (projectile.madeIT())
+                if (projectile.madeIT() || !projectile.isInRange())
                 {
                     projectileList.RemoveAt(i);
                 }

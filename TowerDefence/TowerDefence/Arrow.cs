@@ -10,8 +10,9 @@ namespace TowerDefense
 {
     class Arrow : Projectile
     {
-        public Arrow(Texture2D arrow, int damage, Enemy target, Vector2 startPosition)
+        public Arrow(Texture2D arrow, int damage, Enemy target, Vector2 startPosition, int range)
         {
+            maxRange = range;
             texture = arrow;
             speed = 6;
             this.damage = damage;
