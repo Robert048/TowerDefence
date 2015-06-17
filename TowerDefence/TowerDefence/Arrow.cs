@@ -13,7 +13,7 @@ namespace TowerDefense
         public Arrow(Texture2D arrow, int damage, Enemy target, Vector2 startPosition)
         {
             texture = arrow;
-            speed = 2;
+            speed = 6;
             this.damage = damage;
             this.target = target;
             position = startPosition;

@@ -33,7 +33,7 @@ namespace TowerDefense
         {
             tPos = target.getPosition();
             direction = tPos - position;
-            rotation = (float)Math.Atan2(direction.Y + 25, direction.X + 25);
+            rotation = (float)Math.Atan2(direction.Y + 15, direction.X + 20);
 
             if (target.IsKilled())
             {
@@ -55,7 +55,7 @@ namespace TowerDefense
             {
                 position.Y += speed;
             }
-            if (((int)position.X >= (tPos.X) && (int)position.X <= (tPos.X + 50)) && (position.Y >= (tPos.Y) && position.Y <= (tPos.Y + 50)))
+            if (((int)position.X >= (tPos.X) && (int)position.X <= (tPos.X + 40)) && (position.Y >= (tPos.Y) && position.Y <= (tPos.Y + 30)))
             {
                 target.currentHealth = target.currentHealth - damage;
                 madeIt = true;
@@ -66,7 +66,7 @@ namespace TowerDefense
         {
             if (projectileType == "arrow")
             {
-                rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 10);
+                rectangle = new Rectangle((int)position.X + 25, (int)position.Y + 25, 30, 10);
             }
             else if (projectileType == "freeze")
             {
