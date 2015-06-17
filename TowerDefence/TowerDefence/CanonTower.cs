@@ -13,12 +13,12 @@ namespace TowerDefense
         public CanonTower(Texture2D tower, Texture2D canon, Vector2 position)
         {
             this.position = position;
-            damage = 20;
-            attackSpeed = 2000;
+            damage = 15;
+            attackSpeed = 2500;
             range = 150;
             ground = true;
             air = false;
-            cost = 40;
+            cost = 50;
             projectileList = new List<Projectile>();
             texture = tower;
             projectileTexture = canon;

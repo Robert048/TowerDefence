@@ -14,9 +14,9 @@ namespace TowerDefense
         public ArrowTower(Texture2D arrowTower, Texture2D arrow, Vector2 position)
         {
             this.position = position;
-            damage = 10;
+            damage = 5;
             attackSpeed = 1000;
-            range = 300;
+            range = 200;
             ground = true;
             air = true;
             cost = 20;
