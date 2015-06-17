@@ -15,9 +15,9 @@ namespace TowerDefense
         public FastEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 4 + (waveNumber * 3);
+            startHealth = 10 + (waveNumber * 5);
             currentHealth = startHealth;
-            bountyGiven = 2 + (waveNumber * 2);
+            bountyGiven = 5 + (waveNumber * 1);
             speed = 2.5f;
             this.waypoints = waypoints;
             this.position = position;

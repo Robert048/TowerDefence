@@ -16,7 +16,7 @@ namespace TowerDefense
         {
             startHealth = 10 + (waveNumber * 5);
             currentHealth = startHealth;
-            bountyGiven = 1 + (waveNumber * 1);
+            bountyGiven = 1 + (int)(waveNumber * 0.5f);
             speed = 1.0f;
             this.waypoints = waypoints;
             this.position = position;
