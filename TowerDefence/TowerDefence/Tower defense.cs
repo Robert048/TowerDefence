@@ -16,6 +16,8 @@ namespace TowerDefense
         private Texture2D BG;
         private Texture2D MenuBG;
         private Texture2D CreditsBG;
+        private Texture2D VictoryBG;
+        private Texture2D DefeatBG;
 
         //Objecten
         private Player player = new Player();
@@ -114,6 +116,8 @@ namespace TowerDefense
             BG = Content.Load<Texture2D>("BG_ingame");
             MenuBG = Content.Load<Texture2D>("Menu Background");
             CreditsBG = Content.Load<Texture2D>("CreditsBackground");
+            VictoryBG = Content.Load<Texture2D>("victoryscreen");
+            DefeatBG = Content.Load<Texture2D>("defeatscreen");
 
             //buttons for Main Menu
             btnMenuPlay = new Button(Content.Load<Texture2D>("Buttons/Play"), graphics.GraphicsDevice);
@@ -313,6 +317,8 @@ namespace TowerDefense
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
+                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnMenuBack.Update(mouse);
                     break;
             }
 
@@ -406,6 +412,16 @@ namespace TowerDefense
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
+                    if (player.lives <= 0)
+                    {
+                        batch.Draw(DefeatBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    }
+
+                    if(manager.isFinished())
+                    {
+                        batch.Draw(VictoryBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    }
+                    btnMenuBack.Draw(batch);
                     break;
             }
             batch.End();
