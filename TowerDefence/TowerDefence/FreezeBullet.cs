@@ -10,8 +10,10 @@ namespace TowerDefense
 {
     class FreezeBullet : Projectile
     {
-        public FreezeBullet(Texture2D freeze, int damage, Enemy target, Vector2 startPosition)
+        public FreezeBullet(Texture2D freeze, int damage, Enemy target, Vector2 startPosition, int range, int freezePower)
         {
+            this.freezePower = freezePower;
+            maxRange = range;
             texture = freeze;
             speed = 2;
             this.damage = damage;

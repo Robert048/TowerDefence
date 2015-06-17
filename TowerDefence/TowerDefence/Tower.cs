@@ -24,6 +24,7 @@ namespace TowerDefense
         protected Enemy target;
         protected int attackTime;
         protected String towerString;
+        protected int freezePower = 0;
 
         public int getCost()
         {
@@ -52,18 +53,6 @@ namespace TowerDefense
             return target;
         }
 
-        //public bool targetInRange()
-        //{
-        //    if (Vector2.Distance(position, target.getPosition()) < range)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-
         public void Update(GameTime gameTime, Wave_manager manager)
         {
             getTarget(manager);
@@ -73,20 +62,19 @@ namespace TowerDefense
                 if (attackTime >= attackSpeed)
                 {
                     attackTime = 0;
-                    // TODO CHECK WELKE TOWER HET IS EN MAAK ER EEN BIJBEHORENDE PROJECTILE VAN
                     if (towerString == "arrowTower")
                     {
                         Arrow projectile = new Arrow(projectileTexture, damage, target, position, range);
                         projectileList.Add(projectile);
                     }
-                    else if (towerString == "freezeTower")
-                    {
-                        CanonBall projectile = new CanonBall(projectileTexture, damage, target, position);
-                        projectileList.Add(projectile);
-                    }
                     else if (towerString == "canonTower")
                     {
-                        FreezeBullet projectile = new FreezeBullet(projectileTexture, damage, target, position);
+                        CanonBall projectile = new CanonBall(projectileTexture, damage, target, position, range);
+                        projectileList.Add(projectile);
+                    }
+                    else if (towerString == "freezeTower")
+                    {
+                        FreezeBullet projectile = new FreezeBullet(projectileTexture, damage, target, position, range, freezePower);
                         projectileList.Add(projectile);
                     }
                 }

@@ -10,8 +10,6 @@ namespace TowerDefense
 {
     class FreezeTower : Tower
     {
-        protected int freezePower;
-
         public FreezeTower(Texture2D freezeTower, Texture2D freeze, Vector2 position)
         {
             this.position = position;
@@ -23,7 +21,7 @@ namespace TowerDefense
             cost = 50;
             projectileList = new List<Projectile>();
             texture = freezeTower;
-            freezePower = 2;
+            this.freezePower = 2;
             projectileTexture = freeze;
             towerString = "freezeTower";
         }

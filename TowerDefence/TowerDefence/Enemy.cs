@@ -20,6 +20,9 @@ namespace TowerDefense
         protected float speed;
         private float rotation;
         private Vector2 vector;
+        private int counter = 0;
+        private bool slowed = false;
+        private float startSpeed;
 
         public int currentHealth { get; set; }
         public int bountyGiven { get; set; }
@@ -67,6 +70,18 @@ namespace TowerDefense
             {
                 madeIt = true;
             }
+            //slowed
+            if (slowed && counter < 2)
+            {
+                counter++;
+            }
+            if (slowed && counter >= 50)
+            {
+                slowed = false;
+                counter = 0;
+                speed = startSpeed;
+            }
+
             //levens
             if(currentHealth <= 0) alive = false;
         }
@@ -92,9 +107,16 @@ namespace TowerDefense
             return position;
         }
 
-        public bool getAlive()
+        public void setSlowed(int freezePower)
         {
-            return alive;
+            slowed = true;
+            startSpeed = speed;
+            speed = speed / freezePower;
         }
+        public bool getSlowed()
+        {
+           return slowed;
+        }
+
     }
 }

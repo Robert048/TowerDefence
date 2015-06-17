@@ -372,7 +372,7 @@ namespace TowerDefense
                     batch.DrawString(font, "Gold: " + player.money, new Vector2(level.Width, level.Height + 670), Color.Black);
                    
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
-
+                    
                     if (arrow)
                     {
                         batch.DrawString(font, "ArrowTower", new Vector2(level.Width + 900, level.Height + 550), Color.Black);

@@ -21,9 +21,9 @@ namespace TowerDefense
         protected int maxRange;
         protected Enemy target;
         protected String projectileType;
+        protected int freezePower;
         private Vector2 direction;
-        float rotation;
-        //private Vector2 vector;
+        private float rotation;
 
         public bool madeIT()
         {
@@ -81,6 +81,10 @@ namespace TowerDefense
             {
                 target.currentHealth = target.currentHealth - damage;
                 madeIt = true;
+                if (projectileType == "freeze" && target.getSlowed() == false)
+                {
+                    target.setSlowed(freezePower);
+                }
             }
         }
 
