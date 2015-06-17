@@ -412,14 +412,13 @@ namespace TowerDefense
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
-                    if (player.lives <= 0)
-                    {
-                        batch.Draw(DefeatBG, new Rectangle(0, 0, 1200, 750), Color.White);
-                    }
-
-                    if(manager.isFinished())
+                    if (manager.isFinished() && player.lives > 0)
                     {
                         batch.Draw(VictoryBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    }
+                    else
+                    {
+                        batch.Draw(DefeatBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     }
                     btnMenuBack.Draw(batch);
                     break;
