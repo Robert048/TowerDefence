@@ -19,10 +19,10 @@ namespace TowerDefense
         protected bool madeIt = false;
         protected Enemy target;
         protected String projectileType;
-        private float angle;
         private Vector2 direction;
+        float rotation;
         //private Vector2 vector;
-        
+
 
         public bool madeIT()
         {
@@ -32,11 +32,10 @@ namespace TowerDefense
         public void Update(GameTime gametime)
         {
             tPos = target.getPosition();
-            direction = (position) - tPos;
-            direction.Normalize();
-            angle = (float)(Math.Atan2(direction.Y, direction.X));
-            
-            if(target.IsKilled())
+            direction = tPos - position;
+            rotation = (float)Math.Atan2(direction.Y + 25, direction.X + 25);
+
+            if (target.IsKilled())
             {
                 madeIt = true;
             }
@@ -56,7 +55,7 @@ namespace TowerDefense
             {
                 position.Y += speed;
             }
-            if ((int)position.X == (tPos.X + 26) && position.Y == (tPos.Y + 26))
+            if (((int)position.X >= (tPos.X) && (int)position.X <= (tPos.X + 50)) && (position.Y >= (tPos.Y) && position.Y <= (tPos.Y + 50)))
             {
                 target.currentHealth = target.currentHealth - damage;
                 madeIt = true;
@@ -65,23 +64,23 @@ namespace TowerDefense
 
         public void Draw(SpriteBatch batch)
         {
-            if(projectileType == "arrow")
+            if (projectileType == "arrow")
             {
                 rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 10);
             }
-            else if(projectileType == "freeze")
+            else if (projectileType == "freeze")
             {
                 rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
             }
-            else if(projectileType == "canon")
+            else if (projectileType == "canon")
             {
                 rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
             }
-            
+
             //batch.Draw(texture, rectangle, Color.White);
             Vector2 orgin = new Vector2(15, 5);
             //batch.Draw(texture, position, rectangle, Color.White, angle, orgin, 1.0f, SpriteEffects.None, 0);
-            batch.Draw(texture, rectangle, null, Color.White, angle, new Vector2(15, 5), SpriteEffects.None, 0);
+            batch.Draw(texture, rectangle, null, Color.White, rotation, new Vector2(15, 5), SpriteEffects.None, 0);
         }
     }
 }

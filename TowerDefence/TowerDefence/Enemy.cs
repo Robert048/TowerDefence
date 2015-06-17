@@ -73,14 +73,17 @@ namespace TowerDefense
 
         public void Draw(SpriteBatch batch, Texture2D texture, Texture2D healthBar)
         {
-            if(alive)
+            if (alive)
             {
                 float healthPercentage = (((float)currentHealth / (float)startHealth) * 100);
-                byte test = Convert.ToByte(255 - ((255f / 100f) * healthPercentage));
-                byte test2 = Convert.ToByte(0 + ((255f / 100f) * healthPercentage));
-                Color color = new Color(test, test2, 0);
-                batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), null, Color.White, rotation, vector, SpriteEffects.None, 0);
-                batch.Draw(healthBar, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), Convert.ToInt32(healthPercentage / 2), 10), color);
+                if (healthPercentage > 1)
+                {
+                    byte test = Convert.ToByte(255 - ((255f / 100f) * healthPercentage));
+                    byte test2 = Convert.ToByte(0 + ((255f / 100f) * healthPercentage));
+                    Color color = new Color(test, test2, 0);
+                    batch.Draw(texture, new Rectangle(Convert.ToInt32(position.X), Convert.ToInt32(position.Y), 50, 50), null, Color.White, rotation, vector, SpriteEffects.None, 0);
+                    batch.Draw(healthBar, new Rectangle(Convert.ToInt32(position.X), (Convert.ToInt32(position.Y) - 10), Convert.ToInt32(healthPercentage / 2), 10), color);
+                }
             }
         }
 
