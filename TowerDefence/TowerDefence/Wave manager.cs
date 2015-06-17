@@ -20,7 +20,7 @@ namespace TowerDefense
 
         public Wave_manager(Queue<Vector2> waypoints, int levelIndex, Player player)
         {
-            numberOfWaves = 10 + levelIndex;
+            numberOfWaves = 9 + levelIndex;
             for (int i = 1; i < numberOfWaves; i++)
             {
                 int initialNumberOfEnemies = 10;
