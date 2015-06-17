@@ -15,15 +15,15 @@ namespace TowerDefense
         public FreezeTower(Texture2D freezeTower, Texture2D freeze, Vector2 position)
         {
             this.position = position;
-            damage = 10;
-            attackSpeed = 1000;
+            damage = 2;
+            attackSpeed = 1500;
             range = 100;
             ground = true;
             air = true;
             cost = 50;
             projectileList = new List<Projectile>();
             texture = freezeTower;
-            freezePower = 10;
+            freezePower = 2;
             projectileTexture = freeze;
             towerString = "freezeTower";
         }
