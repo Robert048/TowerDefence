@@ -14,9 +14,9 @@ namespace TowerDefense
         public NormalEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 10 + (waveNumber * 4);
+            startHealth = 10 + (waveNumber * 5);
             currentHealth = startHealth;
-            bountyGiven = 1 + (waveNumber * 2);
+            bountyGiven = 1 + (waveNumber * 1);
             speed = 1.0f;
             this.waypoints = waypoints;
             this.position = position;

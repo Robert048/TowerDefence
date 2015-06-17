@@ -12,9 +12,9 @@ namespace TowerDefense
         public FlyingEnemy(Vector2 position, int waveNumber, Queue<Vector2> waypoints)
             : base()
         {
-            startHealth = 6 + (waveNumber * 4);
+            startHealth = 6 + (waveNumber * 5);
             currentHealth = startHealth;
-            bountyGiven = 2 + (waveNumber * 2);
+            bountyGiven = 2 + (waveNumber * 1);
             speed = 1.25f;
             this.waypoints = waypoints;
             this.position = position;
