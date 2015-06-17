@@ -71,11 +71,11 @@ namespace TowerDefense
                 madeIt = true;
             }
             //slowed
-            if (slowed && counter < 2)
+            if (slowed && counter < 100)
             {
                 counter++;
             }
-            if (slowed && counter >= 50)
+            if (slowed && counter >= 100 && (position - waypoint).X % startSpeed == 0 && (position - waypoint).Y % startSpeed == 0)
             {
                 slowed = false;
                 counter = 0;
