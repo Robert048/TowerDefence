@@ -133,17 +133,17 @@ namespace TowerDefense
             }
             else if (enemy.GetType() == typeof(BossEnemy))
             {
-                Random random = new Random();
-                int randomNumber = random.Next(0,2);
-                if (randomNumber == 0)
-                {
+                //Random random = new Random();
+                //int randomNumber = random.Next(0,2);
+                //if (randomNumber == 0)
+                //{
                     return content.Load<Texture2D>("Enemies/bossEnemy");
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                    return content.Load<Texture2D>("Enemies/boss2Enemy");
-                }
+                    //return content.Load<Texture2D>("Enemies/boss2Enemy");
+                //}
             }
             else if (enemy.GetType() == typeof(FlyingEnemy))
             {

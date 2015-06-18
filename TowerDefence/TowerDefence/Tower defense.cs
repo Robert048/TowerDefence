@@ -15,6 +15,7 @@ namespace TowerDefense
         private SpriteFont font;
         private Texture2D BG;
         private Texture2D MenuBG;
+        private Texture2D howToPlay;
         private Texture2D CreditsBG;
         private Texture2D VictoryBG;
         private Texture2D DefeatBG;
@@ -115,6 +116,7 @@ namespace TowerDefense
             font = Content.Load<SpriteFont>("font");
             BG = Content.Load<Texture2D>("BG_ingame");
             MenuBG = Content.Load<Texture2D>("Menu Background");
+            howToPlay = Content.Load<Texture2D>("howToPlay");
             CreditsBG = Content.Load<Texture2D>("CreditsBackground");
             VictoryBG = Content.Load<Texture2D>("victoryscreen");
             DefeatBG = Content.Load<Texture2D>("defeatscreen");
@@ -343,11 +345,12 @@ namespace TowerDefense
                     btnMenuPlay.Draw(batch);
                     btnMenuSettings.Draw(batch);
                     btnMenuCredits.Draw(batch);
-                    btnMenuExit.Draw(batch);
+                  //  btnMenuExit.Draw(batch);
                     break;
                 case GameState.Settings:
-                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    batch.Draw(howToPlay, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuBack.Draw(batch);
+                    btnMenuBack.setPosition(new Vector2(1000, 400));
                     break;
                 case GameState.Credits:
                     batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
