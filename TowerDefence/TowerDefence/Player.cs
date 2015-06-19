@@ -16,7 +16,7 @@ namespace TowerDefense
         public Player()
         {
             score = 0;
-            lives = 20000;
+            lives = 20;
             money = 51;
         }
     }
