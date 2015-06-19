@@ -183,7 +183,6 @@
     <Content Include="Content\CreditsBackground.png" />
     <Content Include="Content\end.png" />
     <Content Include="Content\BG_ingame.png" />
-    <Content Include="Content\Buttons\Exit.png" />
     <Content Include="Content\Enemies\fastEnemy.png" />
     <Content Include="Content\Enemies\flyingEnemy.png" />
     <Content Include="Content\freezeBullet.png" />
