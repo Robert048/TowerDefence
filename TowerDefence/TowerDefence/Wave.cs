@@ -17,6 +17,8 @@ namespace TowerDefense
         private bool spawn;
         private Queue<Vector2> waypoints;
         private Player player;
+        Random random = new Random();
+        int BossNumber;
 
         public Wave(int waveNumber, int numberOfEnemies, Queue<Vector2> waypoints, Player player)
         {
@@ -26,6 +28,7 @@ namespace TowerDefense
             enemies = new List<Enemy>();
             spawn = false;
             this.player = player;
+            BossNumber = random.Next(0, 2);
         }
 
         public void Start()
@@ -44,9 +47,9 @@ namespace TowerDefense
         {
             int enemiesNR = numberOfEnemies;
             int halfWave = enemiesNR / 2;
-            for (int i = 0; i < numberOfEnemies; i++)
+            for (int i = 1; i < (numberOfEnemies + 1); i++)
             {
-                if (waveNumber < 3)
+                if (waveNumber < 2)
                 {
                     //normal
                     Enemy normal = new NormalEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
@@ -54,7 +57,7 @@ namespace TowerDefense
 
                 }
                 //alle 10e rondes
-                else if (waveNumber % 10 == 0)
+                else if ((waveNumber + 1) % 10 == 0)
                 {
                     //Boss wave
                     Enemy boss = new BossEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
@@ -62,7 +65,7 @@ namespace TowerDefense
                     numberOfEnemies = 0;
                 }
                 //alle 5e rondes behalve de 10e rondes
-                else if (waveNumber % 5 == 0)
+                else if ((waveNumber + 1) % 5 == 0)
                 {
                     //Fast enemy wave
                     Enemy fast = new FastEnemy(new Vector2((0 - (i * 50)), 250), waveNumber, waypoints);
@@ -104,7 +107,14 @@ namespace TowerDefense
                     }
                     if (enemy.madeItToEnd())
                     {
-                        player.lives--;
+                        if (enemy.GetType() == typeof(BossEnemy))
+                        {
+                            player.lives = player.lives - 5;
+                        }
+                        else
+                        {
+                            player.lives--;
+                        }
                         enemies.Remove(enemy);
                         i--;
                     }
@@ -133,17 +143,15 @@ namespace TowerDefense
             }
             else if (enemy.GetType() == typeof(BossEnemy))
             {
-                //Random random = new Random();
-                //int randomNumber = random.Next(0,2);
-                //if (randomNumber == 0)
-                //{
+                if (BossNumber == 0)
+                {
                     return content.Load<Texture2D>("Enemies/bossEnemy");
-                //}
-                //else
-                //{
+                }
+                else
+                {
 
-                    //return content.Load<Texture2D>("Enemies/boss2Enemy");
-                //}
+                    return content.Load<Texture2D>("Enemies/boss2Enemy");
+                }
             }
             else if (enemy.GetType() == typeof(FlyingEnemy))
             {

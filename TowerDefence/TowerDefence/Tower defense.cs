@@ -32,7 +32,8 @@ namespace TowerDefense
         private Button btnMenuPlay;
         private Button btnMenuCredits;
         private Button btnMenuHowto;
-        private Button btnMenuBack;
+        private Button btnBack;
+        private Button btnNext;
 
         //tower buttons
         private Button btnArrow;        
@@ -63,7 +64,7 @@ namespace TowerDefense
         //gameStates for the different states the game has
         enum GameState
         {
-            MainMenu, Credits, Settings, Playing, EndGame, Pause
+            MainMenu, Credits, Howto, Playing, EndGame, Pause
         }
         GameState CurrentGameState = GameState.MainMenu;
 
@@ -130,8 +131,11 @@ namespace TowerDefense
             btnMenuCredits.setPosition(new Vector2(550, 400));
 
             //Other menu buttons
-            btnMenuBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
-            btnMenuBack.setPosition(new Vector2(550, 500));
+            btnBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
+            btnBack.setPosition(new Vector2(550, 500));
+
+            btnNext = new Button(Content.Load<Texture2D>("Buttons/Next"), graphics.GraphicsDevice);
+            btnNext.setPosition(new Vector2(750, 500));
 
             //Tower buttons
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
@@ -160,18 +164,18 @@ namespace TowerDefense
                     IsMouseVisible = true;
                     if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
-                    if (btnMenuHowto.isClicked == true) CurrentGameState = GameState.Settings;
+                    if (btnMenuHowto.isClicked == true) CurrentGameState = GameState.Howto;
                     btnMenuHowto.Update(mouse);
                     if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Credits;
                     btnMenuCredits.Update(mouse);
                     break;
-                case GameState.Settings:
-                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
-                    btnMenuBack.Update(mouse);
+                case GameState.Howto:
+                    if (btnBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnBack.Update(mouse);
                     break;
                 case GameState.Credits:
-                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
-                    btnMenuBack.Update(mouse);
+                    if (btnBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnBack.Update(mouse);
                     break;
                 case GameState.Playing:
                     if (keyboardState.IsKeyDown(Keys.Escape)) CurrentGameState = GameState.Pause;
@@ -254,7 +258,6 @@ namespace TowerDefense
                     }
                     else if (canon)
                     {
-                        //todo cursor icon tower
                         MouseState nextState = Mouse.GetState();
                         if (nextState.LeftButton == ButtonState.Pressed)
                         {
@@ -310,8 +313,10 @@ namespace TowerDefense
                         levelIndex = 0;
                         makeLevel();
                     }
-                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
-                    btnMenuBack.Update(mouse);
+                    if (btnBack.isClicked == true) CurrentGameState = GameState.MainMenu;
+                    btnBack.Update(mouse);
+                    if (btnNext.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnNext.Update(mouse);
                     break;
             }
 
@@ -337,21 +342,21 @@ namespace TowerDefense
             //gamestates
             switch (CurrentGameState)
             {
+                //Draw BackGrounds and buttons for each gamestate
                 case GameState.MainMenu:
-                    //draw buttons
                     batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuPlay.Draw(batch);
                     btnMenuHowto.Draw(batch);
                     btnMenuCredits.Draw(batch);
                     break;
-                case GameState.Settings:
+                case GameState.Howto:
                     batch.Draw(howToPlay, new Rectangle(0, 0, 1200, 750), Color.White);
-                    btnMenuBack.Draw(batch);
-                    btnMenuBack.setPosition(new Vector2(1000, 400));
+                    btnBack.Draw(batch);
+                    btnBack.setPosition(new Vector2(1000, 400));
                     break;
                 case GameState.Credits:
                     batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
-                    btnMenuBack.Draw(batch);
+                    btnBack.Draw(batch);
                     break;
                 case GameState.Playing:
                     level.Draw(batch);
@@ -359,7 +364,7 @@ namespace TowerDefense
                     manager.Draw(batch, Content);
                     //onderste gedeelte
                     batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
-                    batch.DrawString(font, "Level: ", new Vector2(level.Width, level.Height + 550), Color.Black);
+                    batch.DrawString(font, "Level: " + (levelIndex + 1), new Vector2(level.Width, level.Height + 550), Color.Black);
                     batch.DrawString(font, "Total Waves: " + manager.numberOfWaves, new Vector2(level.Width, level.Height + 570), Color.Black);
                     batch.DrawString(font, "Currentwave: " + manager.currentWave, new Vector2(level.Width, level.Height + 590), Color.Black);
                     batch.DrawString(font, "Enemies: " + manager.enemies.Count, new Vector2(level.Width, level.Height + 610), Color.Black);
@@ -417,7 +422,8 @@ namespace TowerDefense
                     {
                         batch.Draw(DefeatBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     }
-                    btnMenuBack.Draw(batch);
+                    btnBack.Draw(batch);
+                    btnNext.Draw(batch);
                     break;
             }
             batch.End();

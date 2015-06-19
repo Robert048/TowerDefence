@@ -175,6 +175,7 @@
     <Content Include="Content\Buttons\Back.png" />
     <Content Include="Content\BlankBar.png" />
     <Content Include="Content\Buttons\Howto.png" />
+    <Content Include="Content\Buttons\Next.png" />
     <Content Include="Content\defeatscreen.png" />
     <Content Include="Content\Enemies\boss2Enemy.png" />
     <Content Include="Content\Enemies\bossEnemy.png" />
