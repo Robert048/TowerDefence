@@ -32,7 +32,6 @@ namespace TowerDefense
         private Button btnMenuPlay;
         private Button btnMenuCredits;
         private Button btnMenuSettings;
-        private Button btnMenuExit;
         private Button btnMenuBack;
         private Button btnLevel;
 
@@ -131,9 +130,6 @@ namespace TowerDefense
             btnMenuCredits = new Button(Content.Load<Texture2D>("Buttons/Credits"), graphics.GraphicsDevice);
             btnMenuCredits.setPosition(new Vector2(550, 400));
 
-            btnMenuExit = new Button(Content.Load<Texture2D>("Buttons/Exit"), graphics.GraphicsDevice);
-            btnMenuExit.setPosition(new Vector2(550, 500));
-
             //Other menu buttons
             btnMenuBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
             btnMenuBack.setPosition(new Vector2(550, 500));
@@ -170,6 +166,7 @@ namespace TowerDefense
         {
             //gamestates
             MouseState mouse = Mouse.GetState();
+            KeyboardState keyboardState = Keyboard.GetState();
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
@@ -180,8 +177,6 @@ namespace TowerDefense
                     btnMenuSettings.Update(mouse);
                     if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Credits;
                     btnMenuCredits.Update(mouse);
-                    if (btnMenuExit.isClicked == true) CurrentGameState = GameState.MainMenu; //Exit mag niet in store app
-                    btnMenuExit.Update(mouse);
                     break;
                 case GameState.Settings:
                     if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
@@ -198,14 +193,11 @@ namespace TowerDefense
                     btnMenuBack.Update(mouse);
                     break;
                 case GameState.Playing:
+                    if (keyboardState.IsKeyDown(Keys.Escape)) CurrentGameState = GameState.Pause;
                     foreach (Tower tower in towerList)
                     {
                         tower.Update(gameTime, manager);                       
                     }
-                    //keep game fullscreen
-                    //graphics.PreferredBackBufferWidth = level.Width * 50;
-                    //graphics.PreferredBackBufferHeight = (level.Height * 50) + 200;
-                    //graphics.ApplyChanges();
 
                     if (btnArrow.isClicked) 
                     {
