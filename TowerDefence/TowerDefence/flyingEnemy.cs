@@ -19,6 +19,7 @@ namespace TowerDefense
             this.waypoints = waypoints;
             this.position = position;
             waypoint = position;
+            flying = true;
         }
 
     }

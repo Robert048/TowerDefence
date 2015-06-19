@@ -16,6 +16,7 @@ namespace TowerDefense
         protected Queue<Vector2> waypoints = new Queue<Vector2>();
         protected Vector2 position = new Vector2();
         protected Vector2 waypoint = new Vector2();
+        protected bool flying = false;
         private int nr = 0;
         protected float speed;
         private float rotation;
@@ -116,6 +117,11 @@ namespace TowerDefense
         public bool getSlowed()
         {
            return slowed;
+        }
+
+        public bool getFlying()
+        {
+            return flying;
         }
 
     }

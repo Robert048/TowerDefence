@@ -17,7 +17,6 @@ namespace TowerDefense
         protected int damage;
         protected int attackSpeed;
         protected int range;
-        protected Boolean ground;
         protected Boolean air;
         protected int cost;
         protected List<Projectile> projectileList;
@@ -46,8 +45,16 @@ namespace TowerDefense
             {
                 if (Vector2.Distance(position, enemy.getPosition()) < smallestRange)
                 {
-                    smallestRange = Vector2.Distance(position, enemy.getPosition());
-                    target = enemy;
+                    if (enemy.getFlying() && air == false)
+                    {
+
+                    }
+                    else
+                    {
+                        smallestRange = Vector2.Distance(position, enemy.getPosition());
+                        target = enemy;
+                    }
+                    
                 }
             }
             return target;
