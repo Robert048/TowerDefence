@@ -166,6 +166,7 @@
     <Content Include="Assets\SmallLogo.png" />
     <Content Include="Assets\SplashScreenOld.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Content\1.txt" />
     <Content Include="Content\0.txt" />
     <Content Include="Content\arrowTower.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

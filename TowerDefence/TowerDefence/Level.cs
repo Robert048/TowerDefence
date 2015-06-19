@@ -17,9 +17,9 @@ namespace TowerDefense
         //the layout
         private Tile[,] tiles;
         //Waypoints for enemies
-        private Queue<Vector2> waypoints = new Queue<Vector2>();
+        private Queue<Vector2> waypoints;
 
-        private Dictionary<Vector2, String> tileList = new Dictionary<Vector2, String>();
+        private Dictionary<Vector2, String> tileList;
 
         private bool firstLoad = true;
 
@@ -44,14 +44,20 @@ namespace TowerDefense
             get { return tiles.GetLength(1); }
         }
 
-        public void Draw(SpriteBatch batch)
+        public void setLevel(int levelIndex)
         {
+            waypoints = new Queue<Vector2>();
+            tileList = new Dictionary<Vector2, String>();
+
             // Load the level.
-            int levelIndex = 0;
             string levelPath = string.Format("Content/{0}.txt", levelIndex);
             Stream fileStream = TitleContainer.OpenStream(levelPath);
 
             LoadTiles(fileStream);
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
             DrawTiles(batch);
         }
 
@@ -63,6 +69,7 @@ namespace TowerDefense
         /// </param>
         private void LoadTiles(Stream fileStream)
         {
+
             //Laad level en zorg dat alle regels even lang zijn
             int width;
             List<string> lines = new List<string>();
@@ -89,10 +96,7 @@ namespace TowerDefense
                 {
                     // to load each tile.
                     char tileType = lines[y][x];
-                    if (tileList.Count() < 264)
-                    {
-                        tileList.Add(new Vector2(y, x), tileType.ToString());
-                    }
+                    tileList.Add(new Vector2(y, x), tileType.ToString());
 
                     tiles[x, y] = LoadTile(tileType, x, y);
                     //add waypoints for enemies
@@ -102,21 +106,15 @@ namespace TowerDefense
                     }
                 }
             }
-
-            if (firstLoad)
-            {
-                sortWaypoints();
-                firstLoad = false;
-            }
+            sortWaypoints();
         }
 
+        //Sort the waypoints queue
         private void sortWaypoints()
         {
             Vector2 position = new Vector2(0, 250);
             Vector2[] array = waypoints.ToArray();
-            Queue<Vector2> waypointsTemp = new Queue<Vector2>();
             waypoints.Clear();
-            //sort waypoints
             // loop through waypoints
             for (int i = 0; i < array.Length; i++)
             {
@@ -136,9 +134,6 @@ namespace TowerDefense
                 //set position
                 position = waypoint;
             }
-            //temp in normal
-            //waypoints.Clear();
-
         }
 
         private Vector2 findX(Vector2[] array, Vector2 position)
