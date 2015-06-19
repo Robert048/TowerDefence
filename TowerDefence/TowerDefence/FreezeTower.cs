@@ -16,7 +16,6 @@ namespace TowerDefense
             damage = 2;
             attackSpeed = 1500;
             range = 100;
-            ground = true;
             air = true;
             cost = 50;
             projectileList = new List<Projectile>();

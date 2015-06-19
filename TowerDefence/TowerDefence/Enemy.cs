@@ -10,29 +10,31 @@ namespace TowerDefense
 {
     class Enemy
     {
-        protected bool alive = true;
-        protected bool madeIt = false;
-        protected int startHealth;
-        protected Queue<Vector2> waypoints = new Queue<Vector2>();
-        protected Vector2 position = new Vector2();
-        protected Vector2 waypoint = new Vector2();
-        protected bool flying = false;
-        private int nr = 0;
-        protected float speed;
-        private float rotation;
-        private Vector2 vector;
-        private int counter = 0;
-        private bool slowed = false;
-        private float startSpeed;
+        protected bool alive = true; // is de enemy in leven
+        protected bool madeIt = false; //heeft de enmey het einde van de level gehaald
+        protected int startHealth; // de statr leven van de enemy
+        protected Queue<Vector2> waypoints = new Queue<Vector2>(); //de pad dat de enemy moet afleggen
+        protected Vector2 position = new Vector2(); //de positie van de enemy
+        protected Vector2 waypoint = new Vector2(); // waar de enemy naar toe gaat
+        protected bool flying = false; //vliegt de enemy
+        private int nr = 0; // welke nr de enemy is
+        protected float speed; //de snelheid van de enemy
+        private float rotation; //de rotatie wanner de enemy een bocht bereikt
+        private Vector2 vector; //lopen van de enemy
+        private int counter = 0; // counter
+        private bool slowed = false; // wordt de enemy vertraagd
+        private float startSpeed; // de start snelheid van de enemy
 
-        public int currentHealth { get; set; }
-        public int bountyGiven { get; set; }
+        public int currentHealth { get; set; } //de huidige health van de enemy
+        public int bountyGiven { get; set; } //de hoeveelheid gold dat de enemy geeft
 
+        //doorgeven wanneer een enemy is gekilled
         public bool IsKilled()
         {
             return (alive == false);
         }
 
+        //doorgeven wanneer een enemy het einde heeft bereikt
         public bool madeItToEnd()
         {
             return madeIt;
@@ -40,7 +42,7 @@ namespace TowerDefense
 
         public void Update()
         {
-            //waypoints
+            //waypoints de pad die de enemy moet aflegen afleggen
             if (position == waypoint)
             {
                 waypoint = waypoints.ElementAt(nr);
@@ -87,6 +89,7 @@ namespace TowerDefense
             if(currentHealth <= 0) alive = false;
         }
 
+        //tekenen van de enemy
         public void Draw(SpriteBatch batch, Texture2D texture, Texture2D healthBar)
         {
             if (alive)
@@ -103,22 +106,26 @@ namespace TowerDefense
             }
         }
 
+        //returnd de locatie van de enemy
         public Vector2 getPosition()
         {
             return position;
         }
 
+        //de enemy vertragen
         public void setSlowed(int freezePower)
         {
             slowed = true;
             startSpeed = speed;
             speed = speed / freezePower;
         }
+        // returned of de enemy is vertraagd
         public bool getSlowed()
         {
            return slowed;
         }
 
+        //returned of de enemy vliegt
         public bool getFlying()
         {
             return flying;
