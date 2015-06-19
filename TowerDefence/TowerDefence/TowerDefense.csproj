@@ -174,6 +174,7 @@
     <Content Include="Content\arrowTowerFront.png" />
     <Content Include="Content\Buttons\Back.png" />
     <Content Include="Content\BlankBar.png" />
+    <Content Include="Content\Buttons\Howto.png" />
     <Content Include="Content\defeatscreen.png" />
     <Content Include="Content\Enemies\boss2Enemy.png" />
     <Content Include="Content\Enemies\bossEnemy.png" />
@@ -195,7 +196,6 @@
     <Content Include="Content\Arrow.png" />
     <Content Include="Content\Buttons\Play.png" />
     <Content Include="Content\road.png" />
-    <Content Include="Content\Buttons\Settings.png" />
     <Content Include="Content\slowTower.png" />
     <Content Include="Content\slowTowerFront.png" />
     <Content Include="Content\turn.png" />

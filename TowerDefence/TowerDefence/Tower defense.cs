@@ -31,7 +31,7 @@ namespace TowerDefense
         //buttons
         private Button btnMenuPlay;
         private Button btnMenuCredits;
-        private Button btnMenuSettings;
+        private Button btnMenuHowto;
         private Button btnMenuBack;
 
         //tower buttons
@@ -123,8 +123,8 @@ namespace TowerDefense
             btnMenuPlay = new Button(Content.Load<Texture2D>("Buttons/Play"), graphics.GraphicsDevice);
             btnMenuPlay.setPosition(new Vector2(550, 200));
             
-            btnMenuSettings = new Button(Content.Load<Texture2D>("Buttons/Settings"), graphics.GraphicsDevice);
-            btnMenuSettings.setPosition(new Vector2(550, 300));
+            btnMenuHowto = new Button(Content.Load<Texture2D>("Buttons/Howto"), graphics.GraphicsDevice);
+            btnMenuHowto.setPosition(new Vector2(550, 300));
 
             btnMenuCredits = new Button(Content.Load<Texture2D>("Buttons/Credits"), graphics.GraphicsDevice);
             btnMenuCredits.setPosition(new Vector2(550, 400));
@@ -160,8 +160,8 @@ namespace TowerDefense
                     IsMouseVisible = true;
                     if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
-                    if (btnMenuSettings.isClicked == true) CurrentGameState = GameState.Settings;
-                    btnMenuSettings.Update(mouse);
+                    if (btnMenuHowto.isClicked == true) CurrentGameState = GameState.Settings;
+                    btnMenuHowto.Update(mouse);
                     if (btnMenuCredits.isClicked == true) CurrentGameState = GameState.Credits;
                     btnMenuCredits.Update(mouse);
                     break;
@@ -341,7 +341,7 @@ namespace TowerDefense
                     //draw buttons
                     batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuPlay.Draw(batch);
-                    btnMenuSettings.Draw(batch);
+                    btnMenuHowto.Draw(batch);
                     btnMenuCredits.Draw(batch);
                     break;
                 case GameState.Settings:
