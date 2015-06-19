@@ -33,7 +33,6 @@ namespace TowerDefense
         private Button btnMenuCredits;
         private Button btnMenuSettings;
         private Button btnMenuBack;
-        private Button btnLevel;
 
         //tower buttons
         private Button btnArrow;        
@@ -55,15 +54,16 @@ namespace TowerDefense
 
         //Bool
         private bool onPath;
-        //Place Tower bool
         private bool arrow;
         private bool canon;
         private bool freeze;
 
+        private int levelIndex = 0;
+
         //gameStates for the different states the game has
         enum GameState
         {
-            MainMenu, Credits, Settings, LevelSelect, Playing, EndGame, Pause
+            MainMenu, Credits, Settings, Playing, EndGame, Pause
         }
         GameState CurrentGameState = GameState.MainMenu;
 
@@ -71,9 +71,6 @@ namespace TowerDefense
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            int levelIndex = 1;
-            manager = new Wave_manager(level.getWaypoints(), levelIndex, player);
-            towerList = new List<Tower>();
             
             Vector2 newVector = new Vector2(0,0);
             infoArrow = new ArrowTower(null, null, newVector);
@@ -105,11 +102,13 @@ namespace TowerDefense
             Texture2D road = Content.Load<Texture2D>("road");
             Texture2D turn = Content.Load<Texture2D>("turn");
             Texture2D end = Content.Load<Texture2D>("end");
-            //add sprites for tiles to level
+
+            //add sprites for tiles to level and initialize level
             level.AddTexture(grass);
             level.AddTexture(road);
             level.AddTexture(turn);
             level.AddTexture(end);
+            makeLevel();
 
             //load content for the game
             font = Content.Load<SpriteFont>("font");
@@ -134,9 +133,6 @@ namespace TowerDefense
             btnMenuBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
             btnMenuBack.setPosition(new Vector2(550, 500));
 
-            btnLevel = new Button(Content.Load<Texture2D>("Buttons/Play"), graphics.GraphicsDevice);
-            btnLevel.setPosition(new Vector2(550, 200));
-
             //Tower buttons
             btnArrow = new Button(Content.Load<Texture2D>("arrowTowerFront"), graphics.GraphicsDevice);
             btnArrow.setPosition(new Vector2(250, 600));
@@ -146,15 +142,6 @@ namespace TowerDefense
 
             btnCanon = new Button(Content.Load<Texture2D>("canonTowerFront"), graphics.GraphicsDevice);
             btnCanon.setPosition(new Vector2(650, 650));
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// all content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -171,7 +158,7 @@ namespace TowerDefense
             {
                 case GameState.MainMenu:
                     IsMouseVisible = true;
-                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.LevelSelect;
+                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
                     btnMenuPlay.Update(mouse);
                     if (btnMenuSettings.isClicked == true) CurrentGameState = GameState.Settings;
                     btnMenuSettings.Update(mouse);
@@ -183,12 +170,6 @@ namespace TowerDefense
                     btnMenuBack.Update(mouse);
                     break;
                 case GameState.Credits:
-                    if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
-                    btnMenuBack.Update(mouse);
-                    break;
-                case GameState.LevelSelect:
-                    if (btnLevel.isClicked == true) CurrentGameState = GameState.Playing;
-                    btnLevel.Update(mouse);
                     if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
                     btnMenuBack.Update(mouse);
                     break;
@@ -311,12 +292,37 @@ namespace TowerDefense
                 case GameState.Pause:
                     break;
                 case GameState.EndGame:
+                    if (manager.isFinished() && player.lives > 0)
+                    {
+                        if (levelIndex > 1)
+                        {
+                            levelIndex = 0;
+                            makeLevel();
+                        }
+                        else
+                        {
+                            levelIndex = 1;
+                            makeLevel();
+                        }
+                    }
+                    else if (player.lives <= 0)
+                    {
+                        levelIndex = 0;
+                        makeLevel();
+                    }
                     if (btnMenuBack.isClicked == true) CurrentGameState = GameState.MainMenu;
                     btnMenuBack.Update(mouse);
                     break;
             }
 
             base.Update(gameTime);
+        }
+
+        private void makeLevel()
+        {
+            level.setLevel(levelIndex);
+            manager = new Wave_manager(level.getWaypoints(), levelIndex, player);
+            towerList = new List<Tower>();
         }
 
         /// <summary>
@@ -337,7 +343,6 @@ namespace TowerDefense
                     btnMenuPlay.Draw(batch);
                     btnMenuSettings.Draw(batch);
                     btnMenuCredits.Draw(batch);
-                  //  btnMenuExit.Draw(batch);
                     break;
                 case GameState.Settings:
                     batch.Draw(howToPlay, new Rectangle(0, 0, 1200, 750), Color.White);
@@ -348,11 +353,6 @@ namespace TowerDefense
                     batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnMenuBack.Draw(batch);
                     break;
-                case GameState.LevelSelect:
-                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
-                    btnMenuPlay.Draw(batch);
-                    btnMenuBack.Draw(batch);
-                    break;
                 case GameState.Playing:
                     level.Draw(batch);
                     //draw enemies from wave manager > wave
@@ -360,7 +360,7 @@ namespace TowerDefense
                     //onderste gedeelte
                     batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
                     batch.DrawString(font, "Level: ", new Vector2(level.Width, level.Height + 550), Color.Black);
-                    batch.DrawString(font, "Total Waves: " + (manager.numberOfWaves - 1), new Vector2(level.Width, level.Height + 570), Color.Black);
+                    batch.DrawString(font, "Total Waves: " + manager.numberOfWaves, new Vector2(level.Width, level.Height + 570), Color.Black);
                     batch.DrawString(font, "Currentwave: " + manager.currentWave, new Vector2(level.Width, level.Height + 590), Color.Black);
                     batch.DrawString(font, "Enemies: " + manager.enemies.Count, new Vector2(level.Width, level.Height + 610), Color.Black);
                     batch.DrawString(font, "Lives: " + player.lives, new Vector2(level.Width, level.Height + 650 ), Color.Black);
@@ -405,9 +405,11 @@ namespace TowerDefense
                     
                     break;
                 case GameState.Pause:
+                    batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
+                    btnMenuPlay.Draw(batch);
                     break;
                 case GameState.EndGame:
-                    if (manager.isFinished() && player.lives > 0)
+                    if (player.lives > 0)
                     {
                         batch.Draw(VictoryBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     }
