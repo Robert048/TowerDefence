@@ -10,6 +10,7 @@ namespace TowerDefense
 {
     class Tower
     {
+        //de variabelen van elke tower
         protected Texture2D projectileTexture;
         protected Texture2D texture;
         protected Rectangle rectangle;
@@ -25,16 +26,26 @@ namespace TowerDefense
         protected String towerString;
         protected int freezePower = 0;
 
+        /// <summary>
+        /// returned de kosten van de toren
+        /// </summary>
         public int getCost()
         {
             return cost;
         }
 
+        /// <summary>
+        /// returned de postitie van de toren
+        /// </summary>
         public Vector2 getPosition()
         {
             return position;
         }
 
+        /// <summary>
+        /// returned de target waar de toren op schiet
+        /// </summary>
+        /// <param name="manager">de huidige wave</param>
         public Enemy getTarget(Wave_manager manager)
         {
             //targeting
@@ -60,6 +71,9 @@ namespace TowerDefense
             return target;
         }
 
+        /// <summary>
+        /// update de game
+        /// </summary>
         public void Update(GameTime gameTime, Wave_manager manager)
         {
             getTarget(manager);
@@ -98,6 +112,9 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// tekend de toren
+        /// </summary>
         public void Draw(SpriteBatch spritebatch)
         {
             rectangle = new Rectangle((int)position.X, (int)position.Y, 50, 50);
@@ -109,16 +126,25 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// returned de schade dat de toren doet
+        /// </summary>
         public int getDamage()
         {
             return damage;
         }
 
+        /// <summary>
+        /// returned de 
+        /// </summary>
         public int getRange()
         {
             return range;
         }
 
+        /// <summary>
+        /// returned de aanval snelheid
+        /// </summary>
         public int getAttackSpeed()
         {
             return attackSpeed;

@@ -16,6 +16,7 @@ namespace TowerDefense
         public Texture2D Texture;
         public int rotation;
 
+        // groote van elke tile
         public const int Width = 50;
         public const int Height = 50;
         public const int Center = Width / 2;

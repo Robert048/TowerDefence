@@ -8,8 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TowerDefense
 {
+    //hoofd classe van alle projectiles
     class Projectile
     {
+        //standaard gedivineerde variabelen die door de klassen worden ingevuld
         protected Texture2D texture;
         protected Rectangle rectangle;
         protected Vector2 position = new Vector2();
@@ -25,16 +27,26 @@ namespace TowerDefense
         private Vector2 direction;
         private float rotation;
 
+
+        /// <summary>
+        /// returned of de projectile zijn target heeft gehaald
+        /// </summary>
         public bool madeIT()
         {
             return madeIt;
         }
 
+        /// <summary>
+        /// returned of de target in range is
+        /// </summary>
         public bool isInRange()
         {
             return inRange;
         }
 
+        /// <summary>
+        /// controleerd of de enemy nog steeds in range is
+        /// </summary>
         private bool stillInRange()
         {
             if (Vector2.Distance(position, target.getPosition()) < maxRange)
@@ -47,20 +59,25 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// update de projectile
+        /// </summary>
         public void Update(GameTime gametime)
         {
             tPos = target.getPosition();
             direction = tPos - position;
             rotation = (float)Math.Atan2(direction.Y + 15, direction.X + 20);
-
+            //als target dood is delete projectile
             if (target.IsKilled())
             {
                 madeIt = true;
             }
+            //als de target out of range is delete projectile
             if (!stillInRange())
             {
                 inRange = false;
             }
+            //volgen van de target
             if ((int)position.X > tPos.X + 26)
             {
                 position.X -= speed;
@@ -88,6 +105,9 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// draw de projectile
+        /// </summary>
         public void Draw(SpriteBatch batch)
         {
             if (projectileType == "arrow")
@@ -102,10 +122,7 @@ namespace TowerDefense
             {
                 rectangle = new Rectangle((int)position.X, (int)position.Y, 30, 30);
             }
-
-            //batch.Draw(texture, rectangle, Color.White);
             Vector2 orgin = new Vector2(15, 5);
-            //batch.Draw(texture, position, rectangle, Color.White, angle, orgin, 1.0f, SpriteEffects.None, 0);
             batch.Draw(texture, rectangle, null, Color.White, rotation, new Vector2(15, 5), SpriteEffects.None, 0);
         }
     }

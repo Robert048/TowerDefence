@@ -20,7 +20,7 @@ namespace TowerDefense
         private Queue<Vector2> waypoints;
 
         private Dictionary<Vector2, String> tileList;
-
+        // first time the level is loaded
         private bool firstLoad = true;
 
         public void AddTexture(Texture2D texture)
@@ -44,6 +44,9 @@ namespace TowerDefense
             get { return tiles.GetLength(1); }
         }
 
+        /// <summary>
+        /// loading the level
+        /// </summary>
         public void setLevel(int levelIndex)
         {
             waypoints = new Queue<Vector2>();
@@ -56,6 +59,9 @@ namespace TowerDefense
             LoadTiles(fileStream);
         }
 
+        /// <summary>
+        /// drawing the level
+        /// </summary>
         public void Draw(SpriteBatch batch)
         {
             DrawTiles(batch);
