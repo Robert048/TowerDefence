@@ -11,13 +11,21 @@ namespace TowerDefense
 {
     class Wave_manager
     {
+        //fields
         private readonly Queue<Wave> waves = new Queue<Wave>();
         public int numberOfWaves;
         private bool levelFinished = false;
         public int currentWave = 1;
             
+        //lijst met enemies
         public List<Enemy> enemies { get { return CurrentWave().enemies; } }
 
+        /// <summary>
+        /// wave manager constructor
+        /// </summary>
+        /// <param name="waypoints">Waypoints voor de enemies</param>
+        /// <param name="levelIndex">Het level nummer</param>
+        /// <param name="player">De Player</param>
         public Wave_manager(Queue<Vector2> waypoints, int levelIndex, Player player)
         {
             numberOfWaves = 10 + (levelIndex * 5);
@@ -31,6 +39,10 @@ namespace TowerDefense
             StartNextWave();
         }
 
+        /// <summary>
+        /// getter voor de currentWave
+        /// </summary>
+        /// <returns>De currentwave</returns>
         public Wave CurrentWave()
         { 
             if(waves.Count > 0)
@@ -47,11 +59,18 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// getter voor levelFinished
+        /// </summary>
+        /// <returns>LevelFinished</returns>
         public bool isFinished()
         {
             return levelFinished;
         }
 
+        /// <summary>
+        /// start de volgende wave
+        /// </summary>
         private void StartNextWave()
         {
             if(waves.Count > 0)
@@ -60,6 +79,10 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// monogame Update method
+        /// </summary>
+        /// <param name="gametime"></param>
         public void Update(GameTime gametime)
         {
             if(levelFinished)
@@ -78,6 +101,11 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// monogame Draw method
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="content"></param>
         public void Draw(SpriteBatch batch, ContentManager content)
         {
             CurrentWave().Draw(batch, content);

@@ -11,6 +11,7 @@ namespace TowerDefense
 {
     class Wave
     {
+        //fields
         public List<Enemy> enemies;
         private int numberOfEnemies;
         private int waveNumber;
@@ -20,6 +21,13 @@ namespace TowerDefense
         Random random = new Random();
         int BossNumber;
 
+        /// <summary>
+        /// constructor wave
+        /// </summary>
+        /// <param name="waveNumber">Het nummer van de wave</param>
+        /// <param name="numberOfEnemies">Het aantal enemies in de wave</param>
+        /// <param name="waypoints">De waypoints voor de enemies</param>
+        /// <param name="player">De player</param>
         public Wave(int waveNumber, int numberOfEnemies, Queue<Vector2> waypoints, Player player)
         {
             this.numberOfEnemies = numberOfEnemies;
@@ -30,19 +38,19 @@ namespace TowerDefense
             this.player = player;
             BossNumber = random.Next(0, 2);
         }
-
+        
+        /// <summary>
+        /// start method om de wave te laten starten met spawnen.
+        /// </summary>
         public void Start()
         {
             AddEnemy();
             spawn = true;
         }
 
-        // Return current wavenumber
-        public int getWaveNumber()
-        {
-            return waveNumber;
-        }
-
+        /// <summary>
+        /// methode om enemy toe te voegen aan de wave
+        /// </summary>
         private void AddEnemy()
         {
             int enemiesNR = numberOfEnemies;
@@ -90,6 +98,10 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// monogame Update methode
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             if (spawn)
@@ -122,6 +134,11 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// monogame Draw methode
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="content"></param>
         public void Draw(SpriteBatch batch, ContentManager content)
         {
             //soort enemy
@@ -131,6 +148,12 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// getter voor de textures van de enemies
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         private Texture2D getTextures(Enemy enemy, ContentManager content)
         {
             if(enemy.GetType() == typeof(NormalEnemy))

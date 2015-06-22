@@ -9,12 +9,17 @@ namespace TowerDefense
 {
     class Player
     {
-        public int lives { get; set; }
-        public int money { get; set; }
-        public int score { get; set; }
+        //stats van de player
+        public int lives { get; set; } //levens
+        public int money { get; set; } //geld
+        public int score { get; set; } //score
 
+        /// <summary>
+        /// constructor voor Player
+        /// </summary>
         public Player()
         {
+            //initialize de player stats
             score = 0;
             lives = 20;
             money = 51;
