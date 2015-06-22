@@ -424,6 +424,7 @@ namespace TowerDefense
                     }
                     btnBack.Draw(batch);
                     btnNext.Draw(batch);
+                    btnBack.setPosition(new Vector2(550, 500));
                     break;
             }
             batch.End();
