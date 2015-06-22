@@ -132,7 +132,6 @@ namespace TowerDefense
 
             //Other menu buttons
             btnBack = new Button(Content.Load<Texture2D>("Buttons/Back"), graphics.GraphicsDevice);
-            btnBack.setPosition(new Vector2(550, 500));
 
             btnNext = new Button(Content.Load<Texture2D>("Buttons/Next"), graphics.GraphicsDevice);
             btnNext.setPosition(new Vector2(750, 500));
@@ -357,6 +356,7 @@ namespace TowerDefense
                 case GameState.Credits:
                     batch.Draw(CreditsBG, new Rectangle(0, 0, 1200, 750), Color.White);
                     btnBack.Draw(batch);
+                    btnBack.setPosition(new Vector2(550, 500));
                     break;
                 case GameState.Playing:
                     level.Draw(batch);
