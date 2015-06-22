@@ -292,6 +292,8 @@ namespace TowerDefense
                     manager.Update(gameTime);
                     break;
                 case GameState.Pause:
+                    if (btnMenuPlay.isClicked == true) CurrentGameState = GameState.Playing;
+                    btnMenuPlay.Update(mouse);
                     break;
                 case GameState.EndGame:
                     if (manager.isFinished() && player.lives > 0)
