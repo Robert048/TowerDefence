@@ -296,7 +296,7 @@ namespace TowerDefense
                 case GameState.EndGame:
                     if (manager.isFinished() && player.lives > 0)
                     {
-                        if (levelIndex > 1)
+                        if (levelIndex >= 1)
                         {
                             levelIndex = 0;
                             makeLevel();
