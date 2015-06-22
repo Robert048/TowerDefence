@@ -10,6 +10,8 @@ namespace TowerDefense
     /// </summary>
     public class TowerDefense : Game
     {
+        //fields
+
         private GraphicsDeviceManager graphics;
         private SpriteBatch batch;
         private SpriteFont font;
@@ -61,7 +63,7 @@ namespace TowerDefense
 
         private int levelIndex = 0;
 
-        //gameStates for the different states the game has
+        //GameStates voor het spel
         enum GameState
         {
             MainMenu, Credits, Howto, Playing, EndGame, Pause
@@ -154,9 +156,10 @@ namespace TowerDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //gamestates
+            //muis en toetsenbord status
             MouseState mouse = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
+            //check gameStates en update
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
@@ -217,7 +220,6 @@ namespace TowerDefense
 
                     if (arrow)
                     {
-                        //todo cursor icon tower
                         MouseState nextState = Mouse.GetState();
                         if (nextState.LeftButton == ButtonState.Pressed)
                         {
@@ -237,7 +239,6 @@ namespace TowerDefense
                     }
                     else if (freeze)
                     {
-                        //todo cursor icon tower
                         MouseState nextState = Mouse.GetState();
                         if (nextState.LeftButton == ButtonState.Pressed)
                         {
@@ -275,15 +276,18 @@ namespace TowerDefense
                         }
                     }
 
+                    //Update de tower buttons
                     btnArrow.Update(mouse);
                     btnFreeze.Update(mouse);
                     btnCanon.Update(mouse);
 
+                    //check player's levens
                     if (player.lives <= 0)
                     {
                         CurrentGameState = GameState.EndGame;
                     }
 
+                    //check of level klaar is
                     if(manager.isFinished())
                     {
                         CurrentGameState = GameState.EndGame;
@@ -296,6 +300,7 @@ namespace TowerDefense
                     btnMenuPlay.Update(mouse);
                     break;
                 case GameState.EndGame:
+                    //level klaar & player leeft nog
                     if (manager.isFinished() && player.lives > 0)
                     {
                         if (levelIndex >= 1)
@@ -309,11 +314,13 @@ namespace TowerDefense
                             makeLevel();
                         }
                     }
+                    //player leeft niet meer
                     else if (player.lives <= 0)
                     {
                         levelIndex = 0;
                         makeLevel();
                     }
+                    //update buttons
                     if (btnBack.isClicked == true) CurrentGameState = GameState.MainMenu;
                     btnBack.Update(mouse);
                     if (btnNext.isClicked == true) CurrentGameState = GameState.Playing;
@@ -324,6 +331,9 @@ namespace TowerDefense
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// method om een nieuw level te maken.
+        /// </summary>
         private void makeLevel()
         {
             level.setLevel(levelIndex);
@@ -339,7 +349,7 @@ namespace TowerDefense
         {
             //Begin the drawing
             batch.Begin();
-            
+
             //gamestates
             switch (CurrentGameState)
             {
@@ -364,17 +374,17 @@ namespace TowerDefense
                     level.Draw(batch);
                     //draw enemies from wave manager > wave
                     manager.Draw(batch, Content);
-                    //onderste gedeelte
+                    //onderste gedeelte op scherm
                     batch.Draw(BG, new Rectangle(0, 550, 1200, 200), Color.White);
                     batch.DrawString(font, "Level: " + (levelIndex + 1), new Vector2(level.Width, level.Height + 550), Color.Black);
                     batch.DrawString(font, "Total Waves: " + manager.numberOfWaves, new Vector2(level.Width, level.Height + 570), Color.Black);
                     batch.DrawString(font, "Currentwave: " + manager.currentWave, new Vector2(level.Width, level.Height + 590), Color.Black);
                     batch.DrawString(font, "Enemies: " + manager.enemies.Count, new Vector2(level.Width, level.Height + 610), Color.Black);
-                    batch.DrawString(font, "Lives: " + player.lives, new Vector2(level.Width, level.Height + 650 ), Color.Black);
+                    batch.DrawString(font, "Lives: " + player.lives, new Vector2(level.Width, level.Height + 650), Color.Black);
                     batch.DrawString(font, "Gold: " + player.money, new Vector2(level.Width, level.Height + 670), Color.Black);
-                   
+
                     batch.DrawString(font, "Towers: ", new Vector2(level.Width + 225, level.Height + 550), Color.Black);
-                    
+
                     if (arrow)
                     {
                         batch.DrawString(font, "ArrowTower", new Vector2(level.Width + 900, level.Height + 550), Color.Black);
@@ -402,14 +412,14 @@ namespace TowerDefense
                     }
 
                     foreach (Tower item in towerList)
-                    {                        
+                    {
                         item.Draw(batch);
                     }
 
+                    //draw de tower buttons
                     btnArrow.Draw(batch);
                     btnFreeze.Draw(batch);
                     btnCanon.Draw(batch);
-                    
                     break;
                 case GameState.Pause:
                     batch.Draw(MenuBG, new Rectangle(0, 0, 1200, 750), Color.White);
@@ -430,13 +440,18 @@ namespace TowerDefense
                     break;
             }
             batch.End();
-
             base.Draw(gameTime);
         }
-
-         public void newTower(int tileX, int tileY)
+         
+        /// <summary>
+        /// method om tower te plaatsen en toe te voegen aan de lijst
+        /// </summary>
+        /// <param name="tileX">X coördinaat</param>
+        /// <param name="tileY">Y coördinaat</param>
+        public void newTower(int tileX, int tileY)
         {
             Tower towerToAdd = null;
+            //check het tower type
             switch (towerType)
             {
                 case "arrowTower":
@@ -469,6 +484,10 @@ namespace TowerDefense
             }
         }
 
+        /// <summary>
+        /// check of de tile leeg is
+        /// </summary>
+        /// <returns></returns>
         private bool IsCellClear()
         {
             // Hier checken we dat het in het speelveld is en niet er buiten
